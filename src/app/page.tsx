@@ -1184,7 +1184,8 @@ export default function Home() {
     setEscalateNote("");
   }
 
-  const renderShankarDashboard = () => (
+  function renderShankarDashboard() {
+    return (
     <>
       {renderGlobalControlBar()}
 
@@ -1260,9 +1261,11 @@ export default function Home() {
         </>
       ) : renderAllOpenOrders()}
     </>
-  );
+    );
+  }
 
-  const renderDashboard = () => (
+  function renderDashboard() {
+    return (
     <>
       {renderGlobalControlBar()}
 
@@ -1878,9 +1881,11 @@ export default function Home() {
           </tbody>
        </table>
     </div>
-  );
+    );
+  }
 
-  const renderVPDashboard = () => (
+  function renderVPDashboard() {
+    return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '64px', padding: '32px 32px 64px 32px' }}>
        {/* Section 1: Support Operations */}
        <div>
@@ -2185,9 +2190,10 @@ export default function Home() {
         {renderOrderPipelineBand()}
       </div>
     );
-  };
+  }
 
-  const renderManagerDashboard = () => (
+  function renderManagerDashboard() {
+    return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', padding: '0 32px 64px 32px' }}>
        {renderManagerMetricCards()}
        {renderSmartAlertStrip()}
@@ -2241,7 +2247,8 @@ export default function Home() {
          </>
        )}
     </div>
-  );
+    );
+  }
 
   function renderTechnicalIncidentDetail() {
     return (
@@ -3206,7 +3213,7 @@ export default function Home() {
       return renderVPDashboard();
     }
     
-    return renderAssociateDashboard();
+    return renderDashboard();
   }
 
   return (
