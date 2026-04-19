@@ -711,8 +711,7 @@ export default function Home() {
           Next
         </button>
       </div>
-    );
-  };
+  }
 
   const vantageCases = filteredCases.filter(c => c.isVantageAlert);
   const generalCases = filteredCases.filter(c => !c.isVantageAlert);
@@ -882,16 +881,19 @@ export default function Home() {
     setExpandedTranscripts(prev => ({...prev, [newLog.id]: true}));
   }
 
-  const renderGlobalControlBar = () => (
+  function renderGlobalControlBar() {
+    return (
     <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '0 0 16px 0' }}>
       <button onClick={() => {setShowTimezoneMenu(!showTimezoneMenu);}} style={{ background: 'var(--bg-deep)', border: '1px solid var(--accent-sentry)', color: 'var(--text-white)', padding: '8px 16px', fontSize: '11px', fontWeight: 'bold', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', whiteSpace: 'nowrap' }}>
         <Globe size={14} color="var(--accent-sentry)" />
         {globalTimezone}
       </button>
     </div>
-  );
+    );
+  }
 
-  const renderDashboardTabs = () => (
+  function renderDashboardTabs() {
+    return (
     <div style={{ display: 'flex', gap: '24px', margin: '24px 0 0px 0', borderBottom: '1px solid var(--bg-border)', paddingBottom: '0', paddingLeft: '32px', paddingRight: '32px' }}>
       <button 
         onClick={() => { setDashboardTab('Cases'); setCasesPage(1); }}
@@ -944,9 +946,10 @@ export default function Home() {
         </button>
       )}
     </div>
-  );
+    );
+  }
 
-  const renderFilterRow = () => {
+  function renderFilterRow() {
     const isShankar = selectedPersona?.name === 'Shankar';
     
     return (
@@ -1030,6 +1033,7 @@ export default function Home() {
                 </select>
               )}
             </>
+      )}
           )}
           <select className="filter-select" value={filterSLAHealth} onChange={(e) => setFilterSLAHealth(e.target.value)} style={{ flex: 1 }}>
             <option value="All">All SLA</option>
@@ -1065,7 +1069,7 @@ export default function Home() {
     );
   };
 
-  const renderAllOpenOrders = () => {
+  function renderAllOpenOrders() {
     return (
       <div className="main-workspace overflow-auto" style={{ marginTop: '24px' }}>
         <div className="list-section-header">All Active Orders</div>
@@ -1215,7 +1219,7 @@ export default function Home() {
 
       {renderFilterRow()}
 
-      {dashboardTab === 'Cases' ? (
+      {dashboardTab === 'Cases' && (
         <>
           <div className="main-workspace overflow-auto">
             <div className="list-section-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -1333,11 +1337,6 @@ export default function Home() {
             {renderPagination(casesPage, totalCasesPages, setCasesPage)}
           </div>
         </>
-      ) : renderAllOpenOrders()}
-    </>
-  );
-
-  const renderManagerMetricCards = () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '16px', marginBottom: '32px' }}>
       {managerMetrics.map((card, i) => (
         <div key={i} className="data-card" style={{ height: '140px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '20px' }}>
@@ -1354,9 +1353,11 @@ export default function Home() {
         </div>
       ))}
     </div>
-  );
+    );
+  }
 
-  const renderSmartAlertStrip = () => (
+  function renderSmartAlertStrip() {
+    return (
     <div style={{ display: 'flex', gap: '16px', marginBottom: '32px', overflowX: 'auto', paddingBottom: '8px' }}>
       {smartAlerts.map(alert => (
         <div key={alert.id} style={{ 
@@ -1390,9 +1391,10 @@ export default function Home() {
         </div>
       ))}
     </div>
-  );
+    );
+  }
 
-  const renderManagerTabbedWorkspace = () => {
+  function renderManagerTabbedWorkspace() {
     // Shared filtering for manager view
     const items = mockCases.filter(c => {
       if (mgrActiveTab === 'Escalations') return c.status === 'Escalated' && c.escalatedBy;
@@ -1489,7 +1491,8 @@ export default function Home() {
     );
   };
 
-  const renderTeamWorkloadPanel = () => (
+  function renderTeamWorkloadPanel() {
+    return (
     <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', display: 'flex', flexDirection: 'column' }}>
        <div style={{ padding: '20px', borderBottom: '1px solid var(--bg-border)', fontSize: '14px', fontWeight: 'bold', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           Team Workload
@@ -1516,9 +1519,11 @@ export default function Home() {
           </button>
        </div>
     </div>
-  );
+    );
+  }
 
-  const renderUSDeliveryMap = () => (
+  function renderUSDeliveryMap() {
+    return (
     <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px', position: 'relative' }}>
        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
           <div>
@@ -1569,9 +1574,11 @@ export default function Home() {
           </svg>
        </div>
     </div>
-  );
+    );
+  }
 
-  const renderPipelineHealthChart = () => (
+  function renderPipelineHealthChart() {
+    return (
     <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
        <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '4px' }}>Orders Placed & Pipeline Health</div>
        <div style={{ fontSize: '12px', color: 'var(--text-gray)', marginBottom: '24px' }}>Daily volume vs. stage distribution.</div>
@@ -1593,9 +1600,11 @@ export default function Home() {
           <div><div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>Exception</div><div style={{ fontSize: '18px', fontWeight: 'bold', color: 'var(--accent-coral)' }}>480</div></div>
        </div>
     </div>
-  );
+    );
+  }
 
-  const renderBreachRiskPanel = () => (
+  function renderBreachRiskPanel() {
+    return (
     <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
        <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '24px' }}>Breach Risk — Detailed Breakdown</div>
        
@@ -1640,9 +1649,11 @@ export default function Home() {
           </div>
        </div>
     </div>
-  );
+    );
+  }
 
-  const renderCarrierHealthPanel = () => (
+  function renderCarrierHealthPanel() {
+    return (
     <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', overflow: 'hidden' }}>
        <div style={{ padding: '20px', borderBottom: '1px solid var(--bg-border)', fontSize: '16px', fontWeight: 'bold' }}>Carrier Health — Quantitative View</div>
        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
@@ -1697,9 +1708,11 @@ export default function Home() {
           </div>
        </div>
     </div>
-  );
+    );
+  }
 
-  const renderOrderSourceHealth = () => (
+  function renderOrderSourceHealth() {
+    return (
     <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
        <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '24px' }}>Order Source Health</div>
        <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: '48px', marginBottom: '32px' }}>
@@ -1753,9 +1766,11 @@ export default function Home() {
           </tbody>
        </table>
     </div>
-  );
+    );
+  }
 
-  const renderQueueDepthChart = () => (
+  function renderQueueDepthChart() {
+    return (
     <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
        <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '4px' }}>Queue Depth Over Time</div>
        <div style={{ fontSize: '12px', color: 'var(--text-gray)', marginBottom: '24px' }}>Daily evolution of New, In-Progress, and Escalated cases.</div>
@@ -1771,9 +1786,11 @@ export default function Home() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px' }}><div style={{ width: '10px', height: '10px', background: 'var(--accent-coral)' }}></div> ESCALATED</div>
        </div>
     </div>
-  );
+    );
+  }
 
-  const renderAIImpactHeader = () => (
+  function renderAIImpactHeader() {
+    return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', marginBottom: '12px' }}>
       <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px', position: 'relative', overflow: 'hidden' }}>
         <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '8px' }}>Cost Avoidance</div>
@@ -1797,9 +1814,11 @@ export default function Home() {
         <div style={{ position: 'absolute', bottom: '-10px', right: '-10px', opacity: 0.1 }}><Package size={80} color="var(--accent-coral)"/></div>
       </div>
     </div>
-  );
+    );
+  }
 
-  const renderAIAccuracyChart = () => (
+  function renderAIAccuracyChart() {
+    return (
     <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
         <div>
@@ -1823,9 +1842,11 @@ export default function Home() {
          </svg>
       </div>
     </div>
-  );
+    );
+  }
 
-  const renderRiskDistribution = () => (
+  function renderRiskDistribution() {
+    return (
     <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
        <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '4px' }}>Risk Score Distribution</div>
        <div style={{ fontSize: '12px', color: 'var(--text-gray)', marginBottom: '24px' }}>Intelligence Action Bar aggregate across fleet.</div>
@@ -1845,9 +1866,11 @@ export default function Home() {
           </div>
        </div>
     </div>
-  );
+    );
+  }
 
-  const renderAssociateAIUtil = () => (
+  function renderAssociateAIUtil() {
+    return (
     <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', overflow: 'hidden' }}>
        <div style={{ padding: '20px', fontSize: '14px', fontWeight: 'bold', borderBottom: '1px solid var(--bg-border)' }}>Associate AI Utilisation & Outcomes</div>
        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
@@ -1875,12 +1898,13 @@ export default function Home() {
                    <td style={{ padding: '16px 20px' }}>
                       <div style={{ fontSize: '11px' }}>Avg: {row.deviatedTime}</div>
                       <div style={{ fontSize: '11px', color: 'var(--accent-coral)' }}>B: {row.deviatedBreach}</div>
-                   </td>
-                </tr>
-             ))}
-          </tbody>
-       </table>
-    </div>
+
+                    </td>
+                 </tr>
+              ))}
+           </tbody>
+        </table>
+     </div>
     );
   }
 
@@ -1939,247 +1963,11 @@ export default function Home() {
           </div>
        </div>
     </div>
-  );
+    );
+  }
 
-  const renderManagerOperationsTab = () => {
+  function renderManagerOperationsTab() {
     const stats = mgrOpsTimelineStats[opsTimeWindow];
-
-    const renderShiftSnapshotBand = () => (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ fontSize: '16px', fontWeight: 'bold' }}>Shift Snapshot</div>
-          <div style={{ display: 'flex', background: 'rgba(255,255,255,0.05)', borderRadius: '6px', padding: '2px' }}>
-            {['Today', 'This Week', 'Last 7 Days'].map(w => (
-              <button 
-                key={w}
-                onClick={() => setOpsTimeWindow(w)}
-                style={{ padding: '6px 12px', background: opsTimeWindow === w ? 'var(--bg-primary)' : 'transparent', border: 'none', color: opsTimeWindow === w ? 'var(--text-white)' : 'var(--text-gray)', fontSize: '11px', fontWeight: 'bold', borderRadius: '4px', cursor: 'pointer' }}
-              >
-                {w}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '16px' }}>
-          {[
-            { label: 'Vantage Alerts', value: stats.alerts, color: 'var(--accent-lime)' },
-            { label: 'New Cases', value: stats.new, color: 'white' },
-            { label: 'In-Progress', value: stats.inProg, color: 'white' },
-            { label: 'Escalated', value: stats.esc, color: 'var(--accent-coral)' },
-            { label: 'Resolved', value: stats.resolved, color: 'var(--accent-lime)' },
-            { label: 'Breach Risk', value: stats.breachRisk, color: 'var(--accent-coral)' },
-          ].map(c => (
-            <div key={c.label} style={{ height: '140px', background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-              <div style={{ fontSize: '10px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '8px' }}>{c.label}</div>
-              <div style={{ fontSize: '32px', fontWeight: 'bold', color: c.color }}>{c.value}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-
-    const renderVolumeResolutionBand = () => (
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
-        <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
-          <div style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '24px' }}>Case Inflow vs. Resolution</div>
-          <div style={{ height: '180px', width: '100%', display: 'flex', alignItems: 'flex-end', gap: '12px' }}>
-            {caseInflowResolutionData.map(d => (
-              <div key={d.date} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-                <div style={{ width: '100%', display: 'flex', alignItems: 'flex-end', gap: '4px', height: '140px' }}>
-                   <div style={{ flex: 1, height: `${(d.opened / 80) * 100}%`, background: '#3b82f6', borderRadius: '2px' }}></div>
-                   <div style={{ flex: 1, height: `${(d.resolved / 80) * 100}%`, background: 'var(--accent-lime)', borderRadius: '2px' }}></div>
-                </div>
-                <div style={{ fontSize: '10px', color: 'var(--text-gray)' }}>{d.date}</div>
-              </div>
-            ))}
-          </div>
-          <div style={{ display: 'flex', gap: '16px', marginTop: '16px', fontSize: '11px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '8px', height: '8px', background: '#3b82f6' }}></div> OPENED</div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><div style={{ width: '8px', height: '8px', background: 'var(--accent-lime)' }}></div> RESOLVED</div>
-          </div>
-        </div>
-        <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
-          <div style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '24px' }}>Resolution Time Distribution (hrs)</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            {associatePerfData.map(a => (
-              <div key={a.name}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', marginBottom: '6px' }}>
-                  <span style={{ fontWeight: 'bold' }}>{a.name}</span>
-                  <span style={{ color: 'var(--text-gray)' }}>Mean: {a.mean}h</span>
-                </div>
-                <div style={{ height: '4px', background: 'rgba(255,255,255,0.05)', borderRadius: '2px', position: 'relative' }}>
-                  <div style={{ position: 'absolute', left: `${(a.min / 5) * 100}%`, right: `${100 - (a.max / 5) * 100}%`, height: '100%', background: 'var(--accent-sentry)', opacity: 0.3 }}></div>
-                  <div style={{ position: 'absolute', left: `${(a.mean / 5) * 100}%`, width: '8px', height: '8px', background: 'var(--text-white)', borderRadius: '50%', top: '-2px', transform: 'translateX(-4px)' }}></div>
-                </div>
-              </div>
-            ))}
-            <div style={{ borderTop: '1px dashed var(--bg-border)', paddingTop: '12px', marginTop: '8px', display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: 'var(--text-gray)' }}>
-              <span>TEAM AVERAGE</span>
-              <span style={{ fontWeight: 'bold', color: 'white' }}>1.62h</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-
-    const renderRiskSLAIntelligenceBand = () => (
-      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr 1fr', gap: '24px' }}>
-        <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
-          <div style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '20px' }}>Time-to-Breach Distribution</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            {[
-              { label: '0–30 m', count: 12, color: 'var(--accent-coral)' },
-              { label: '30–60 m', count: 24, color: '#f59e0b' },
-              { label: '1–2 hr', count: 45, color: '#3b82f6' },
-              { label: '2–4 hr', count: 18, color: '#3b82f6' },
-              { label: '4–8 hr', count: 22, color: 'rgba(255,255,255,0.2)' },
-              { label: '8hr +', count: 15, color: 'rgba(255,255,255,0.1)' },
-            ].map(b => (
-              <div 
-                key={b.label} 
-                onClick={() => { setDashboardTab('Cases'); setFilterPriority('High'); setCasesPage(1); }}
-                style={{ display: 'flex', alignItems: 'center', gap: '12px', cursor: 'pointer' }}
-              >
-                <div style={{ width: '50px', fontSize: '10px', color: 'var(--text-gray)' }}>{b.label}</div>
-                <div style={{ flex: 1, height: '16px', background: 'rgba(255,255,255,0.03)', borderRadius: '2px', overflow: 'hidden' }}>
-                  <div style={{ height: '100%', width: `${(b.count / 50) * 100}%`, background: b.color }}></div>
-                </div>
-                <div style={{ width: '20px', fontSize: '11px', fontWeight: 'bold' }}>{b.count}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px', textAlign: 'center' }}>
-          <div style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '20px', textAlign: 'left' }}>SLA Outcome Split</div>
-          <div style={{ position: 'relative', width: '120px', height: '120px', margin: '0 auto' }}>
-            <svg viewBox="0 0 100 100" style={{ transform: 'rotate(-90deg)' }}>
-              <circle cx="50" cy="50" r="40" fill="none" stroke="var(--accent-lime)" strokeWidth="12" strokeDasharray="180 251.2" />
-              <circle cx="50" cy="50" r="40" fill="none" stroke="#f59e0b" strokeWidth="12" strokeDasharray="45 251.2" strokeDashoffset="-180" />
-              <circle cx="50" cy="50" r="40" fill="none" stroke="var(--accent-coral)" strokeWidth="12" strokeDasharray="26.2 251.2" strokeDashoffset="-225" />
-            </svg>
-            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
-              <div style={{ fontSize: '20px', fontWeight: 'bold' }}>82%</div>
-              <div style={{ fontSize: '8px', color: 'var(--text-gray)' }}>ON TIME</div>
-            </div>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '12px', marginTop: '20px' }}>
-            <div style={{ fontSize: '10px' }}><span style={{ color: 'var(--accent-lime)' }}>●</span> 142</div>
-            <div style={{ fontSize: '10px' }}><span style={{ color: '#f59e0b' }}>●</span> 38</div>
-            <div style={{ fontSize: '10px' }}><span style={{ color: 'var(--accent-coral)' }}>●</span> 12</div>
-          </div>
-        </div>
-        <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
-          <div style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '24px' }}>Breach Rate by Source</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-             {[
-               { label: 'Customer', value: '14%' },
-               { label: 'Vantage AI', value: '28%', color: 'var(--accent-coral)' },
-               { label: 'INFRA', value: '8%' },
-             ].map(s => (
-               <div key={s.label}>
-                 <div style={{ fontSize: '10px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '4px' }}>{s.label}</div>
-                 <div style={{ fontSize: '20px', fontWeight: 'bold', color: s.color || 'white' }}>{s.value}</div>
-               </div>
-             ))}
-          </div>
-        </div>
-      </div>
-    );
-
-    const renderTeamCarrierHealthBand = () => (
-      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '24px' }}>
-        <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', overflow: 'hidden' }}>
-          <div style={{ padding: '20px', fontSize: '14px', fontWeight: 'bold', borderBottom: '1px solid var(--bg-border)' }}>Team Workload Matrix</div>
-          <table style={{ width: '100%', fontSize: '12px' }}>
-            <thead>
-              <tr style={{ textAlign: 'left', color: 'var(--text-gray)', background: 'rgba(255,255,255,0.02)' }}>
-                <th style={{ padding: '12px 20px' }}>Associate</th>
-                <th>Assigned</th>
-                <th>High</th>
-                <th>In-Prog</th>
-                <th>Res Today</th>
-                <th>Avg Time</th>
-                <th>Breach</th>
-              </tr>
-            </thead>
-            <tbody>
-              {teamWorkloadMatrix.map(row => (
-                <tr key={row.name} style={{ borderBottom: '1px solid var(--bg-border)', borderLeft: row.breaches > 0 ? '4px solid var(--accent-coral)' : 'none' }}>
-                  <td style={{ padding: '12px 20px', fontWeight: 'bold' }}>{row.name}</td>
-                  <td>{row.assigned}</td>
-                  <td>{row.high}</td>
-                  <td>{row.inProg}</td>
-                  <td>{row.resolved}</td>
-                  <td>{row.avgTime}</td>
-                  <td style={{ fontWeight: 'bold', color: row.breaches > 0 ? 'var(--accent-coral)' : 'var(--text-gray)' }}>{row.breaches}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div style={{ padding: '12px 20px', background: 'rgba(255,255,255,0.02)', display: 'flex', gap: '24px', fontSize: '11px', color: 'var(--text-gray)' }}>
-            <div>TEAM TOTAL OPEN: <span style={{ color: 'white', fontWeight: 'bold' }}>44</span></div>
-            <div>AVG RESOLUTION: <span style={{ color: 'white', fontWeight: 'bold' }}>1.6h</span></div>
-          </div>
-        </div>
-        <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
-          <div style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '16px' }}>Carrier Exception Trend (Counts)</div>
-          <div style={{ height: '120px', width: '100%' }}>
-             <svg viewBox="0 0 400 120" style={{ width: '100%', height: '100%' }}>
-                <path d="M0,80 L50,60 L100,90 L150,50 L200,70 L250,30 L300,40 L400,80" fill="none" stroke="#3b82f6" strokeWidth="2" />
-                <path d="M0,100 L50,90 L100,110 L150,90 L200,100 L250,85 L300,95 L400,110" fill="none" stroke="var(--accent-lime)" strokeWidth="2" />
-                <path d="M0,60 L50,40 L100,50 L150,20 L200,30 L250,10 L300,20 L400,5" fill="none" stroke="var(--accent-coral)" strokeWidth="2" />
-             </svg>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', marginTop: '20px' }}>
-             {[
-               { c: 'FedEx', val: 42, d: '+12%' },
-               { c: 'UPS', val: 18, d: '-4%' },
-               { c: 'USPS', val: 124, d: '+8%' },
-               { c: 'OnTrac', val: 12, d: '0%' },
-             ].map(s => (
-               <div key={s.c}>
-                 <div style={{ fontSize: '9px', color: 'var(--text-gray)', fontWeight: 'bold' }}>{s.c}</div>
-                 <div style={{ fontSize: '14px', fontWeight: 'bold' }}>{s.val}</div>
-                 <div style={{ fontSize: '9px', color: s.d.startsWith('+') ? 'var(--accent-coral)' : 'var(--accent-lime)' }}>{s.d}</div>
-               </div>
-             ))}
-          </div>
-        </div>
-      </div>
-    );
-
-    const renderOrderPipelineBand = () => (
-      <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
-        <div style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '24px' }}>Active Order Pipeline Funnel (LOC-XXXX)</div>
-        <div style={{ display: 'flex', height: '40px', background: 'rgba(255,255,255,0.05)', borderRadius: '6px', overflow: 'hidden', marginBottom: '12px' }}>
-          {pipelineFunnelData.map(s => (
-            <div key={s.stage} style={{ flex: 1, height: '100%', position: 'relative', background: s.stage === 'Exception' ? 'var(--accent-coral)' : 'rgba(59, 130, 246, 0.4)', borderRight: '1px solid var(--bg-deep)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-               <div style={{ fontSize: '10px', color: 'white', fontWeight: 'bold' }}>{s.pct}%</div>
-            </div>
-          ))}
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: 'var(--text-gray)', marginBottom: '32px' }}>
-          {pipelineFunnelData.map(s => (
-            <div key={s.stage} style={{ textAlign: 'center', flex: 1 }}>
-              <div style={{ color: 'white', fontWeight: 'bold' }}>{s.count}</div>
-              {s.stage}
-            </div>
-          ))}
-        </div>
-        <div style={{ borderTop: '1px solid var(--bg-border)', paddingTop: '20px' }}>
-          <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', marginBottom: '16px' }}>STAGE DWELL TIMES (MEDIAN)</div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '16px' }}>
-            {stageDwellTimes.map(s => (
-              <div key={s.stage}>
-                <div style={{ fontSize: '10px', color: 'var(--text-gray)', marginBottom: '4px' }}>{s.stage}</div>
-                <div style={{ fontSize: '16px', fontWeight: 'bold' }}>{s.current}</div>
-                <div style={{ fontSize: '9px', color: s.delta.startsWith('+') ? 'var(--accent-coral)' : 'var(--accent-lime)' }}>vs {s.median} ({s.delta})</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
 
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
@@ -2541,7 +2329,7 @@ export default function Home() {
          </div>
       </div>
     );
-  };
+  }
 
   function renderCaseDetail() {
     const slaText = activeCase.sla === '00d 00h' ? 'BREACHED' : activeCase.sla;
@@ -3190,7 +2978,7 @@ export default function Home() {
 
       </div>
     );
-  };
+  }
 
   function renderMainContent() {
     if (activeCaseId) {
@@ -3542,5 +3330,4 @@ export default function Home() {
       </AnimatePresence>
     </main>
   );
-}
 }
