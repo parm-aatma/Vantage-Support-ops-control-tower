@@ -2243,7 +2243,7 @@ export default function Home() {
     </div>
   );
 
-  const renderTechnicalIncidentDetail = () => {
+  function renderTechnicalIncidentDetail() {
     return (
       <div className="case-detail-container" style={{ color: 'var(--text-white)' }}>
          {/* Page Header */}
@@ -2536,7 +2536,7 @@ export default function Home() {
     );
   };
 
-  const renderCaseDetail = () => {
+  function renderCaseDetail() {
     const slaText = activeCase.sla === '00d 00h' ? 'BREACHED' : activeCase.sla;
     const slaColor = activeCase.slaColor || 'sla-red';
     
@@ -3185,16 +3185,15 @@ export default function Home() {
     );
   };
 
-  const renderMainContent = () => {
-    if (!selectedPersona) return renderPersonaSelection();
+  function renderMainContent() {
     if (activeCaseId) {
       if (activeCaseId.startsWith('INFRA-')) return renderTechnicalIncidentDetail();
       return renderCaseDetail();
     }
     
     // Support Command Center Routing
-    if (selectedPersona.name === 'Shankar') return renderShankarDashboard();
-    if (selectedPersona.name === 'Simran') {
+    if (selectedPersona?.name === 'Shankar') return renderShankarDashboard();
+    if (selectedPersona?.name === 'Simran') {
       return (
         <>
           {renderDashboardTabs()}
@@ -3203,12 +3202,12 @@ export default function Home() {
       );
     }
 
-    if (selectedPersona.name === 'Piyush') {
+    if (selectedPersona?.name === 'Piyush') {
       return renderVPDashboard();
     }
     
     return renderAssociateDashboard();
-  };
+  }
 
   return (
     <main className={!selectedPersona ? "main-viewport" : ""}>
