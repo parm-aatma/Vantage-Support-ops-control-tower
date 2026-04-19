@@ -1,0 +1,69 @@
+{
+  "orderId": "LOC-USP-24213",
+  "source": "Amazon",
+  "customerName": "Sarah Thomas",
+  "destination": "Philadelphia, PA",
+  "orderDate": "11/16",
+  "status": "Picked Up",
+  "deliveryStatus": "On Time",
+  "sla": "2d 00h",
+  "slaColor": "sla-green",
+  "carrier": "USPS",
+  "carrierService": "Express",
+  "zip": "55455",
+  "fulfillmentCenter": "WH-CENTRAL-08",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "Sarah Thomas",
+    "email": "sarah.thomas@example.com",
+    "phone": "+1 (415) 253-3036",
+    "type": "NEW",
+    "totalOrders": 1,
+    "order_window": "New",
+    "ltv": "$1137.00",
+    "city": "Philadelphia",
+    "state": "PA",
+    "fullAddress": "596 Maple St, Philadelphia, PA 33372",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(PST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    },
+    {
+      "id": 2,
+      "action": "Picked Up",
+      "location": "Warehouse",
+      "time": "11/18, 10:15 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "4h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

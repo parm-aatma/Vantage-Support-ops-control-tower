@@ -1,0 +1,80 @@
+{
+  "orderId": "LOC-USP-79250",
+  "source": "Direct",
+  "customerName": "Charles Thomas",
+  "destination": "Dallas, TX",
+  "orderDate": "11/15",
+  "status": "In Transit",
+  "deliveryStatus": "On Time",
+  "sla": "4d 00h",
+  "slaColor": "sla-green",
+  "carrier": "USPS",
+  "carrierService": "Ground",
+  "zip": "38317",
+  "fulfillmentCenter": "WH-EAST-03",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "Charles Thomas",
+    "email": "charles.thomas@example.com",
+    "phone": "+1 (590) 381-8827",
+    "type": "NEW",
+    "totalOrders": 1,
+    "order_window": "New",
+    "ltv": "$1811.00",
+    "city": "Dallas",
+    "state": "TX",
+    "fullAddress": "218 Maple St, Dallas, TX 60288",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(MST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    },
+    {
+      "id": 2,
+      "action": "Picked Up",
+      "location": "Warehouse",
+      "time": "11/18, 10:15 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "4h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    },
+    {
+      "id": 3,
+      "action": "In Transit",
+      "location": "Regional Hub",
+      "time": "11/19, 02:40 PM",
+      "status": "Current",
+      "colorClass": "blue",
+      "connectorTime": "--",
+      "connectorColor": "var(--bg-border)",
+      "icon": "clock"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

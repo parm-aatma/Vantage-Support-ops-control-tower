@@ -1,0 +1,58 @@
+{
+  "orderId": "LOC-DHL-55623",
+  "source": "Wholesale",
+  "customerName": "John Taylor",
+  "destination": "Columbus, OH",
+  "orderDate": "11/17",
+  "status": "Label Created",
+  "deliveryStatus": "On Time",
+  "sla": "4d 00h",
+  "slaColor": "sla-green",
+  "carrier": "DHL",
+  "carrierService": "Express",
+  "zip": "81250",
+  "fulfillmentCenter": "WH-EAST-04",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "John Taylor",
+    "email": "john.taylor@example.com",
+    "phone": "+1 (236) 941-9651",
+    "type": "NEW",
+    "totalOrders": 1,
+    "order_window": "New",
+    "ltv": "$1170.00",
+    "city": "Columbus",
+    "state": "OH",
+    "fullAddress": "275 Oak St, Columbus, OH 43340",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(CST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

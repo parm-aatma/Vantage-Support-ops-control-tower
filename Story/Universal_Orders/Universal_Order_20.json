@@ -1,0 +1,58 @@
+{
+  "orderId": "LOC-USP-96511",
+  "source": "Amazon",
+  "customerName": "James Wilson",
+  "destination": "San Francisco, CA",
+  "orderDate": "11/18",
+  "status": "Label Created",
+  "deliveryStatus": "On Time",
+  "sla": "1d 00h",
+  "slaColor": "sla-green",
+  "carrier": "USPS",
+  "carrierService": "Ground",
+  "zip": "19115",
+  "fulfillmentCenter": "WH-CENTRAL-05",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "James Wilson",
+    "email": "james.wilson@example.com",
+    "phone": "+1 (319) 709-7756",
+    "type": "REPEAT",
+    "totalOrders": 9,
+    "order_window": "10mo",
+    "ltv": "$194.00",
+    "city": "San Francisco",
+    "state": "CA",
+    "fullAddress": "20 Washington St, San Francisco, CA 46521",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(PST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

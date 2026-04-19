@@ -1,0 +1,58 @@
+{
+  "orderId": "LOC-ONT-67491",
+  "source": "Wholesale",
+  "customerName": "William Davis",
+  "destination": "Dallas, TX",
+  "orderDate": "11/15",
+  "status": "Label Created",
+  "deliveryStatus": "On Time",
+  "sla": "2d 00h",
+  "slaColor": "sla-green",
+  "carrier": "OnTrac",
+  "carrierService": "2-Day",
+  "zip": "85680",
+  "fulfillmentCenter": "WH-WEST-01",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "William Davis",
+    "email": "william.davis@example.com",
+    "phone": "+1 (395) 461-1728",
+    "type": "REPEAT",
+    "totalOrders": 8,
+    "order_window": "9mo",
+    "ltv": "$1644.00",
+    "city": "Dallas",
+    "state": "TX",
+    "fullAddress": "323 Washington St, Dallas, TX 13947",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(PST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

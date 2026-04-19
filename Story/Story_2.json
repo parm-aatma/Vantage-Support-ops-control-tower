@@ -1,0 +1,186 @@
+{
+    "case": {
+        "id": "#US-9024",
+        "zip": "60601",
+        "source": "Vantage",
+        "status": "Breach Risk",
+        "sla": "00d 14h",
+        "slaColor": "sla-red",
+        "summary": "Package experienced sequential delays at Memphis and Indianapolis hubs due to repetitive barcode scanning failures. Both issues were autonomously resolved with FedEx, but compounding delays have pushed the SLA Breach Risk to 85%.",
+        "updates": "SLA Breach Risk High",
+        "isVantageAlert": true,
+        "integrationSource": "FedEx Webhook",
+        "techStatus": "Success",
+        "lastPing": "11/08, 02:15 PM",
+        "breachProb": "85%",
+        "intelligence": {
+            "caseSynthesis": "This package has been relabeled twice at two separate FedEx hubs (Memphis, TN and Indianapolis, IN) due to recurring barcode unreadability — a pattern suggesting physical label damage sustained during the origin scan. Vantage autonomously resolved both stalls via carrier tickets (#CAR-102, #CAR-304), but the compounded 72+ hours of delays have critically compressed the remaining delivery window to under 4 hours for the Chicago destination.",
+            "suggestedAction": "Call FedEx Indianapolis Regional Dispatch at Ext 204. Request an immediate 'Service Level Upgrade' to Priority First Overnight for the final-mile leg to Chicago, IL 60601. This upgrade requires human authorization and cannot be triggered via API. Reference carrier tickets #CAR-102 and #CAR-304 for context.",
+            "breachProbability": 85,
+            "resolutionRunway": "04h 00m",
+            "riskAssessment": "CRITICAL — The delivery window has been reduced from 4 days to under 4 hours by two sequential hub stalls. Standard ground routing from Indianapolis to Chicago will not arrive in time. Without a carrier service level upgrade, SLA breach is near-certain. This is a first-time customer with only 1 order — a breach here directly risks permanent churn.",
+            "humanTouchAdvice": "Vantage cannot authorize carrier service level upgrades — this is a human-only action. The associate must call FedEx dispatch to override the routing tier. No customer outreach is needed yet; the customer has not contacted support and is unaware of the delays."
+        },
+        "customer": {
+            "name": "Michael T.",
+            "email": "michael.t@example.com",
+            "phone": "+1 (312) 555-0188",
+            "city": "Chicago",
+            "state": "IL",
+            "zipCode": "60601",
+            "fullAddress": "200 E Randolph St, Suite 4100, Chicago, IL 60601",
+            "localTimezone": "US Central (CST)",
+            "type": "NEW",
+            "ltv": "$185",
+            "totalOrders": 1,
+            "orderWindow": "12 months",
+            "localTimeNow": "01:30 PM CST",
+            "isQuietHours": false
+        },
+        "milestones": [
+            {
+                "id": 1,
+                "action": "Order Received",
+                "location": "Shopify",
+                "time": "11/04, 09:15 AM",
+                "status": "Completed",
+                "colorClass": "green",
+                "icon": "check",
+                "connectorTime": "6h 30m",
+                "connectorColor": "#10b981"
+            },
+            {
+                "id": 2,
+                "action": "Origin Scan",
+                "location": "Atlanta, GA",
+                "time": "11/04, 03:45 PM",
+                "status": "Completed",
+                "colorClass": "green",
+                "icon": "check",
+                "connectorTime": "14h 15m",
+                "connectorColor": "#10b981"
+            },
+            {
+                "id": 3,
+                "action": "Carrier Hub (Resolved)",
+                "location": "Memphis, TN",
+                "time": "11/05, 06:00 AM",
+                "status": "Completed",
+                "colorClass": "green",
+                "icon": "check",
+                "connectorTime": "48h 30m",
+                "connectorColor": "#ef4444"
+            },
+            {
+                "id": 4,
+                "action": "Regional Hub (Delayed)",
+                "location": "Indianapolis, IN",
+                "time": "11/08, 02:00 PM",
+                "status": "Current",
+                "colorClass": "red",
+                "icon": "alert",
+                "connectorTime": "Pending",
+                "connectorColor": "gray"
+            },
+            {
+                "id": 5,
+                "action": "Out for Delivery",
+                "location": "Chicago, IL",
+                "time": "Pending",
+                "status": "Pending",
+                "colorClass": "gray",
+                "icon": "clock",
+                "connectorTime": null,
+                "connectorColor": "gray"
+            }
+        ],
+        "auditLogs": [
+            {
+                "id": 2001,
+                "type": "Source",
+                "title": "Order Ingested",
+                "time": "11/04, 09:15 AM",
+                "details": "Order received from Shopify API. Processed normally.",
+                "isVantage": false
+            },
+            {
+                "id": 2002,
+                "type": "Carrier",
+                "title": "Picked up by Carrier",
+                "time": "11/04, 03:45 PM",
+                "details": "FedEx Express origin scan completed in Atlanta, GA.",
+                "isVantage": false
+            },
+            {
+                "id": 2003,
+                "type": "VantageAction",
+                "title": "Stall Detected: Memphis Hub",
+                "time": "11/05, 02:00 PM",
+                "details": "Package missed scheduled departure scan at Memphis, TN hub. No movement for 8 hours.",
+                "isVantage": true,
+                "actionCategory": "detection"
+            },
+            {
+                "id": 2004,
+                "type": "VantageAction",
+                "title": "Carrier Ticket Raised",
+                "time": "11/05, 02:05 PM",
+                "details": "Automated Ticket #CAR-102 raised to FedEx Memphis facility requesting location check.",
+                "isVantage": true,
+                "actionCategory": "alert"
+            },
+            {
+                "id": 2005,
+                "type": "Carrier",
+                "title": "Carrier Ticket Updated",
+                "time": "11/05, 05:45 PM",
+                "details": "FedEx responded: 'Barcode damaged. Relabeled and re-entered into sorting queue.'",
+                "isVantage": false
+            },
+            {
+                "id": 2006,
+                "type": "Carrier",
+                "title": "Departed Memphis Hub",
+                "time": "11/05, 06:00 AM",
+                "details": "Departure scan recorded. SLA remains intact. Vantage closed Ticket #CAR-102.",
+                "isVantage": false
+            },
+            {
+                "id": 2007,
+                "type": "VantageAction",
+                "title": "Stall Detected: Indianapolis Hub",
+                "time": "11/08, 10:00 AM",
+                "details": "Package missed scheduled departure scan at Indianapolis, IN hub. Similar barcode unreadability pattern detected.",
+                "isVantage": true,
+                "actionCategory": "detection"
+            },
+            {
+                "id": 2008,
+                "type": "VantageAction",
+                "title": "Carrier Ticket Raised",
+                "time": "11/08, 10:05 AM",
+                "details": "Automated Ticket #CAR-304 raised to FedEx Indianapolis facility requesting manual scan.",
+                "isVantage": true,
+                "actionCategory": "alert"
+            },
+            {
+                "id": 2009,
+                "type": "Carrier",
+                "title": "Carrier Ticket Updated",
+                "time": "11/08, 01:50 PM",
+                "details": "FedEx responded: 'Package required secondary relabeling. Cleared for next dispatch.'",
+                "isVantage": false
+            },
+            {
+                "id": 2010,
+                "type": "VantageAction",
+                "title": "SLA Risk Esculated",
+                "time": "11/08, 02:15 PM",
+                "details": "Compounding delays have reduced the resolution runway to 4 hours. Escalated to Associate queue for manual Service Level Upgrade.",
+                "isVantage": true,
+                "actionCategory": "alert"
+            }
+        ],
+        "omniMessages": []
+    }
+}

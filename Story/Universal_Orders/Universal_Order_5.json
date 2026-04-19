@@ -1,0 +1,58 @@
+{
+  "orderId": "LOC-USP-63563",
+  "source": "Amazon",
+  "customerName": "Barbara Johnson",
+  "destination": "San Jose, CA",
+  "orderDate": "11/19",
+  "status": "Label Created",
+  "deliveryStatus": "On Time",
+  "sla": "4d 00h",
+  "slaColor": "sla-green",
+  "carrier": "USPS",
+  "carrierService": "Express",
+  "zip": "41878",
+  "fulfillmentCenter": "WH-CENTRAL-04",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "Barbara Johnson",
+    "email": "barbara.johnson@example.com",
+    "phone": "+1 (729) 287-4498",
+    "type": "NEW",
+    "totalOrders": 1,
+    "order_window": "New",
+    "ltv": "$811.00",
+    "city": "San Jose",
+    "state": "CA",
+    "fullAddress": "935 Washington St, San Jose, CA 76686",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(CST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

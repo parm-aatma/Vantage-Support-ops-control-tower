@@ -1,0 +1,58 @@
+{
+  "orderId": "LOC-DHL-45921",
+  "source": "Direct",
+  "customerName": "James Moore",
+  "destination": "Washington, DC",
+  "orderDate": "11/15",
+  "status": "Label Created",
+  "deliveryStatus": "On Time",
+  "sla": "3d 00h",
+  "slaColor": "sla-green",
+  "carrier": "DHL",
+  "carrierService": "Express",
+  "zip": "31493",
+  "fulfillmentCenter": "WH-CENTRAL-06",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "James Moore",
+    "email": "james.moore@example.com",
+    "phone": "+1 (418) 105-9820",
+    "type": "NEW",
+    "totalOrders": 1,
+    "order_window": "New",
+    "ltv": "$1349.00",
+    "city": "Washington",
+    "state": "DC",
+    "fullAddress": "752 Washington St, Washington, DC 45690",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(CST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

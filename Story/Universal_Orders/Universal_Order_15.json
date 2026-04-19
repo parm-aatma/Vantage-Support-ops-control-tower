@@ -1,0 +1,58 @@
+{
+  "orderId": "LOC-FED-27939",
+  "source": "Direct",
+  "customerName": "David Hernandez",
+  "destination": "Columbus, OH",
+  "orderDate": "11/15",
+  "status": "Label Created",
+  "deliveryStatus": "On Time",
+  "sla": "4d 00h",
+  "slaColor": "sla-green",
+  "carrier": "FedEx",
+  "carrierService": "Ground",
+  "zip": "29886",
+  "fulfillmentCenter": "WH-EAST-03",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "David Hernandez",
+    "email": "david.hernandez@example.com",
+    "phone": "+1 (806) 765-1955",
+    "type": "REPEAT",
+    "totalOrders": 12,
+    "order_window": "4mo",
+    "ltv": "$1083.00",
+    "city": "Columbus",
+    "state": "OH",
+    "fullAddress": "663 Maple St, Columbus, OH 31304",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(CST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

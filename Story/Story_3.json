@@ -1,0 +1,176 @@
+{
+    "case": {
+        "id": "#US-9105",
+        "zip": "98109",
+        "source": "Customer",
+        "status": "New",
+        "sla": "01d 12h",
+        "slaColor": "sla-green",
+        "summary": "Customer reported missing delivery. Carrier logs confirm failed delivery attempt (Signature Required), package redirected to local FedEx OnSite.",
+        "updates": "1 unread message",
+        "isVantageAlert": false,
+        "integrationSource": "FedEx API",
+        "techStatus": "Success",
+        "lastPing": "11/08, 09:30 AM",
+        "breachProb": "5%",
+        "intelligence": {
+            "caseSynthesis": "Customer believes their package was stolen because tracking shows 'Delivered' but their porch is empty. In reality, the delivery required a signature and no one was home at 1:45 PM yesterday. Per FedEx protocol, the driver redirected the package to the nearest OnSite location (Walgreens, 400 Broad St, Seattle, WA 98109). The package has been scanned and is safely held there since 4:00 PM yesterday.",
+            "suggestedAction": "Use Vantage Copilot to draft a reassurance email to the customer. Key points to include: (1) Package was NOT stolen, (2) It requires a signature, (3) It is being held at Walgreens on 400 Broad St, (4) Customer needs a valid photo ID to pick up. No carrier action needed — the package is exactly where it should be.",
+            "breachProbability": 5,
+            "resolutionRunway": "36h 00m",
+            "riskAssessment": "MINIMAL — The package is physically secure and the SLA window is healthy at 1d 12h. The only risk here is reputational: the customer is alarmed and believes their package was stolen. A fast, clear, empathetic response will fully resolve this case. Delayed response risks an unnecessary chargeback or social media escalation from a frustrated first-time buyer.",
+            "humanTouchAdvice": "No operational action is required — the carrier workflow completed correctly. This is purely a customer communication task. The Vantage Copilot has already pre-generated an accurate response. The associate should review, personalize the tone if needed, and send immediately to de-escalate the customer's anxiety."
+        },
+        "customer": {
+            "name": "David L.",
+            "email": "david.l@example.com",
+            "phone": "+1 (206) 555-0122",
+            "city": "Seattle",
+            "state": "WA",
+            "zipCode": "98109",
+            "fullAddress": "1200 Aloha St, Seattle, WA 98109",
+            "localTimezone": "US Pacific (PST)",
+            "type": "NEW",
+            "ltv": "$120",
+            "totalOrders": 1,
+            "orderWindow": "12 months",
+            "localTimeNow": "10:15 AM PST",
+            "isQuietHours": false
+        },
+        "milestones": [
+            {
+                "id": 1,
+                "action": "Out for Delivery",
+                "location": "Seattle, WA",
+                "time": "11/07, 08:30 AM",
+                "status": "Completed",
+                "colorClass": "green",
+                "icon": "check",
+                "connectorTime": "5h 15m",
+                "connectorColor": "#10b981"
+            },
+            {
+                "id": 2,
+                "action": "Delivery Attempted",
+                "location": "Seattle, WA",
+                "time": "11/07, 01:45 PM",
+                "status": "Completed",
+                "colorClass": "red",
+                "icon": "alert",
+                "connectorTime": "0h 45m",
+                "connectorColor": "#ef4444"
+            },
+            {
+                "id": 3,
+                "action": "Redirected to Hold",
+                "location": "Seattle, WA",
+                "time": "11/07, 02:30 PM",
+                "status": "Completed",
+                "colorClass": "green",
+                "icon": "check",
+                "connectorTime": "1h 30m",
+                "connectorColor": "#10b981"
+            },
+            {
+                "id": 4,
+                "action": "Ready for Pickup",
+                "location": "FedEx OnSite",
+                "time": "11/07, 04:00 PM",
+                "status": "Current",
+                "colorClass": "green",
+                "icon": "check",
+                "connectorTime": "Pending",
+                "connectorColor": "gray"
+            },
+            {
+                "id": 5,
+                "action": "Delivered to Buyer",
+                "location": "Pending",
+                "time": "Pending",
+                "status": "Pending",
+                "colorClass": "gray",
+                "icon": "clock",
+                "connectorTime": null,
+                "connectorColor": "gray"
+            }
+        ],
+        "auditLogs": [
+            {
+                "id": 3001,
+                "type": "Carrier",
+                "title": "Out for Delivery",
+                "time": "11/07, 08:30 AM",
+                "details": "Package loaded onto final mile delivery vehicle. Signature Required flag active.",
+                "isVantage": false
+            },
+            {
+                "id": 3002,
+                "type": "Carrier",
+                "title": "Delivery Exception",
+                "time": "11/07, 01:45 PM",
+                "details": "Delivery attempt failed. Reason: Customer not available or business closed. Signature required.",
+                "isVantage": false
+            },
+            {
+                "id": 3003,
+                "type": "Carrier",
+                "title": "Package Redirected",
+                "time": "11/07, 02:30 PM",
+                "details": "Package redirected to nearby FedEx OnSite location per carrier protocol.",
+                "isVantage": false
+            },
+            {
+                "id": 3004,
+                "type": "Carrier",
+                "title": "Ready for Pickup",
+                "time": "11/07, 04:00 PM",
+                "details": "Package scanned and held at FedEx OnSite (Walgreens, 400 Broad St, Seattle, WA 98109).",
+                "isVantage": false
+            },
+            {
+                "id": 3005,
+                "type": "Customer",
+                "title": "Inbound Customer Message",
+                "time": "11/08, 09:10 AM",
+                "details": "Customer initiated support ticket via Email. Subject: Missing Package.",
+                "isVantage": false
+            },
+            {
+                "id": 3006,
+                "type": "VantageAction",
+                "title": "Case Intelligence Synthesized",
+                "time": "11/08, 09:10 AM",
+                "details": "Vantage analyzed carrier logs against customer complaint. Root cause identified as redirected signature-required delivery. Copilot response generated.",
+                "isVantage": true,
+                "actionCategory": "detection"
+            },
+            {
+                "id": 3007,
+                "type": "Customer",
+                "title": "Agent Response Sent",
+                "time": "11/08, 09:12 AM",
+                "details": "Associate utilized Vantage Copilot to send resolution email to customer.",
+                "isVantage": false
+            }
+        ],
+        "omniMessages": [
+            {
+                "id": 504,
+                "direction": "inbound",
+                "channel": "Email",
+                "text": "Hi, my tracking says my package was delivered yesterday, but my porch is empty! I've checked everywhere. Was it stolen?! Please help, I need this for the weekend.",
+                "time": "11/08, 09:10 AM",
+                "sender": "David L."
+            },
+            {
+                "id": 505,
+                "direction": "outbound",
+                "channel": "Email",
+                "text": "Hi David, don't worry, your package wasn't stolen! Because this order required a signature and no one was home yesterday at 1:45 PM, the driver safely redirected it to the local FedEx OnSite for you to pick up at your convenience. \n\nIt is currently waiting for you at the Walgreens at 400 Broad St. Just bring a valid photo ID matching the shipping address to claim it. Let me know if you need any other help!",
+                "time": "11/08, 09:12 AM",
+                "sender": "Siddhant",
+                "isAiSuggested": true
+            }
+        ]
+    }
+}

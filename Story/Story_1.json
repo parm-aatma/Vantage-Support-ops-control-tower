@@ -1,0 +1,212 @@
+{
+    "case": {
+        "id": "#US-8911",
+        "zip": "78701",
+        "source": "Vantage",
+        "status": "Escalated",
+        "sla": "03d 14h",
+        "slaColor": "sla-green",
+        "summary": "Address flagged incomplete at ingestion. Vantage autonomously resolved the address via WhatsApp and lifted the hold. Order is now stalled in warehouse packing. Automated ticket unresponsive.",
+        "updates": "Escalated to human support",
+        "isVantageAlert": true,
+        "integrationSource": "Shopify API",
+        "techStatus": "Success",
+        "lastPing": "11/08, 08:00 AM",
+        "breachProb": "20%",
+        "intelligence": {
+            "caseSynthesis": "Vantage autonomously corrected an incomplete address via WhatsApp outreach (missing Apt 405). The address hold was lifted and the order was released to the Austin, TX fulfillment center. However, the order has now been sitting in the warehouse pick queue for over 40 hours with zero scan activity. Automated priority ticket #WH-882 was raised 24 hours ago and has received no response from warehouse staff.",
+            "suggestedAction": "Call Austin Warehouse Dispatch directly at Ext 402. Reference internal ticket #WH-882 and request an immediate manual pick scan for this order. If dispatch is unresponsive, escalate to Regional Warehouse Manager (Sarah Jenkins) with a P1 override.",
+            "breachProbability": 20,
+            "resolutionRunway": "48h 00m",
+            "riskAssessment": "LOW — SLA has a comfortable 3-day buffer, but the order is completely stationary. The risk is not time-based but operational: if the warehouse queue remains blocked, the order will never enter the carrier network. Every hour of inaction compresses the final-mile delivery window.",
+            "humanTouchAdvice": "This is a physical-world blockage — no digital automation can resolve it. The warehouse pick queue requires a human operator to locate and scan the order. A direct phone call is the only path to resolution."
+        },
+        "customer": {
+            "name": "Jordan P.",
+            "email": "jordan.p@example.com",
+            "phone": "+1 (512) 555-0199",
+            "city": "Austin",
+            "state": "TX",
+            "zipCode": "78701",
+            "fullAddress": "1100 Congress Ave, Apt 405, Austin, TX 78701",
+            "localTimezone": "US Central (CST)",
+            "type": "REPEAT",
+            "ltv": "$450",
+            "totalOrders": 4,
+            "orderWindow": "12 months",
+            "localTimeNow": "09:45 AM CST",
+            "isQuietHours": false
+        },
+        "milestones": [
+            {
+                "id": 1,
+                "action": "Order Received",
+                "location": "Shopify",
+                "time": "11/06, 02:15 PM",
+                "status": "Completed",
+                "colorClass": "green",
+                "icon": "check",
+                "connectorTime": "0h 02m",
+                "connectorColor": "#10b981"
+            },
+            {
+                "id": 2,
+                "action": "Address Validation",
+                "location": "Vantage AI",
+                "time": "11/06, 04:30 PM",
+                "status": "Completed",
+                "colorClass": "green",
+                "icon": "check",
+                "connectorTime": "2h 15m",
+                "connectorColor": "#10b981"
+            },
+            {
+                "id": 3,
+                "action": "Warehouse Processing",
+                "location": "Austin, TX",
+                "time": "11/06, 04:35 PM",
+                "status": "Current",
+                "colorClass": "red",
+                "icon": "alert",
+                "connectorTime": "Stalled",
+                "connectorColor": "#ef4444"
+            },
+            {
+                "id": 4,
+                "action": "Pick & Pack",
+                "location": "Austin, TX",
+                "time": "Pending",
+                "status": "Pending",
+                "colorClass": "gray",
+                "icon": "clock",
+                "connectorTime": "Pending",
+                "connectorColor": "gray"
+            },
+            {
+                "id": 5,
+                "action": "Carrier Hub",
+                "location": "Pending",
+                "time": "Pending",
+                "status": "Pending",
+                "colorClass": "gray",
+                "icon": "clock",
+                "connectorTime": null,
+                "connectorColor": "gray"
+            }
+        ],
+        "auditLogs": [
+            {
+                "id": 1001,
+                "type": "Source",
+                "title": "Order Ingested",
+                "time": "11/06, 02:15 PM",
+                "details": "Order received from Shopify API. Payload parsed successfully.",
+                "isVantage": false
+            },
+            {
+                "id": 1002,
+                "type": "VantageAction",
+                "title": "Address Anomaly Detected",
+                "time": "11/06, 02:17 PM",
+                "details": "Vantage detected incomplete destination address. Missing secondary unit/apartment number for multi-tenant building.",
+                "isVantage": true,
+                "actionCategory": "detection"
+            },
+            {
+                "id": 1003,
+                "type": "VantageAction",
+                "title": "Fulfillment Hold Placed",
+                "time": "11/06, 02:17 PM",
+                "details": "Automated hold placed on order routing to prevent undeliverable exception.",
+                "isVantage": true,
+                "actionCategory": "validation"
+            },
+            {
+                "id": 1004,
+                "type": "Customer",
+                "title": "Automated Outreach Sent",
+                "time": "11/06, 02:20 PM",
+                "details": "Vantage dispatched automated WhatsApp message requesting address clarification.",
+                "isVantage": true
+            },
+            {
+                "id": 1005,
+                "type": "Customer",
+                "title": "Customer Reply Received",
+                "time": "11/06, 04:28 PM",
+                "details": "Customer responded via WhatsApp providing unit number 'Apt 405'.",
+                "isVantage": false
+            },
+            {
+                "id": 1006,
+                "type": "VantageAction",
+                "title": "Address Updated & Hold Lifted",
+                "time": "11/06, 04:30 PM",
+                "details": "Address payload updated. Fulfillment hold successfully removed. Order released to warehouse.",
+                "isVantage": true,
+                "actionCategory": "validation"
+            },
+            {
+                "id": 1007,
+                "type": "Warehouse",
+                "title": "Order Routed to Facility",
+                "time": "11/06, 04:35 PM",
+                "details": "Order assigned to Austin TX Fulfillment Center. Added to pick queue.",
+                "isVantage": false
+            },
+            {
+                "id": 1008,
+                "type": "VantageAction",
+                "title": "Packing Delay Detected",
+                "time": "11/07, 04:35 PM",
+                "details": "Order has been in warehouse queue for >24 hours without a pick scan. Automated Ticket #WH-882 raised to warehouse prioritizing the order.",
+                "isVantage": true,
+                "actionCategory": "alert"
+            },
+            {
+                "id": 1009,
+                "type": "System",
+                "title": "Ticket SLA Expired",
+                "time": "11/08, 04:35 AM",
+                "details": "Internal SLA of 12 hours for automated Ticket #WH-882 elapsed with no status change from warehouse facility.",
+                "isVantage": false
+            },
+            {
+                "id": 1010,
+                "type": "Internal",
+                "title": "Escalated to Support Team",
+                "time": "11/08, 08:00 AM",
+                "details": "Case transferred from autonomous queue to Associate queue due to unresponsive warehouse ticket.",
+                "isVantage": true
+            }
+        ],
+        "omniMessages": [
+            {
+                "id": 501,
+                "direction": "outbound",
+                "channel": "WhatsApp",
+                "text": "Hi Jordan! Your order from the brand is ready to be processed, but our system flagged that your address (1100 Congress Ave) might be missing an apartment or unit number. Could you please reply with your unit number so we can get your package shipped out?",
+                "time": "11/06, 02:20 PM",
+                "sender": "Vantage AI",
+                "isAiSuggested": true
+            },
+            {
+                "id": 502,
+                "direction": "inbound",
+                "channel": "WhatsApp",
+                "text": "Oh sorry! It's Apt 405.",
+                "time": "11/06, 04:28 PM",
+                "sender": "Jordan P."
+            },
+            {
+                "id": 503,
+                "direction": "outbound",
+                "channel": "WhatsApp",
+                "text": "Got it, thank you! Your address has been updated to 1100 Congress Ave, Apt 405, and your order is heading to the warehouse for packing now.",
+                "time": "11/06, 04:30 PM",
+                "sender": "Vantage AI",
+                "isAiSuggested": true
+            }
+        ]
+    }
+}

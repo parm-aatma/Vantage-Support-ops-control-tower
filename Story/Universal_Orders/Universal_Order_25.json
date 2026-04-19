@@ -1,0 +1,58 @@
+{
+  "orderId": "LOC-UPS-97644",
+  "source": "Direct",
+  "customerName": "James Thomas",
+  "destination": "Dallas, TX",
+  "orderDate": "11/19",
+  "status": "Label Created",
+  "deliveryStatus": "On Time",
+  "sla": "2d 00h",
+  "slaColor": "sla-green",
+  "carrier": "UPS",
+  "carrierService": "Ground",
+  "zip": "76342",
+  "fulfillmentCenter": "WH-WEST-01",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "James Thomas",
+    "email": "james.thomas@example.com",
+    "phone": "+1 (743) 394-8483",
+    "type": "NEW",
+    "totalOrders": 1,
+    "order_window": "New",
+    "ltv": "$1987.00",
+    "city": "Dallas",
+    "state": "TX",
+    "fullAddress": "483 Oak St, Dallas, TX 59994",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(PST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

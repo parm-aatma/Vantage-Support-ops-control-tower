@@ -1,0 +1,69 @@
+{
+  "orderId": "LOC-FED-44935",
+  "source": "Shopify",
+  "customerName": "Jennifer Martin",
+  "destination": "Indianapolis, IN",
+  "orderDate": "11/17",
+  "status": "Picked Up",
+  "deliveryStatus": "On Time",
+  "sla": "3d 00h",
+  "slaColor": "sla-green",
+  "carrier": "FedEx",
+  "carrierService": "Priority",
+  "zip": "55848",
+  "fulfillmentCenter": "WH-CENTRAL-09",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "Jennifer Martin",
+    "email": "jennifer.martin@example.com",
+    "phone": "+1 (788) 444-2789",
+    "type": "REPEAT",
+    "totalOrders": 5,
+    "order_window": "6mo",
+    "ltv": "$281.00",
+    "city": "Indianapolis",
+    "state": "IN",
+    "fullAddress": "139 Maple St, Indianapolis, IN 60687",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(PST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    },
+    {
+      "id": 2,
+      "action": "Picked Up",
+      "location": "Warehouse",
+      "time": "11/18, 10:15 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "4h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

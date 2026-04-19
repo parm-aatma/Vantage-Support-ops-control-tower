@@ -1,0 +1,69 @@
+{
+  "orderId": "LOC-DHL-66420",
+  "source": "Direct",
+  "customerName": "Mary Miller",
+  "destination": "Denver, CO",
+  "orderDate": "11/15",
+  "status": "Picked Up",
+  "deliveryStatus": "On Time",
+  "sla": "3d 00h",
+  "slaColor": "sla-green",
+  "carrier": "DHL",
+  "carrierService": "Express",
+  "zip": "75768",
+  "fulfillmentCenter": "WH-EAST-05",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "Mary Miller",
+    "email": "mary.miller@example.com",
+    "phone": "+1 (506) 702-6360",
+    "type": "NEW",
+    "totalOrders": 1,
+    "order_window": "New",
+    "ltv": "$1150.00",
+    "city": "Denver",
+    "state": "CO",
+    "fullAddress": "901 Washington St, Denver, CO 12368",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(CST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    },
+    {
+      "id": 2,
+      "action": "Picked Up",
+      "location": "Warehouse",
+      "time": "11/18, 10:15 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "4h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

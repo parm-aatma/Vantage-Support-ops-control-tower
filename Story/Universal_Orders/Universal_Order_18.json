@@ -1,0 +1,91 @@
+{
+  "orderId": "LOC-DHL-53236",
+  "source": "Direct",
+  "customerName": "William Lopez",
+  "destination": "San Antonio, TX",
+  "orderDate": "11/15",
+  "status": "Out for Delivery",
+  "deliveryStatus": "On Time",
+  "sla": "3d 00h",
+  "slaColor": "sla-green",
+  "carrier": "DHL",
+  "carrierService": "Express",
+  "zip": "28030",
+  "fulfillmentCenter": "WH-CENTRAL-07",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "William Lopez",
+    "email": "william.lopez@example.com",
+    "phone": "+1 (744) 685-1184",
+    "type": "NEW",
+    "totalOrders": 1,
+    "order_window": "New",
+    "ltv": "$160.00",
+    "city": "San Antonio",
+    "state": "TX",
+    "fullAddress": "462 Maple St, San Antonio, TX 72240",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(MST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    },
+    {
+      "id": 2,
+      "action": "Picked Up",
+      "location": "Warehouse",
+      "time": "11/18, 10:15 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "4h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    },
+    {
+      "id": 3,
+      "action": "In Transit",
+      "location": "Regional Hub",
+      "time": "11/19, 02:40 PM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "12h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    },
+    {
+      "id": 4,
+      "action": "Out for Delivery",
+      "location": "Local Node",
+      "time": "11/20, 08:00 AM",
+      "status": "Current",
+      "colorClass": "blue",
+      "connectorTime": null,
+      "connectorColor": "var(--bg-border)",
+      "icon": "clock"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "orderId": "LOC-USP-66524",
+  "source": "Amazon",
+  "customerName": "Sarah Anderson",
+  "destination": "Fort Worth, TX",
+  "orderDate": "11/18",
+  "status": "Label Created",
+  "deliveryStatus": "On Time",
+  "sla": "4d 00h",
+  "slaColor": "sla-green",
+  "carrier": "USPS",
+  "carrierService": "Express",
+  "zip": "34645",
+  "fulfillmentCenter": "WH-WEST-05",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "Sarah Anderson",
+    "email": "sarah.anderson@example.com",
+    "phone": "+1 (982) 890-6416",
+    "type": "NEW",
+    "totalOrders": 1,
+    "order_window": "New",
+    "ltv": "$368.00",
+    "city": "Fort Worth",
+    "state": "TX",
+    "fullAddress": "562 Oak St, Fort Worth, TX 81135",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(MST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

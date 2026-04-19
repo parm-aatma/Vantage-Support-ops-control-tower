@@ -1,0 +1,58 @@
+{
+  "orderId": "LOC-FED-42573",
+  "source": "Direct",
+  "customerName": "Sarah Taylor",
+  "destination": "Denver, CO",
+  "orderDate": "11/18",
+  "status": "Label Created",
+  "deliveryStatus": "On Time",
+  "sla": "2d 00h",
+  "slaColor": "sla-green",
+  "carrier": "FedEx",
+  "carrierService": "Ground",
+  "zip": "41863",
+  "fulfillmentCenter": "WH-CENTRAL-02",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "Sarah Taylor",
+    "email": "sarah.taylor@example.com",
+    "phone": "+1 (517) 846-7700",
+    "type": "NEW",
+    "totalOrders": 1,
+    "order_window": "New",
+    "ltv": "$1418.00",
+    "city": "Denver",
+    "state": "CO",
+    "fullAddress": "158 Maple St, Denver, CO 25889",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(EST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

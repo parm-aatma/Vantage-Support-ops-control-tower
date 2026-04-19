@@ -1,0 +1,58 @@
+{
+  "orderId": "LOC-UPS-41221",
+  "source": "Amazon",
+  "customerName": "Robert Garcia",
+  "destination": "Charlotte, NC",
+  "orderDate": "11/17",
+  "status": "Label Created",
+  "deliveryStatus": "On Time",
+  "sla": "3d 00h",
+  "slaColor": "sla-green",
+  "carrier": "UPS",
+  "carrierService": "Ground",
+  "zip": "15020",
+  "fulfillmentCenter": "WH-WEST-02",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "Robert Garcia",
+    "email": "robert.garcia@example.com",
+    "phone": "+1 (681) 191-7077",
+    "type": "NEW",
+    "totalOrders": 1,
+    "order_window": "New",
+    "ltv": "$1594.00",
+    "city": "Charlotte",
+    "state": "NC",
+    "fullAddress": "206 Maple St, Charlotte, NC 60082",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(EST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

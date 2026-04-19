@@ -1,0 +1,58 @@
+{
+  "orderId": "LOC-FED-86504",
+  "source": "Amazon",
+  "customerName": "Mary Davis",
+  "destination": "Seattle, WA",
+  "orderDate": "11/18",
+  "status": "Label Created",
+  "deliveryStatus": "On Time",
+  "sla": "4d 00h",
+  "slaColor": "sla-green",
+  "carrier": "FedEx",
+  "carrierService": "Priority",
+  "zip": "48145",
+  "fulfillmentCenter": "WH-WEST-09",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "Mary Davis",
+    "email": "mary.davis@example.com",
+    "phone": "+1 (870) 138-2901",
+    "type": "NEW",
+    "totalOrders": 1,
+    "order_window": "New",
+    "ltv": "$824.00",
+    "city": "Seattle",
+    "state": "WA",
+    "fullAddress": "448 Maple St, Seattle, WA 35681",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(CST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

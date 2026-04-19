@@ -1,0 +1,69 @@
+{
+  "orderId": "LOC-ONT-19081",
+  "source": "Amazon",
+  "customerName": "Barbara Johnson",
+  "destination": "San Francisco, CA",
+  "orderDate": "11/15",
+  "status": "Picked Up",
+  "deliveryStatus": "On Time",
+  "sla": "2d 00h",
+  "slaColor": "sla-green",
+  "carrier": "OnTrac",
+  "carrierService": "2-Day",
+  "zip": "58992",
+  "fulfillmentCenter": "WH-WEST-03",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "Barbara Johnson",
+    "email": "barbara.johnson@example.com",
+    "phone": "+1 (297) 779-6311",
+    "type": "NEW",
+    "totalOrders": 1,
+    "order_window": "New",
+    "ltv": "$1573.00",
+    "city": "San Francisco",
+    "state": "CA",
+    "fullAddress": "103 Maple St, San Francisco, CA 59009",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(EST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    },
+    {
+      "id": 2,
+      "action": "Picked Up",
+      "location": "Warehouse",
+      "time": "11/18, 10:15 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "4h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

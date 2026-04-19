@@ -1,0 +1,58 @@
+{
+  "orderId": "LOC-ONT-27197",
+  "source": "Wholesale",
+  "customerName": "Thomas Rodriguez",
+  "destination": "Washington, DC",
+  "orderDate": "11/16",
+  "status": "Label Created",
+  "deliveryStatus": "On Time",
+  "sla": "1d 00h",
+  "slaColor": "sla-green",
+  "carrier": "OnTrac",
+  "carrierService": "2-Day",
+  "zip": "38467",
+  "fulfillmentCenter": "WH-EAST-05",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "Thomas Rodriguez",
+    "email": "thomas.rodriguez@example.com",
+    "phone": "+1 (593) 749-1867",
+    "type": "NEW",
+    "totalOrders": 1,
+    "order_window": "New",
+    "ltv": "$1191.00",
+    "city": "Washington",
+    "state": "DC",
+    "fullAddress": "252 Oak St, Washington, DC 88251",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(CST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

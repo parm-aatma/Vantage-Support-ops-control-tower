@@ -1,0 +1,69 @@
+{
+  "orderId": "LOC-FED-51760",
+  "source": "Shopify",
+  "customerName": "Michael Wilson",
+  "destination": "San Antonio, TX",
+  "orderDate": "11/18",
+  "status": "Picked Up",
+  "deliveryStatus": "On Time",
+  "sla": "1d 00h",
+  "slaColor": "sla-green",
+  "carrier": "FedEx",
+  "carrierService": "2-Day",
+  "zip": "35908",
+  "fulfillmentCenter": "WH-EAST-03",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "Michael Wilson",
+    "email": "michael.wilson@example.com",
+    "phone": "+1 (441) 597-4925",
+    "type": "REPEAT",
+    "totalOrders": 12,
+    "order_window": "11mo",
+    "ltv": "$419.00",
+    "city": "San Antonio",
+    "state": "TX",
+    "fullAddress": "565 Lake St, San Antonio, TX 48184",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(PST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    },
+    {
+      "id": 2,
+      "action": "Picked Up",
+      "location": "Warehouse",
+      "time": "11/18, 10:15 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "4h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

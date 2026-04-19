@@ -1,0 +1,58 @@
+{
+  "orderId": "LOC-FED-56526",
+  "source": "Wholesale",
+  "customerName": "Charles Martin",
+  "destination": "Los Angeles, CA",
+  "orderDate": "11/16",
+  "status": "Label Created",
+  "deliveryStatus": "On Time",
+  "sla": "3d 00h",
+  "slaColor": "sla-green",
+  "carrier": "FedEx",
+  "carrierService": "Ground",
+  "zip": "73268",
+  "fulfillmentCenter": "WH-CENTRAL-02",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "Charles Martin",
+    "email": "charles.martin@example.com",
+    "phone": "+1 (752) 157-5010",
+    "type": "NEW",
+    "totalOrders": 1,
+    "order_window": "New",
+    "ltv": "$864.00",
+    "city": "Los Angeles",
+    "state": "CA",
+    "fullAddress": "24 Lake St, Los Angeles, CA 30454",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(PST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

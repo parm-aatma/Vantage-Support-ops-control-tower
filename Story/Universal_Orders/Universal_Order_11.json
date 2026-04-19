@@ -1,0 +1,58 @@
+{
+  "orderId": "LOC-FED-88549",
+  "source": "Wholesale",
+  "customerName": "Sarah Martin",
+  "destination": "Fort Worth, TX",
+  "orderDate": "11/16",
+  "status": "Label Created",
+  "deliveryStatus": "On Time",
+  "sla": "2d 00h",
+  "slaColor": "sla-green",
+  "carrier": "FedEx",
+  "carrierService": "Ground",
+  "zip": "29753",
+  "fulfillmentCenter": "WH-EAST-05",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "Sarah Martin",
+    "email": "sarah.martin@example.com",
+    "phone": "+1 (496) 924-1191",
+    "type": "REPEAT",
+    "totalOrders": 3,
+    "order_window": "3mo",
+    "ltv": "$262.00",
+    "city": "Fort Worth",
+    "state": "TX",
+    "fullAddress": "239 Oak St, Fort Worth, TX 10854",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(MST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

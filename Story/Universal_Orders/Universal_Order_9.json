@@ -1,0 +1,58 @@
+{
+  "orderId": "LOC-FED-64401",
+  "source": "Direct",
+  "customerName": "Jessica Thomas",
+  "destination": "San Jose, CA",
+  "orderDate": "11/17",
+  "status": "Label Created",
+  "deliveryStatus": "On Time",
+  "sla": "2d 00h",
+  "slaColor": "sla-green",
+  "carrier": "FedEx",
+  "carrierService": "Express",
+  "zip": "15804",
+  "fulfillmentCenter": "WH-CENTRAL-05",
+  "isVantageAlert": false,
+  "customer": {
+    "name": "Jessica Thomas",
+    "email": "jessica.thomas@example.com",
+    "phone": "+1 (958) 465-4431",
+    "type": "NEW",
+    "totalOrders": 1,
+    "order_window": "New",
+    "ltv": "$1202.00",
+    "city": "San Jose",
+    "state": "CA",
+    "fullAddress": "957 Maple St, San Jose, CA 90029",
+    "localTimeNow": "10:45 AM",
+    "localTimezone": "(PST)",
+    "isQuietHours": false
+  },
+  "milestones": [
+    {
+      "id": 1,
+      "action": "Order Confirmed",
+      "location": "System",
+      "time": "11/18, 09:00 AM",
+      "status": "Completed",
+      "colorClass": "green",
+      "connectorTime": "1h",
+      "connectorColor": "#10b981",
+      "icon": "check"
+    }
+  ],
+  "caseAuditLogs": [
+    {
+      "id": 1,
+      "type": "System",
+      "title": "Order Ingested",
+      "time": "11/18, 09:00 AM",
+      "details": "Order successfully received from storefront."
+    }
+  ],
+  "caseVantageActions": [],
+  "omniMessages": [],
+  "intelligence": {
+    "humanTouchAdvice": ""
+  }
+}

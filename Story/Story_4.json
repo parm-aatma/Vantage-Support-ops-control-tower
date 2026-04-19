@@ -1,0 +1,145 @@
+{
+    "incident": {
+        "caseId": "INFRA-3092",
+        "title": "UPS Webhook — 502 Bad Gateway Outage",
+        "incidentType": "Webhook Failure",
+        "severity": "HIGH",
+        "status": "Identified",
+        "detectedAt": "13:45",
+        "activeDuration": "0h 35m",
+        "whatHappened": "Vantage infrastructure monitor detected a 100% drop in incoming UPS tracking webhook payloads. The endpoint is returning HTTP 502 Bad Gateway errors across all polling requests, freezing tracking state updates in the Vantage UI.",
+        "blastRadiusNarrative": "82 active customer orders currently in transit via UPS are experiencing frozen tracking states. SLA remains fully intact for all affected orders as physical packages are still moving, but associate visibility is temporarily compromised.",
+        "anomalySource": "UPS Webhook",
+        "detectionMethod": "Webhook Drop Rate Monitor",
+        "affectedCarrier": "UPS Ground",
+        "affectedRegion": "National (US)",
+        "ordersInBlastRadius": 82,
+        "openTickets": "82 (12V / 70C)",
+        "slaCriticalCount": "0 (Breaching <6h)",
+        "errorRateDatapoints": [
+            0.1,
+            0.2,
+            0.1,
+            0.3,
+            12.4,
+            68.9,
+            100.0,
+            100.0,
+            100.0,
+            100.0
+        ],
+        "errorRatePeak": "100%",
+        "latencyDatapoints": [
+            120,
+            115,
+            122,
+            130,
+            800,
+            2500,
+            5000,
+            5000,
+            5000,
+            5000
+        ],
+        "latencyP95": "5000ms (Timeout)",
+        "thresholdLine": 5,
+        "endpoints": [
+            {
+                "name": "api.ups.com/track/v1/webhook",
+                "errorCount": 1450,
+                "lastErrorCode": "502 Bad Gateway",
+                "lastErrorTime": "14:18"
+            }
+        ],
+        "affectedTickets": [
+            {
+                "ticketId": "#US-9112",
+                "source": "Customer",
+                "assignedTo": "Siddhant",
+                "orderStage": "In Transit",
+                "carrier": "UPS Ground",
+                "slaRemaining": "02d 10h",
+                "isCritical": false,
+                "notified": true
+            },
+            {
+                "ticketId": "#US-9145",
+                "source": "Vantage",
+                "assignedTo": "Simran",
+                "orderStage": "Out for Delivery",
+                "carrier": "UPS Ground",
+                "slaRemaining": "14h 30m",
+                "isCritical": false,
+                "notified": true
+            },
+            {
+                "ticketId": "#US-9201",
+                "source": "Customer",
+                "assignedTo": "Rupesh",
+                "orderStage": "In Transit",
+                "carrier": "UPS Ground",
+                "slaRemaining": "01d 22h",
+                "isCritical": false,
+                "notified": true
+            },
+            {
+                "ticketId": "#US-9233",
+                "source": "Vantage",
+                "assignedTo": "Piyush",
+                "orderStage": "Pending Scan",
+                "carrier": "UPS Ground",
+                "slaRemaining": "03d 08h",
+                "isCritical": false,
+                "notified": true
+            }
+        ],
+        "broadcastTargets": [
+            "Notify all active tickets (82)"
+        ],
+        "broadcastPreviewText": "⚠️ Tech Incident Notice — INFRA-3092: UPS webhook outage. Tracking statuses will remain frozen for ~2 hours. Do not manually escalate to carrier.",
+        "isBroadcasting": false,
+        "broadcastDoneAt": "14:15",
+        "timeline": [
+            {
+                "id": 4001,
+                "type": "Detection",
+                "text": "Automated alert triggered: UPS Webhook returning consecutive 502 Gateway Timeout errors. Error rate exceeded 5% threshold.",
+                "time": "13:45"
+            },
+            {
+                "id": 4002,
+                "type": "Status",
+                "text": "Incident status changed to Investigating.",
+                "time": "13:50",
+                "user": "System"
+            },
+            {
+                "id": 4003,
+                "type": "Note",
+                "text": "Verified internal systems are operational. Issue isolated to UPS remote servers. Raised priority ticket #UPS-DEV-88 via developer portal.",
+                "time": "14:00",
+                "user": "Shankar"
+            },
+            {
+                "id": 4004,
+                "type": "Note",
+                "text": "UPS Dev Support responded. Confirmed regional load balancer failure. Physical packages are unaffected and moving normally. ETA for API restoration is 2 hours.",
+                "time": "14:10",
+                "user": "Shankar"
+            },
+            {
+                "id": 4005,
+                "type": "Status",
+                "text": "Incident status changed to Identified.",
+                "time": "14:12",
+                "user": "Shankar"
+            },
+            {
+                "id": 4006,
+                "type": "Broadcast",
+                "text": "Broadcast sent: '⚠️ Tech Incident Notice — INFRA-3092: UPS webhook outage. Tracking statuses will remain frozen for ~2 hours. Do not manually escalate to carrier.' targeting 82 tickets.",
+                "time": "14:15"
+            }
+        ]
+    }
+}
