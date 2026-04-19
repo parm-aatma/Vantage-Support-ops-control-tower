@@ -2850,7 +2850,7 @@ export default function Home() {
           )}
 
           <div style={{ display: 'flex', width: '100%', position: 'relative' }}>
-            {displayTimeline.map((node, index) => (
+            {displayTimeline.map((node: any, index: number) => (
               <div key={node.id} style={{ flex: 1, position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: '100px' }}>
                 
                 {index < displayTimeline.length - 1 && (
