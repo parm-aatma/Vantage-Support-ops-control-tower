@@ -3078,20 +3078,9 @@ export default function Home() {
                   </div>
 
                   <div style={{ width: '100%', textAlign: 'center', marginTop: '32px' }}>
-                    <h2 style={{ fontSize: '14px', textTransform: 'uppercase', color: 'var(--accent-coral)', marginBottom: '16px', letterSpacing: '2px', fontWeight: 'bold' }}>Manager</h2>
+                    <h2 style={{ fontSize: '14px', textTransform: 'uppercase', color: 'var(--accent-coral)', marginBottom: '16px', letterSpacing: '2px', fontWeight: 'bold' }}>Management & Leadership</h2>
                     <div className="persona-row">
-                      {PERSONAS.filter(p => p.data.role === 'Manager').map((persona, index) => (
-                        <motion.div key={persona.name} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * index }}>
-                          <PersonaCard persona={persona} onSelect={handleSelect} />
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div style={{ width: '100%', textAlign: 'center', marginTop: '32px' }}>
-                    <h2 style={{ fontSize: '14px', textTransform: 'uppercase', color: 'var(--accent-pink)', marginBottom: '16px', letterSpacing: '2px', fontWeight: 'bold' }}>Executive</h2>
-                    <div className="persona-row">
-                      {PERSONAS.filter(p => p.data.role === 'VP of Support').map((persona, index) => (
+                      {PERSONAS.filter(p => p.data.role === 'Manager' || p.data.role === 'VP of Support').map((persona, index) => (
                         <motion.div key={persona.name} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * index }}>
                           <PersonaCard persona={persona} onSelect={handleSelect} />
                         </motion.div>
