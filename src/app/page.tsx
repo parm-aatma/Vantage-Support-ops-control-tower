@@ -1079,39 +1079,57 @@ export default function Home() {
           <div className="main-workspace overflow-auto">
             <div className="list-section-header">Active Tickets & Alerts</div>
             <div className="data-table">
-              <div className="data-row data-header" style={{ gridTemplateColumns: 'minmax(100px, 1fr) 1fr 1fr 1fr 2fr 90px 90px 1fr' }}>
+              <div className="data-row data-header" style={{ gridTemplateColumns: 'minmax(100px, 1fr) 1fr 1fr 1fr 2fr 60px 80px 70px 1fr' }}>
                 <div className="data-cell">Source</div>
                 <div className="data-cell">Case ID</div>
                 <div className="data-cell">Status</div>
                 <div className="data-cell">SLA Remaining</div>
                 <div className="data-cell">Summary</div>
+                <div className="data-cell" style={{ fontSize: '10px' }}>Priority</div>
                 <div className="data-cell" style={{ fontSize: '10px' }}>Runway</div>
                 <div className="data-cell" style={{ fontSize: '10px' }}>Risk</div>
                 <div className="data-activity"></div>
               </div>
-              {paginatedCases.map(c => (
-                <div className="data-row" key={c.id} onClick={() => handleCaseSelection(c.id)} style={{ cursor: 'pointer', gridTemplateColumns: 'minmax(100px, 1fr) 1fr 1fr 1fr 2fr 90px 90px 1fr' }}>
-                  <div className="data-cell" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    {c.isVantageAlert ? <Bot size={14} color="var(--accent-lime)" /> : <User size={14} color="var(--text-gray)" />}
-                    {c.source}
+              {paginatedCases.map(c => {
+                const priorityMap: Record<string, { label: string; color: string; bg: string }> = {
+                  'Critical': { label: 'P0', color: '#ef4444', bg: 'rgba(239,68,68,0.12)' },
+                  'High':     { label: 'P1', color: '#f97316', bg: 'rgba(249,115,22,0.12)' },
+                  'Medium':   { label: 'P2', color: '#f59e0b', bg: 'rgba(245,158,11,0.12)' },
+                  'Normal':   { label: 'P3', color: 'var(--text-gray)', bg: 'rgba(255,255,255,0.06)' },
+                  'Low':      { label: 'P3', color: 'var(--text-gray)', bg: 'rgba(255,255,255,0.06)' },
+                };
+                const prio = c.isVantageAlert ? (priorityMap[c.priority] || priorityMap['Normal']) : null;
+                return (
+                  <div className="data-row" key={c.id} onClick={() => handleCaseSelection(c.id)} style={{ cursor: 'pointer', gridTemplateColumns: 'minmax(100px, 1fr) 1fr 1fr 1fr 2fr 60px 80px 70px 1fr' }}>
+                    <div className="data-cell" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      {c.isVantageAlert ? <Bot size={14} color="var(--accent-lime)" /> : <User size={14} color="var(--text-gray)" />}
+                      {c.source}
+                    </div>
+                    <div className="data-cell">{c.id}</div>
+                    <div className="data-cell">{c.status}</div>
+                    <div className={`data-cell ${c.slaColor}`}>{c.sla === '00d 00h' ? 'Breached' : c.sla}</div>
+                    <div className="data-cell truncate-cell" title={c.summary}>{c.summary}</div>
+                    <div className="data-cell">
+                      {prio ? (
+                        <span style={{ fontSize: '11px', fontWeight: 'bold', color: prio.color, background: prio.bg, padding: '2px 7px', borderRadius: '4px', border: `1px solid ${prio.color}40` }}>
+                          {prio.label}
+                        </span>
+                      ) : '—'}
+                    </div>
+                    <div className="data-cell" style={{ fontSize: '11px', color: c.isVantageAlert ? 'var(--accent-lime)' : 'var(--text-gray)' }}>
+                      {c.isVantageAlert && c.intelligence?.resolutionRunway ? c.intelligence.resolutionRunway : '—'}
+                    </div>
+                    <div className="data-cell">
+                      {c.isVantageAlert && c.intelligence?.breachProbability != null ? (
+                        <span style={{ fontSize: '11px', fontWeight: 'bold', color: c.intelligence.breachProbability >= 70 ? 'var(--accent-coral)' : c.intelligence.breachProbability >= 30 ? '#f59e0b' : 'var(--accent-lime)' }}>
+                          {c.intelligence.breachProbability}%
+                        </span>
+                      ) : '—'}
+                    </div>
+                    <div className="data-activity">{c.updates}</div>
                   </div>
-                  <div className="data-cell">{c.id}</div>
-                  <div className="data-cell">{c.status}</div>
-                  <div className={`data-cell ${c.slaColor}`}>{c.sla === '00d 00h' ? 'Breached' : c.sla}</div>
-                  <div className="data-cell truncate-cell" title={c.summary}>{c.summary}</div>
-                  <div className="data-cell" style={{ fontSize: '11px', color: c.isVantageAlert ? 'var(--accent-lime)' : 'var(--text-gray)' }}>
-                    {c.isVantageAlert && c.intelligence?.resolutionRunway ? c.intelligence.resolutionRunway : '—'}
-                  </div>
-                  <div className="data-cell">
-                    {c.isVantageAlert && c.intelligence?.breachProbability != null ? (
-                      <span style={{ fontSize: '11px', fontWeight: 'bold', color: c.intelligence.breachProbability >= 70 ? 'var(--accent-coral)' : c.intelligence.breachProbability >= 30 ? '#f59e0b' : 'var(--accent-lime)' }}>
-                        {c.intelligence.breachProbability}%
-                      </span>
-                    ) : '—'}
-                  </div>
-                  <div className="data-activity">{c.updates}</div>
-                </div>
-              ))}
+                );
+              })}
             </div>
             {renderPagination(casesPage, totalCasesPages, setCasesPage)}
           </div>
