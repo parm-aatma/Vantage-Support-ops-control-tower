@@ -1134,24 +1134,8 @@ export default function Home() {
             {renderPagination(casesPage, totalCasesPages, setCasesPage)}
           </div>
         </>
-      ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '16px', marginBottom: '32px' }}>
-      {managerMetrics.map((card, i) => (
-        <div key={i} className="data-card" style={{ height: '140px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '20px' }}>
-          <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase' }}>{card.label}</div>
-          <div style={{ fontSize: '32px', fontWeight: 'bold', color: 'var(--text-white)' }}>{card.value}</div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '11px', color: card.change.includes('+') ? 'var(--accent-lime)' : 'var(--accent-coral)', fontWeight: 'bold' }}>{card.change} vs avg</span>
-            <div style={{ display: 'flex', gap: '2px', alignItems: 'flex-end', height: '16px' }}>
-              {[...Array(6)].map((_, idx) => (
-                <div key={idx} style={{ width: '3px', background: 'var(--bg-border)', height: `${Math.random() * 100}%`, borderRadius: '1px' }}></div>
-              ))}
-            </div>
-          </div>
-        </div>
-      ))}
-        </div>
-      )}
+      ) : renderAllOpenOrders()
+      )
     </>
     );
   }
