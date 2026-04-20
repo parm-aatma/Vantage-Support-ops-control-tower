@@ -3062,16 +3062,41 @@ export default function Home() {
                   >
                     <Command size={24} />
                   </motion.div>
-                  <h1 className="hey-there">Hey there! Login to continue.</h1>
-                  <p className="sub-text">Select your persona to access the Sentinel Command Center and manage system alerts.</p>
+                  <h1 className="hey-there">Vantage - Last Mile Delivery Control Tower</h1>
+                  <p className="sub-text">Identify your role to access the control tower and manage last mile logistics operations.</p>
                 </div>
                 <div className="persona-grid">
-                  <div className="persona-row">
-                    {PERSONAS.map((persona, index) => (
-                      <motion.div key={persona.name} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * index }}>
-                        <PersonaCard persona={persona} onSelect={handleSelect} />
-                      </motion.div>
-                    ))}
+                  <div style={{ width: '100%', textAlign: 'center' }}>
+                    <h2 style={{ fontSize: '14px', textTransform: 'uppercase', color: 'var(--accent-lime)', marginBottom: '16px', letterSpacing: '2px', fontWeight: 'bold' }}>Associates</h2>
+                    <div className="persona-row">
+                      {PERSONAS.filter(p => p.data.role === 'Support').map((persona, index) => (
+                        <motion.div key={persona.name} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * index }}>
+                          <PersonaCard persona={persona} onSelect={handleSelect} />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div style={{ width: '100%', textAlign: 'center', marginTop: '32px' }}>
+                    <h2 style={{ fontSize: '14px', textTransform: 'uppercase', color: 'var(--accent-coral)', marginBottom: '16px', letterSpacing: '2px', fontWeight: 'bold' }}>Manager</h2>
+                    <div className="persona-row">
+                      {PERSONAS.filter(p => p.data.role === 'Manager').map((persona, index) => (
+                        <motion.div key={persona.name} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * index }}>
+                          <PersonaCard persona={persona} onSelect={handleSelect} />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div style={{ width: '100%', textAlign: 'center', marginTop: '32px' }}>
+                    <h2 style={{ fontSize: '14px', textTransform: 'uppercase', color: 'var(--accent-pink)', marginBottom: '16px', letterSpacing: '2px', fontWeight: 'bold' }}>Executive</h2>
+                    <div className="persona-row">
+                      {PERSONAS.filter(p => p.data.role === 'VP of Support').map((persona, index) => (
+                        <motion.div key={persona.name} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * index }}>
+                          <PersonaCard persona={persona} onSelect={handleSelect} />
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </motion.div>
