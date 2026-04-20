@@ -2872,11 +2872,11 @@ export default function Home() {
                   <h1 className="hey-there">Vantage - Last Mile Delivery Control Tower</h1>
                   <p className="sub-text">Identify your role to access the control tower and manage last mile logistics operations.</p>
                 </div>
-                <div className="persona-grid" style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
-                  <div style={{ width: '100%', textAlign: 'center' }}>
-                    <h2 style={{ fontSize: '12px', textTransform: 'uppercase', color: 'var(--text-gray)', marginBottom: '20px', letterSpacing: '3px', fontWeight: 'bold', opacity: 0.6 }}>Level 1: Support Associates</h2>
-                    <div className="persona-row">
-                      {PERSONAS.filter(p => ['Siddhant', 'Rupesh'].includes(p.name)).map((persona, index) => (
+                <div className="persona-grid" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', gap: '48px', flexWrap: 'nowrap', width: 'auto' }}>
+                  <div style={{ textAlign: 'center' }}>
+                    <h2 style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--text-gray)', marginBottom: '20px', letterSpacing: '3px', fontWeight: 'bold', opacity: 0.6 }}>Level 1: Support</h2>
+                    <div className="persona-row" style={{ display: 'flex', gap: '20px' }}>
+                      {PERSONAS.filter(p => ['Siddhant', 'Rupesh', 'Shankar'].includes(p.name)).map((persona, index) => (
                         <motion.div key={persona.name} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * index }}>
                           <PersonaCard persona={persona} onSelect={handleSelect} />
                         </motion.div>
@@ -2884,10 +2884,10 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div style={{ width: '100%', textAlign: 'center' }}>
-                    <h2 style={{ fontSize: '12px', textTransform: 'uppercase', color: 'var(--accent-lime)', marginBottom: '20px', letterSpacing: '3px', fontWeight: 'bold' }}>Level 2: Technical Support</h2>
-                    <div className="persona-row">
-                      {PERSONAS.filter(p => p.name === 'Shankar').map((persona, index) => (
+                  <div style={{ textAlign: 'center' }}>
+                    <h2 style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--accent-lime)', marginBottom: '20px', letterSpacing: '3px', fontWeight: 'bold' }}>Level 2: Manager</h2>
+                    <div className="persona-row" style={{ display: 'flex', gap: '20px' }}>
+                      {PERSONAS.filter(p => p.name === 'Simran').map((persona, index) => (
                         <motion.div key={persona.name} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * index }}>
                           <PersonaCard persona={persona} onSelect={handleSelect} />
                         </motion.div>
@@ -2895,10 +2895,10 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div style={{ width: '100%', textAlign: 'center' }}>
-                    <h2 style={{ fontSize: '12px', textTransform: 'uppercase', color: 'var(--accent-coral)', marginBottom: '20px', letterSpacing: '3px', fontWeight: 'bold' }}>Level 3: Management & Leadership</h2>
-                    <div className="persona-row">
-                      {PERSONAS.filter(p => ['Simran', 'Piyush'].includes(p.name)).map((persona, index) => (
+                  <div style={{ textAlign: 'center' }}>
+                    <h2 style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--accent-coral)', marginBottom: '20px', letterSpacing: '3px', fontWeight: 'bold' }}>Executive</h2>
+                    <div className="persona-row" style={{ display: 'flex', gap: '20px' }}>
+                      {PERSONAS.filter(p => p.name === 'Piyush').map((persona, index) => (
                         <motion.div key={persona.name} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * index }}>
                           <PersonaCard persona={persona} onSelect={handleSelect} />
                         </motion.div>
