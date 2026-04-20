@@ -1134,8 +1134,7 @@ export default function Home() {
             {renderPagination(casesPage, totalCasesPages, setCasesPage)}
           </div>
         </>
-      ) : renderAllOpenOrders()
-      )
+      ) : renderAllOpenOrders()}
     </>
     );
   }
