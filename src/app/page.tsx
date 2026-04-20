@@ -817,14 +817,21 @@ export default function Home() {
         )}
 
         {/* Unified Search */}
-        <input
-          type="text"
-          className="search-input"
-          placeholder="Search by ID, Case ID, or Customer Name..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          style={{ width: '100%' }}
-        />
+        <div style={{ position: 'relative', width: '100%' }}>
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Search tickets — by Case ID (e.g. #US-9401), Order ID, or Customer Name (e.g. 'Priya M.')"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            style={{ width: '100%', paddingRight: '120px' }}
+          />
+          {searchQuery === '' && (
+            <span style={{ position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)', fontSize: '10px', color: 'var(--text-gray)', pointerEvents: 'none', whiteSpace: 'nowrap', background: 'var(--bg-card)', padding: '2px 6px', borderRadius: '4px', border: '1px solid var(--bg-border)' }}>
+              Search by customer name too
+            </span>
+          )}
+        </div>
       </div>
     );
   };
@@ -1072,16 +1079,18 @@ export default function Home() {
           <div className="main-workspace overflow-auto">
             <div className="list-section-header">Active Tickets & Alerts</div>
             <div className="data-table">
-              <div className="data-row data-header" style={{ gridTemplateColumns: 'minmax(100px, 1fr) 1fr 1fr 1fr 2fr 1fr' }}>
+              <div className="data-row data-header" style={{ gridTemplateColumns: 'minmax(100px, 1fr) 1fr 1fr 1fr 2fr 90px 90px 1fr' }}>
                 <div className="data-cell">Source</div>
                 <div className="data-cell">Case ID</div>
                 <div className="data-cell">Status</div>
                 <div className="data-cell">SLA Remaining</div>
                 <div className="data-cell">Summary</div>
+                <div className="data-cell" style={{ fontSize: '10px' }}>Runway</div>
+                <div className="data-cell" style={{ fontSize: '10px' }}>Risk</div>
                 <div className="data-activity"></div>
               </div>
               {paginatedCases.map(c => (
-                <div className="data-row" key={c.id} onClick={() => handleCaseSelection(c.id)} style={{ cursor: 'pointer', gridTemplateColumns: 'minmax(100px, 1fr) 1fr 1fr 1fr 2fr 1fr' }}>
+                <div className="data-row" key={c.id} onClick={() => handleCaseSelection(c.id)} style={{ cursor: 'pointer', gridTemplateColumns: 'minmax(100px, 1fr) 1fr 1fr 1fr 2fr 90px 90px 1fr' }}>
                   <div className="data-cell" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     {c.isVantageAlert ? <Bot size={14} color="var(--accent-lime)" /> : <User size={14} color="var(--text-gray)" />}
                     {c.source}
@@ -1090,6 +1099,16 @@ export default function Home() {
                   <div className="data-cell">{c.status}</div>
                   <div className={`data-cell ${c.slaColor}`}>{c.sla === '00d 00h' ? 'Breached' : c.sla}</div>
                   <div className="data-cell truncate-cell" title={c.summary}>{c.summary}</div>
+                  <div className="data-cell" style={{ fontSize: '11px', color: c.isVantageAlert ? 'var(--accent-lime)' : 'var(--text-gray)' }}>
+                    {c.isVantageAlert && c.intelligence?.resolutionRunway ? c.intelligence.resolutionRunway : '—'}
+                  </div>
+                  <div className="data-cell">
+                    {c.isVantageAlert && c.intelligence?.breachProbability != null ? (
+                      <span style={{ fontSize: '11px', fontWeight: 'bold', color: c.intelligence.breachProbability >= 70 ? 'var(--accent-coral)' : c.intelligence.breachProbability >= 30 ? '#f59e0b' : 'var(--accent-lime)' }}>
+                        {c.intelligence.breachProbability}%
+                      </span>
+                    ) : '—'}
+                  </div>
                   <div className="data-activity">{c.updates}</div>
                 </div>
               ))}
@@ -2327,16 +2346,16 @@ export default function Home() {
           {activeCase.intelligence && (
             <div style={{ display: 'flex', background: 'var(--bg-deep)', borderRadius: '12px', border: '1px solid var(--accent-sentry)', overflow: 'hidden', marginBottom: '16px' }}>
 
-              <div style={{ flex: '0 0 280px', display: 'flex', flexDirection: 'column', padding: '20px 24px', borderRight: '1px solid rgba(255,255,255,0.1)', background: !activeCase.caseId ? 'rgba(194, 239, 78, 0.05)' : 'rgba(239, 68, 68, 0.05)' }}>
-                <div style={{ fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase', color: !activeCase.caseId ? 'var(--accent-lime)' : 'var(--accent-coral)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div style={{ flex: '0 0 280px', display: 'flex', flexDirection: 'column', padding: '20px 24px', borderRight: '1px solid rgba(255,255,255,0.1)', background: (activeCase.intelligence?.breachProbability ?? 0) === 0 ? 'rgba(194, 239, 78, 0.05)' : 'rgba(239, 68, 68, 0.05)' }}>
+                <div style={{ fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase', color: (activeCase.intelligence?.breachProbability ?? 0) === 0 ? 'var(--accent-lime)' : 'var(--accent-coral)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <AlertOctagon size={12} /> Risk Assessment
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                   <div>
                     <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginBottom: '4px' }}>Probability of Breach</div>
-                    <div style={{ color: !activeCase.caseId ? 'var(--accent-lime)' : 'var(--accent-coral)', fontSize: '20px', fontWeight: 'bold' }}>{!activeCase.caseId ? '0' : activeCase.intelligence.breachProbability}% Risk</div>
+                    <div style={{ color: (activeCase.intelligence?.breachProbability ?? 0) === 0 ? 'var(--accent-lime)' : 'var(--accent-coral)', fontSize: '20px', fontWeight: 'bold' }}>{activeCase.intelligence?.breachProbability ?? 0}% Risk</div>
                     <div style={{ height: '4px', width: '100%', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginTop: '6px' }}>
-                      <div style={{ height: '100%', width: `${!activeCase.caseId ? '0' : activeCase.intelligence.breachProbability}%`, background: !activeCase.caseId ? 'var(--accent-lime)' : 'var(--accent-coral)', borderRadius: '2px' }}></div>
+                      <div style={{ height: '100%', width: `${activeCase.intelligence?.breachProbability ?? 0}%`, background: (activeCase.intelligence?.breachProbability ?? 0) === 0 ? 'var(--accent-lime)' : 'var(--accent-coral)', borderRadius: '2px' }}></div>
                     </div>
                   </div>
                   <div>
@@ -2358,8 +2377,8 @@ export default function Home() {
                 </div>
               </div>
 
-              <div style={{ flex: '1', display: 'flex', flexDirection: 'column', padding: '20px 24px', justifyContent: 'center', backgroundColor: !activeCase.caseId ? 'rgba(194, 239, 78, 0.05)' : 'rgba(239, 68, 68, 0.05)' }} className="vantage-ai-glow">
-                <div style={{ fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px', color: !activeCase.caseId ? 'var(--accent-lime)' : 'var(--accent-coral)', marginBottom: '8px' }}>
+              <div style={{ flex: '1', display: 'flex', flexDirection: 'column', padding: '20px 24px', justifyContent: 'center', backgroundColor: (activeCase.intelligence?.breachProbability ?? 0) === 0 ? 'rgba(194, 239, 78, 0.05)' : 'rgba(239, 68, 68, 0.05)' }} className="vantage-ai-glow">
+                <div style={{ fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px', color: (activeCase.intelligence?.breachProbability ?? 0) === 0 ? 'var(--accent-lime)' : 'var(--accent-coral)', marginBottom: '8px' }}>
                   Suggested Action
                 </div>
                 <div style={{ fontSize: '12px', lineHeight: '1.5', color: 'var(--accent-lime)', fontWeight: '600' }}>
