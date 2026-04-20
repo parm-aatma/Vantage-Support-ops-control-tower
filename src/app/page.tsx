@@ -244,255 +244,255 @@ const carrierHealth = [
 ];
 
 const mockCases: any[] = [
-    {
-      id: '#US-9105', orderId: 'WA-FedEx-9105', zip: '98109', source: 'Customer',
-      status: 'Escalated', sla: '01d 12h', slaColor: 'sla-green',
-      summary: 'Refund Authorization Request: Customer received damaged goods. Associate Simran recommends full refund.',
-      updates: 'Approval Needed', isVantageAlert: false,
-      priority: 'Medium', customerName: 'David L.',
-      carrier: 'FedEx', warehouse: 'SEA-02', assignee: 'Simran', date: '11/08',
-      deliveryStatus: 'Damaged in Transit',
-      escalatedBy: 'Siddhant',
-      associateMessage: 'Customer provided photos of significant transit damage. Standard policy applies, but requires manager approval for refund >$100.',
-      intelligence: {
-        breachProbability: 5, resolutionRunway: "36h 00m",
-        riskAssessment: "MINIMAL — The package is physically secure but damaged. Reputational risk is low if refund is processed quickly.",
-        caseSynthesis: "Damage occurred at the final mile delivery node. Associate has verified photos. Order value is $120. Standard procedure is full refund.",
-        suggestedAction: "Review photos in Internal Comments and approve refund."
-      }
+  {
+    id: '#US-9105', orderId: 'WA-FedEx-9105', zip: '98109', source: 'Customer',
+    status: 'Escalated', sla: '01d 12h', slaColor: 'sla-green',
+    summary: 'Refund Authorization Request: Customer received damaged goods. Associate Simran recommends full refund.',
+    updates: 'Approval Needed', isVantageAlert: false,
+    priority: 'Medium', customerName: 'David L.',
+    carrier: 'FedEx', warehouse: 'SEA-02', assignee: 'Simran', date: '11/08',
+    deliveryStatus: 'Damaged in Transit',
+    escalatedBy: 'Siddhant',
+    associateMessage: 'Customer provided photos of significant transit damage. Standard policy applies, but requires manager approval for refund >$100.',
+    intelligence: {
+      breachProbability: 5, resolutionRunway: "36h 00m",
+      riskAssessment: "MINIMAL — The package is physically secure but damaged. Reputational risk is low if refund is processed quickly.",
+      caseSynthesis: "Damage occurred at the final mile delivery node. Associate has verified photos. Order value is $120. Standard procedure is full refund.",
+      suggestedAction: "Review photos in Internal Comments and approve refund."
+    }
+  },
+  // ── AI Flag for Simran ───────────────────────────────────────────────
+  {
+    id: '#US-9288', orderId: 'FL-UPS-9288', zip: '33101', source: 'Vantage',
+    status: 'New', sla: '02d 08h', slaColor: 'sla-green',
+    summary: 'Anomalous cluster detected: 4 orders from MEM-01 stalled at local Miami hub simultaneously.',
+    updates: 'AI Correlation Flag', isVantageAlert: true,
+    priority: 'High', customerName: 'Cluster Alpha',
+    carrier: 'UPS', warehouse: 'MEM-01', assignee: 'Simran', date: '11/08',
+    deliveryStatus: 'Stalled in Regional Hub',
+    intelligence: {
+      breachProbability: 45, resolutionRunway: "18h 00m",
+      riskAssessment: "MODERATE — 4 distinct orders are experiencing identical stalls at the Miami gateway. Indicates a potential systemic carrier issue in the Southeast region.",
+      caseSynthesis: "Vantage detected a correlation in 502 Bad Gateway responses from carriers API for these 4 IDs. Physical arrival at hub confirmed by telematics, but outbound sortation has not triggered in 12 hours.",
+      suggestedAction: "Contact UPS Southeast Regional Manager to confirm gateway processing status."
+    }
+  },
+  // ── Case #US-8911 (Story 1 — Warehouse Stall) ──────────────────────
+  {
+    id: '#US-8911', orderId: 'TX-FedEx-8911', zip: '78701', source: 'Vantage',
+    status: 'Escalated', sla: '03d 14h', slaColor: 'sla-green',
+    summary: 'Address anomaly autonomously resolved via WhatsApp. Order subsequently stalled at the Austin warehouse.',
+    updates: 'Escalated to human support', isVantageAlert: true,
+    integrationSource: 'Shopify API', techStatus: 'Success', lastPing: '11/08, 08:00 AM',
+    breachProb: '20%', priority: 'High', customerName: 'Jordan P.',
+    carrier: 'FedEx', warehouse: 'AUS-01', assignee: 'Siddhant', date: '11/08',
+    deliveryStatus: 'Exception - Warehouse Stall',
+    fulfillmentCenter: 'Austin TX (AUS-01)',
+    intelligence: {
+      breachProbability: 20, resolutionRunway: "48h 00m",
+      riskAssessment: "LOW — SLA has a comfortable 3-day buffer, but the order is completely stationary. The risk is not time-based but operational: if the warehouse queue remains blocked, the order will never enter the carrier network. Every hour of inaction compresses the final-mile delivery window.",
+      caseSynthesis: "Vantage autonomously corrected an incomplete address via WhatsApp outreach (missing Apt 405). The address hold was lifted and the order was released to the Austin, TX fulfillment center. However, the order has now been sitting in the warehouse pick queue for over 40 hours with zero scan activity. Automated priority ticket #WH-882 was raised 24 hours ago and has received no response from warehouse staff.",
+      suggestedAction: "Call Austin Warehouse Dispatch directly at Ext 402. Reference internal ticket #WH-882 and request an immediate manual pick scan for this order. If dispatch is unresponsive, escalate to Regional Warehouse Manager (Sarah Jenkins) with a P1 override.",
+      humanTouchAdvice: "This is a physical-world blockage — no digital automation can resolve it. The warehouse pick queue requires a human operator to locate and scan the order. A direct phone call is the only path to resolution."
     },
-    // ── AI Flag for Simran ───────────────────────────────────────────────
-    {
-      id: '#US-9288', orderId: 'FL-UPS-9288', zip: '33101', source: 'Vantage',
-      status: 'New', sla: '02d 08h', slaColor: 'sla-green',
-      summary: 'Anomalous cluster detected: 4 orders from MEM-01 stalled at local Miami hub simultaneously.',
-      updates: 'AI Correlation Flag', isVantageAlert: true,
-      priority: 'High', customerName: 'Cluster Alpha',
-      carrier: 'UPS', warehouse: 'MEM-01', assignee: 'Simran', date: '11/08',
-      deliveryStatus: 'Stalled in Regional Hub',
-      intelligence: {
-        breachProbability: 45, resolutionRunway: "18h 00m",
-        riskAssessment: "MODERATE — 4 distinct orders are experiencing identical stalls at the Miami gateway. Indicates a potential systemic carrier issue in the Southeast region.",
-        caseSynthesis: "Vantage detected a correlation in 502 Bad Gateway responses from carriers API for these 4 IDs. Physical arrival at hub confirmed by telematics, but outbound sortation has not triggered in 12 hours.",
-        suggestedAction: "Contact UPS Southeast Regional Manager to confirm gateway processing status."
-      }
-    },
-    // ── Case #US-8911 (Story 1 — Warehouse Stall) ──────────────────────
-    {
-      id: '#US-8911', orderId: 'TX-FedEx-8911', zip: '78701', source: 'Vantage',
-      status: 'Escalated', sla: '03d 14h', slaColor: 'sla-green',
-      summary: 'Address anomaly autonomously resolved via WhatsApp. Order subsequently stalled at the Austin warehouse.',
-      updates: 'Escalated to human support', isVantageAlert: true,
-      integrationSource: 'Shopify API', techStatus: 'Success', lastPing: '11/08, 08:00 AM',
-      breachProb: '20%', priority: 'High', customerName: 'Jordan P.',
-      carrier: 'FedEx', warehouse: 'AUS-01', assignee: 'Siddhant', date: '11/08',
-      deliveryStatus: 'Exception - Warehouse Stall',
-      fulfillmentCenter: 'Austin TX (AUS-01)',
-      intelligence: {
-        breachProbability: 20, resolutionRunway: "48h 00m",
-        riskAssessment: "LOW — SLA has a comfortable 3-day buffer, but the order is completely stationary. The risk is not time-based but operational: if the warehouse queue remains blocked, the order will never enter the carrier network. Every hour of inaction compresses the final-mile delivery window.",
-        caseSynthesis: "Vantage autonomously corrected an incomplete address via WhatsApp outreach (missing Apt 405). The address hold was lifted and the order was released to the Austin, TX fulfillment center. However, the order has now been sitting in the warehouse pick queue for over 40 hours with zero scan activity. Automated priority ticket #WH-882 was raised 24 hours ago and has received no response from warehouse staff.",
-        suggestedAction: "Call Austin Warehouse Dispatch directly at Ext 402. Reference internal ticket #WH-882 and request an immediate manual pick scan for this order. If dispatch is unresponsive, escalate to Regional Warehouse Manager (Sarah Jenkins) with a P1 override.",
-        humanTouchAdvice: "This is a physical-world blockage — no digital automation can resolve it. The warehouse pick queue requires a human operator to locate and scan the order. A direct phone call is the only path to resolution."
-      },
-      customer: { name: 'Jordan P.', email: 'jordan.p@example.com', phone: '+1 (512) 555-0199', city: 'Austin', state: 'TX', zipCode: '78701', fullAddress: '1100 Congress Ave, Apt 405, Austin, TX 78701', localTimezone: 'US Central (CST)', type: 'REPEAT', ltv: '', totalOrders: 4, orderWindow: '12 months', localTimeNow: '09:45 AM CST', isQuietHours: false },
-      milestones: [
-        { id: 1, action: 'Order Received', location: 'Shopify', time: '11/06, 02:15 PM', status: 'Completed', colorClass: 'green', icon: 'check', connectorTime: '0h 02m', connectorColor: '#10b981' },
-        { id: 2, action: 'Address Validation', location: 'Vantage AI', time: '11/06, 04:30 PM', status: 'Completed', colorClass: 'green', icon: 'check', connectorTime: '2h 15m', connectorColor: '#10b981' },
-        { id: 3, action: 'Warehouse Processing', location: 'Austin, TX', time: '11/06, 04:35 PM', status: 'Current', colorClass: 'red', icon: 'alert', connectorTime: 'Stalled', connectorColor: '#ef4444' },
-        { id: 4, action: 'Pick & Pack', location: 'Austin, TX', time: 'Pending', status: 'Pending', colorClass: 'gray', icon: 'clock', connectorTime: 'Pending', connectorColor: 'gray' },
-        { id: 5, action: 'Carrier Hub', location: 'Pending', time: 'Pending', status: 'Pending', colorClass: 'gray', icon: 'clock', connectorTime: null, connectorColor: 'gray' },
-      ],
-      caseAuditLogs: [
-        { id: 1010, type: 'Internal', title: 'Escalated to Support Team', time: '11/08, 08:00 AM', details: 'Case transferred from autonomous queue to Associate queue due to unresponsive warehouse ticket.', isVantage: true },
-        { id: 1009, type: 'System', title: 'Ticket SLA Expired', time: '11/08, 04:35 AM', details: 'Internal SLA of 12 hours for automated Ticket #WH-882 elapsed with no status change from warehouse facility.', isVantage: false },
-        { id: 1007, type: 'Warehouse', title: 'Order Routed to Facility', time: '11/06, 04:35 PM', details: 'Order assigned to Austin TX Fulfillment Center. Added to pick queue.', isVantage: false },
-        { id: 1005, type: 'Customer', title: 'Customer Reply Received', time: '11/06, 04:28 PM', details: "Customer responded via WhatsApp providing unit number 'Apt 405'.", isVantage: false },
-        { id: 1004, type: 'Customer', title: 'Automated Outreach Sent', time: '11/06, 02:20 PM', details: 'Vantage dispatched automated WhatsApp message requesting address clarification.', isVantage: true },
-        { id: 1001, type: 'Source', title: 'Order Ingested', time: '11/06, 02:15 PM', details: 'Order received from Shopify API. Payload parsed successfully.', isVantage: false },
-      ],
-      caseVantageActions: [
-        { id: 1008, type: 'VantageAction', title: 'Packing Delay Detected', time: '11/07, 04:35 PM', details: 'Order has been in warehouse queue for >24 hours without a pick scan. Automated Ticket #WH-882 raised to warehouse prioritizing the order.', isVantage: true, actionCategory: 'alert' },
-        { id: 1006, type: 'VantageAction', title: 'Address Updated & Hold Lifted', time: '11/06, 04:30 PM', details: 'Address payload updated. Fulfillment hold successfully removed. Order released to warehouse.', isVantage: true, actionCategory: 'validation' },
-        { id: 1003, type: 'VantageAction', title: 'Fulfillment Hold Placed', time: '11/06, 02:17 PM', details: 'Automated hold placed on order routing to prevent undeliverable exception.', isVantage: true, actionCategory: 'validation' },
-        { id: 1002, type: 'VantageAction', title: 'Address Anomaly Detected', time: '11/06, 02:17 PM', details: 'Vantage detected incomplete destination address. Missing secondary unit/apartment number for multi-tenant building.', isVantage: true, actionCategory: 'detection' },
-      ],
-      omniMessages: [
-        { id: 501, direction: 'outbound', channel: 'WhatsApp', text: "Hi Jordan! Your order from the brand is ready to be processed, but our system flagged that your address (1100 Congress Ave) might be missing an apartment or unit number. Could you please reply with your unit number so we can get your package shipped out?", time: '11/06, 02:20 PM', sender: 'Vantage AI', isAiSuggested: true },
-        { id: 502, direction: 'inbound', channel: 'WhatsApp', text: "Oh sorry! It's Apt 405.", time: '11/06, 04:28 PM', sender: 'Jordan P.' },
-        { id: 503, direction: 'outbound', channel: 'WhatsApp', text: "Got it, thank you! Your address has been updated to 1100 Congress Ave, Apt 405, and your order is heading to the warehouse for packing now.", time: '11/06, 04:30 PM', sender: 'Vantage AI', isAiSuggested: true },
-      ],
-      copilotSuggestion: "Hi Jordan, we've escalated your order to our Austin warehouse team for immediate packing. You should see tracking updates shortly. We appreciate your patience!",
-    },
+    customer: { name: 'Jordan P.', email: 'jordan.p@example.com', phone: '+1 (512) 555-0199', city: 'Austin', state: 'TX', zipCode: '78701', fullAddress: '1100 Congress Ave, Apt 405, Austin, TX 78701', localTimezone: 'US Central (CST)', type: 'REPEAT', ltv: '', totalOrders: 4, orderWindow: '12 months', localTimeNow: '09:45 AM CST', isQuietHours: false },
+    milestones: [
+      { id: 1, action: 'Order Received', location: 'Shopify', time: '11/06, 02:15 PM', status: 'Completed', colorClass: 'green', icon: 'check', connectorTime: '0h 02m', connectorColor: '#10b981' },
+      { id: 2, action: 'Address Validation', location: 'Vantage AI', time: '11/06, 04:30 PM', status: 'Completed', colorClass: 'green', icon: 'check', connectorTime: '2h 15m', connectorColor: '#10b981' },
+      { id: 3, action: 'Warehouse Processing', location: 'Austin, TX', time: '11/06, 04:35 PM', status: 'Current', colorClass: 'red', icon: 'alert', connectorTime: 'Stalled', connectorColor: '#ef4444' },
+      { id: 4, action: 'Pick & Pack', location: 'Austin, TX', time: 'Pending', status: 'Pending', colorClass: 'gray', icon: 'clock', connectorTime: 'Pending', connectorColor: 'gray' },
+      { id: 5, action: 'Carrier Hub', location: 'Pending', time: 'Pending', status: 'Pending', colorClass: 'gray', icon: 'clock', connectorTime: null, connectorColor: 'gray' },
+    ],
+    caseAuditLogs: [
+      { id: 1010, type: 'Internal', title: 'Escalated to Support Team', time: '11/08, 08:00 AM', details: 'Case transferred from autonomous queue to Associate queue due to unresponsive warehouse ticket.', isVantage: true },
+      { id: 1009, type: 'System', title: 'Ticket SLA Expired', time: '11/08, 04:35 AM', details: 'Internal SLA of 12 hours for automated Ticket #WH-882 elapsed with no status change from warehouse facility.', isVantage: false },
+      { id: 1007, type: 'Warehouse', title: 'Order Routed to Facility', time: '11/06, 04:35 PM', details: 'Order assigned to Austin TX Fulfillment Center. Added to pick queue.', isVantage: false },
+      { id: 1005, type: 'Customer', title: 'Customer Reply Received', time: '11/06, 04:28 PM', details: "Customer responded via WhatsApp providing unit number 'Apt 405'.", isVantage: false },
+      { id: 1004, type: 'Customer', title: 'Automated Outreach Sent', time: '11/06, 02:20 PM', details: 'Vantage dispatched automated WhatsApp message requesting address clarification.', isVantage: true },
+      { id: 1001, type: 'Source', title: 'Order Ingested', time: '11/06, 02:15 PM', details: 'Order received from Shopify API. Payload parsed successfully.', isVantage: false },
+    ],
+    caseVantageActions: [
+      { id: 1008, type: 'VantageAction', title: 'Packing Delay Detected', time: '11/07, 04:35 PM', details: 'Order has been in warehouse queue for >24 hours without a pick scan. Automated Ticket #WH-882 raised to warehouse prioritizing the order.', isVantage: true, actionCategory: 'alert' },
+      { id: 1006, type: 'VantageAction', title: 'Address Updated & Hold Lifted', time: '11/06, 04:30 PM', details: 'Address payload updated. Fulfillment hold successfully removed. Order released to warehouse.', isVantage: true, actionCategory: 'validation' },
+      { id: 1003, type: 'VantageAction', title: 'Fulfillment Hold Placed', time: '11/06, 02:17 PM', details: 'Automated hold placed on order routing to prevent undeliverable exception.', isVantage: true, actionCategory: 'validation' },
+      { id: 1002, type: 'VantageAction', title: 'Address Anomaly Detected', time: '11/06, 02:17 PM', details: 'Vantage detected incomplete destination address. Missing secondary unit/apartment number for multi-tenant building.', isVantage: true, actionCategory: 'detection' },
+    ],
+    omniMessages: [
+      { id: 501, direction: 'outbound', channel: 'WhatsApp', text: "Hi Jordan! Your order from the brand is ready to be processed, but our system flagged that your address (1100 Congress Ave) might be missing an apartment or unit number. Could you please reply with your unit number so we can get your package shipped out?", time: '11/06, 02:20 PM', sender: 'Vantage AI', isAiSuggested: true },
+      { id: 502, direction: 'inbound', channel: 'WhatsApp', text: "Oh sorry! It's Apt 405.", time: '11/06, 04:28 PM', sender: 'Jordan P.' },
+      { id: 503, direction: 'outbound', channel: 'WhatsApp', text: "Got it, thank you! Your address has been updated to 1100 Congress Ave, Apt 405, and your order is heading to the warehouse for packing now.", time: '11/06, 04:30 PM', sender: 'Vantage AI', isAiSuggested: true },
+    ],
+    copilotSuggestion: "Hi Jordan, we've escalated your order to our Austin warehouse team for immediate packing. You should see tracking updates shortly. We appreciate your patience!",
+  },
 
-    // ── Case #US-9024 (Story 2 — Sequential Carrier Delays) ────────────
-    {
-      id: '#US-9024', orderId: 'GA-FedEx-9024', zip: '60601', source: 'Vantage',
-      status: 'Breach Risk', sla: '00d 14h', slaColor: 'sla-red',
-      summary: 'Package experienced sequential delays at Memphis and Indianapolis hubs due to repetitive barcode scanning failures.',
-      updates: 'SLA Breach Risk High', isVantageAlert: true,
-      integrationSource: 'FedEx Webhook', techStatus: 'Success', lastPing: '11/08, 02:15 PM',
-      breachProb: '85%', priority: 'Critical', customerName: 'Michael T.',
-      carrier: 'FedEx', warehouse: 'ATL-01', assignee: 'Rupesh', date: '11/08',
-      deliveryStatus: 'Exception - Carrier Delay',
-      fulfillmentCenter: 'Atlanta GA (ATL-01)',
-      intelligence: {
-        breachProbability: 85, resolutionRunway: "04h 00m",
-        riskAssessment: "CRITICAL — The delivery window has been reduced from 4 days to under 4 hours by two sequential hub stalls. Standard ground routing from Indianapolis to Chicago will not arrive in time. Without a carrier service level upgrade, SLA breach is near-certain. This is a first-time customer with only 1 order — a breach here directly risks permanent churn.",
-        caseSynthesis: "This package has been relabeled twice at two separate FedEx hubs (Memphis, TN and Indianapolis, IN) due to recurring barcode unreadability — a pattern suggesting physical label damage sustained during the origin scan. Vantage autonomously resolved both stalls via carrier tickets (#CAR-102, #CAR-304), but the compounded 72+ hours of delays have critically compressed the remaining delivery window to under 4 hours for the Chicago destination.",
-        suggestedAction: "Call FedEx Indianapolis Regional Dispatch at Ext 204. Request an immediate 'Service Level Upgrade' to Priority First Overnight for the final-mile leg to Chicago, IL 60601. This upgrade requires human authorization and cannot be triggered via API. Reference carrier tickets #CAR-102 and #CAR-304 for context.",
-        humanTouchAdvice: "Vantage cannot authorize carrier service level upgrades — this is a human-only action. The associate must call FedEx Indianapolis dispatch at Ext 204 to override the routing tier. No customer outreach needed yet."
-      },
-      customer: { name: 'Michael T.', email: 'michael.t@example.com', phone: '+1 (312) 555-0188', city: 'Chicago', state: 'IL', zipCode: '60601', fullAddress: '200 E Randolph St, Suite 4100, Chicago, IL 60601', localTimezone: 'US Central (CST)', type: 'NEW', ltv: '', totalOrders: 1, orderWindow: '12 months', localTimeNow: '01:30 PM CST', isQuietHours: false },
-      milestones: [
-        { id: 1, action: 'Order Received', location: 'Shopify', time: '11/04, 09:15 AM', status: 'Completed', colorClass: 'green', icon: 'check', connectorTime: '6h 30m', connectorColor: '#10b981' },
-        { id: 2, action: 'Origin Scan', location: 'Atlanta, GA', time: '11/04, 03:45 PM', status: 'Completed', colorClass: 'green', icon: 'check', connectorTime: '14h 15m', connectorColor: '#10b981' },
-        { id: 3, action: 'Carrier Hub (Resolved)', location: 'Memphis, TN', time: '11/05, 06:00 AM', status: 'Completed', colorClass: 'green', icon: 'check', connectorTime: '48h 30m', connectorColor: '#ef4444' },
-        { id: 4, action: 'Regional Hub (Delayed)', location: 'Indianapolis, IN', time: '11/08, 02:00 PM', status: 'Current', colorClass: 'red', icon: 'alert', connectorTime: 'Pending', connectorColor: 'gray' },
-        { id: 5, action: 'Out for Delivery', location: 'Chicago, IL', time: 'Pending', status: 'Pending', colorClass: 'gray', icon: 'clock', connectorTime: null, connectorColor: 'gray' },
-      ],
-      caseAuditLogs: [
-        { id: 2009, type: 'Carrier', title: 'Carrier Ticket Updated', time: '11/08, 01:50 PM', details: "FedEx responded: 'Package required secondary relabeling. Cleared for next dispatch.'", isVantage: false },
-        { id: 2006, type: 'Carrier', title: 'Departed Memphis Hub', time: '11/05, 06:00 AM', details: 'Departure scan recorded. SLA remains intact. Vantage closed Ticket #CAR-102.', isVantage: false },
-        { id: 2005, type: 'Carrier', title: 'Carrier Ticket Updated', time: '11/05, 05:45 PM', details: "FedEx responded: 'Barcode damaged. Relabeled and re-entered into sorting queue.'", isVantage: false },
-        { id: 2002, type: 'Carrier', title: 'Picked up by Carrier', time: '11/04, 03:45 PM', details: 'FedEx Express origin scan completed in Atlanta, GA.', isVantage: false },
-        { id: 2001, type: 'Source', title: 'Order Ingested', time: '11/04, 09:15 AM', details: 'Order received from Shopify API. Processed normally.', isVantage: false },
-      ],
-      caseVantageActions: [
-        { id: 2010, type: 'VantageAction', title: 'SLA Risk Escalated', time: '11/08, 02:15 PM', details: 'Compounding delays have reduced the resolution runway to 4 hours. Escalated to Associate queue for manual Service Level Upgrade.', isVantage: true, actionCategory: 'alert' },
-        { id: 2008, type: 'VantageAction', title: 'Carrier Ticket Raised', time: '11/08, 10:05 AM', details: 'Automated Ticket #CAR-304 raised to FedEx Indianapolis facility requesting manual scan.', isVantage: true, actionCategory: 'alert' },
-        { id: 2007, type: 'VantageAction', title: 'Stall Detected: Indianapolis Hub', time: '11/08, 10:00 AM', details: 'Package missed scheduled departure scan at Indianapolis, IN hub. Similar barcode unreadability pattern detected.', isVantage: true, actionCategory: 'detection' },
-        { id: 2004, type: 'VantageAction', title: 'Carrier Ticket Raised', time: '11/05, 02:05 PM', details: 'Automated Ticket #CAR-102 raised to FedEx Memphis facility requesting location check.', isVantage: true, actionCategory: 'alert' },
-        { id: 2003, type: 'VantageAction', title: 'Stall Detected: Memphis Hub', time: '11/05, 02:00 PM', details: 'Package missed scheduled departure scan at Memphis, TN hub. No movement for 8 hours.', isVantage: true, actionCategory: 'detection' },
-      ],
-      omniMessages: [],
-      copilotSuggestion: "Hi Michael, your package is on its way from Indianapolis and will arrive at your address in Chicago shortly. We apologize for the slight delay and appreciate your patience!",
+  // ── Case #US-9024 (Story 2 — Sequential Carrier Delays) ────────────
+  {
+    id: '#US-9024', orderId: 'GA-FedEx-9024', zip: '60601', source: 'Vantage',
+    status: 'Breach Risk', sla: '00d 14h', slaColor: 'sla-red',
+    summary: 'Package experienced sequential delays at Memphis and Indianapolis hubs due to repetitive barcode scanning failures.',
+    updates: 'SLA Breach Risk High', isVantageAlert: true,
+    integrationSource: 'FedEx Webhook', techStatus: 'Success', lastPing: '11/08, 02:15 PM',
+    breachProb: '85%', priority: 'Critical', customerName: 'Michael T.',
+    carrier: 'FedEx', warehouse: 'ATL-01', assignee: 'Rupesh', date: '11/08',
+    deliveryStatus: 'Exception - Carrier Delay',
+    fulfillmentCenter: 'Atlanta GA (ATL-01)',
+    intelligence: {
+      breachProbability: 85, resolutionRunway: "04h 00m",
+      riskAssessment: "CRITICAL — The delivery window has been reduced from 4 days to under 4 hours by two sequential hub stalls. Standard ground routing from Indianapolis to Chicago will not arrive in time. Without a carrier service level upgrade, SLA breach is near-certain. This is a first-time customer with only 1 order — a breach here directly risks permanent churn.",
+      caseSynthesis: "This package has been relabeled twice at two separate FedEx hubs (Memphis, TN and Indianapolis, IN) due to recurring barcode unreadability — a pattern suggesting physical label damage sustained during the origin scan. Vantage autonomously resolved both stalls via carrier tickets (#CAR-102, #CAR-304), but the compounded 72+ hours of delays have critically compressed the remaining delivery window to under 4 hours for the Chicago destination.",
+      suggestedAction: "Call FedEx Indianapolis Regional Dispatch at Ext 204. Request an immediate 'Service Level Upgrade' to Priority First Overnight for the final-mile leg to Chicago, IL 60601. This upgrade requires human authorization and cannot be triggered via API. Reference carrier tickets #CAR-102 and #CAR-304 for context.",
+      humanTouchAdvice: "Vantage cannot authorize carrier service level upgrades — this is a human-only action. The associate must call FedEx Indianapolis dispatch at Ext 204 to override the routing tier. No customer outreach needed yet."
     },
+    customer: { name: 'Michael T.', email: 'michael.t@example.com', phone: '+1 (312) 555-0188', city: 'Chicago', state: 'IL', zipCode: '60601', fullAddress: '200 E Randolph St, Suite 4100, Chicago, IL 60601', localTimezone: 'US Central (CST)', type: 'NEW', ltv: '', totalOrders: 1, orderWindow: '12 months', localTimeNow: '01:30 PM CST', isQuietHours: false },
+    milestones: [
+      { id: 1, action: 'Order Received', location: 'Shopify', time: '11/04, 09:15 AM', status: 'Completed', colorClass: 'green', icon: 'check', connectorTime: '6h 30m', connectorColor: '#10b981' },
+      { id: 2, action: 'Origin Scan', location: 'Atlanta, GA', time: '11/04, 03:45 PM', status: 'Completed', colorClass: 'green', icon: 'check', connectorTime: '14h 15m', connectorColor: '#10b981' },
+      { id: 3, action: 'Carrier Hub (Resolved)', location: 'Memphis, TN', time: '11/05, 06:00 AM', status: 'Completed', colorClass: 'green', icon: 'check', connectorTime: '48h 30m', connectorColor: '#ef4444' },
+      { id: 4, action: 'Regional Hub (Delayed)', location: 'Indianapolis, IN', time: '11/08, 02:00 PM', status: 'Current', colorClass: 'red', icon: 'alert', connectorTime: 'Pending', connectorColor: 'gray' },
+      { id: 5, action: 'Out for Delivery', location: 'Chicago, IL', time: 'Pending', status: 'Pending', colorClass: 'gray', icon: 'clock', connectorTime: null, connectorColor: 'gray' },
+    ],
+    caseAuditLogs: [
+      { id: 2009, type: 'Carrier', title: 'Carrier Ticket Updated', time: '11/08, 01:50 PM', details: "FedEx responded: 'Package required secondary relabeling. Cleared for next dispatch.'", isVantage: false },
+      { id: 2006, type: 'Carrier', title: 'Departed Memphis Hub', time: '11/05, 06:00 AM', details: 'Departure scan recorded. SLA remains intact. Vantage closed Ticket #CAR-102.', isVantage: false },
+      { id: 2005, type: 'Carrier', title: 'Carrier Ticket Updated', time: '11/05, 05:45 PM', details: "FedEx responded: 'Barcode damaged. Relabeled and re-entered into sorting queue.'", isVantage: false },
+      { id: 2002, type: 'Carrier', title: 'Picked up by Carrier', time: '11/04, 03:45 PM', details: 'FedEx Express origin scan completed in Atlanta, GA.', isVantage: false },
+      { id: 2001, type: 'Source', title: 'Order Ingested', time: '11/04, 09:15 AM', details: 'Order received from Shopify API. Processed normally.', isVantage: false },
+    ],
+    caseVantageActions: [
+      { id: 2010, type: 'VantageAction', title: 'SLA Risk Escalated', time: '11/08, 02:15 PM', details: 'Compounding delays have reduced the resolution runway to 4 hours. Escalated to Associate queue for manual Service Level Upgrade.', isVantage: true, actionCategory: 'alert' },
+      { id: 2008, type: 'VantageAction', title: 'Carrier Ticket Raised', time: '11/08, 10:05 AM', details: 'Automated Ticket #CAR-304 raised to FedEx Indianapolis facility requesting manual scan.', isVantage: true, actionCategory: 'alert' },
+      { id: 2007, type: 'VantageAction', title: 'Stall Detected: Indianapolis Hub', time: '11/08, 10:00 AM', details: 'Package missed scheduled departure scan at Indianapolis, IN hub. Similar barcode unreadability pattern detected.', isVantage: true, actionCategory: 'detection' },
+      { id: 2004, type: 'VantageAction', title: 'Carrier Ticket Raised', time: '11/05, 02:05 PM', details: 'Automated Ticket #CAR-102 raised to FedEx Memphis facility requesting location check.', isVantage: true, actionCategory: 'alert' },
+      { id: 2003, type: 'VantageAction', title: 'Stall Detected: Memphis Hub', time: '11/05, 02:00 PM', details: 'Package missed scheduled departure scan at Memphis, TN hub. No movement for 8 hours.', isVantage: true, actionCategory: 'detection' },
+    ],
+    omniMessages: [],
+    copilotSuggestion: "Hi Michael, your package is on its way from Indianapolis and will arrive at your address in Chicago shortly. We apologize for the slight delay and appreciate your patience!",
+  },
 
-    // ── Case #US-9105 (Story 3 — Signature Required Redirect) ──────────
-    {
-      id: '#US-9105', orderId: 'WA-FedEx-9105', zip: '98109', source: 'Customer',
-      status: 'New', sla: '01d 12h', slaColor: 'sla-green',
-      summary: 'Customer reported missing delivery. Carrier logs confirm failed delivery attempt (Signature Required), package redirected to local FedEx OnSite.',
-      updates: '1 unread message', isVantageAlert: false,
-      integrationSource: 'FedEx API', techStatus: 'Success', lastPing: '11/08, 09:30 AM',
-      breachProb: '5%', priority: 'Low', customerName: 'David L.',
-      carrier: 'FedEx', warehouse: 'SEA-02', assignee: 'Simran', date: '11/08',
-      deliveryStatus: 'Held at FedEx OnSite',
-      fulfillmentCenter: 'Seattle WA (SEA-02)',
-      intelligence: {
-        breachProbability: 5, resolutionRunway: "36h 00m",
-        riskAssessment: "MINIMAL — The package is physically secure and the SLA window is healthy at 1d 12h. The only risk here is reputational: the customer is alarmed and believes their package was stolen. A fast, clear, empathetic response will fully resolve this case. Delayed response risks an unnecessary chargeback or social media escalation from a frustrated first-time buyer.",
-        caseSynthesis: "Customer believes their package was stolen because tracking shows 'Delivered' but their porch is empty. In reality, the delivery required a signature and no one was home at 1:45 PM yesterday. Per FedEx protocol, the driver redirected the package to the nearest OnSite location (Walgreens, 400 Broad St, Seattle, WA 98109). The package has been scanned and is safely held there since 4:00 PM yesterday.",
-        suggestedAction: "Use Vantage Copilot to draft a reassurance email to the customer. Key points to include: (1) Package was NOT stolen, (2) It requires a signature, (3) It is being held at Walgreens on 400 Broad St, (4) Customer needs a valid photo ID to pick up. No carrier action needed — the package is exactly where it should be.",
-        humanTouchAdvice: "No operational action required — the carrier workflow completed correctly. This is purely a customer communication task. The Vantage Copilot has already pre-generated an accurate response. Review, personalize tone, and send immediately."
-      },
-      customer: { name: 'David L.', email: 'david.l@example.com', phone: '+1 (206) 555-0122', city: 'Seattle', state: 'WA', zipCode: '98109', fullAddress: '1200 Aloha St, Seattle, WA 98109', localTimezone: 'US Pacific (PST)', type: 'NEW', ltv: '', totalOrders: 1, orderWindow: '12 months', localTimeNow: '10:15 AM PST', isQuietHours: false },
-      milestones: [
-        { id: 1, action: 'Out for Delivery', location: 'Seattle, WA', time: '11/07, 08:30 AM', status: 'Completed', colorClass: 'green', icon: 'check', connectorTime: '5h 15m', connectorColor: '#10b981' },
-        { id: 2, action: 'Delivery Attempted', location: 'Seattle, WA', time: '11/07, 01:45 PM', status: 'Completed', colorClass: 'red', icon: 'alert', connectorTime: '0h 45m', connectorColor: '#ef4444' },
-        { id: 3, action: 'Redirected to Hold', location: 'Seattle, WA', time: '11/07, 02:30 PM', status: 'Completed', colorClass: 'green', icon: 'check', connectorTime: '1h 30m', connectorColor: '#10b981' },
-        { id: 4, action: 'Ready for Pickup', location: 'FedEx OnSite', time: '11/07, 04:00 PM', status: 'Current', colorClass: 'green', icon: 'check', connectorTime: 'Pending', connectorColor: 'gray' },
-        { id: 5, action: 'Delivered to Buyer', location: 'Pending', time: 'Pending', status: 'Pending', colorClass: 'gray', icon: 'clock', connectorTime: null, connectorColor: 'gray' },
-      ],
-      caseAuditLogs: [
-        { id: 3007, type: 'Customer', title: 'Agent Response Sent', time: '11/08, 09:12 AM', details: 'Associate utilized Vantage Copilot to send resolution email to customer.', isVantage: false },
-        { id: 3005, type: 'Customer', title: 'Inbound Customer Message', time: '11/08, 09:10 AM', details: 'Customer initiated support ticket via Email. Subject: Missing Package.', isVantage: false },
-        { id: 3004, type: 'Carrier', title: 'Ready for Pickup', time: '11/07, 04:00 PM', details: 'Package scanned and held at FedEx OnSite (Walgreens, 400 Broad St, Seattle, WA 98109).', isVantage: false },
-        { id: 3003, type: 'Carrier', title: 'Package Redirected', time: '11/07, 02:30 PM', details: 'Package redirected to nearby FedEx OnSite location per carrier protocol.', isVantage: false },
-        { id: 3002, type: 'Carrier', title: 'Delivery Exception', time: '11/07, 01:45 PM', details: 'Delivery attempt failed. Reason: Customer not available or business closed. Signature required.', isVantage: false },
-        { id: 3001, type: 'Carrier', title: 'Out for Delivery', time: '11/07, 08:30 AM', details: 'Package loaded onto final mile delivery vehicle. Signature Required flag active.', isVantage: false },
-      ],
-      caseVantageActions: [
-        { id: 3006, type: 'VantageAction', title: 'Case Intelligence Synthesized', time: '11/08, 09:10 AM', details: 'Vantage analyzed carrier logs against customer complaint. Root cause identified as redirected signature-required delivery. Copilot response generated.', isVantage: true, actionCategory: 'detection' },
-      ],
-      omniMessages: [
-        { id: 504, direction: 'inbound', channel: 'Email', text: "Hi, my tracking says my package was delivered yesterday, but my porch is empty! I've checked everywhere. Was it stolen?! Please help, I need this for the weekend.", time: '11/08, 09:10 AM', sender: 'David L.' },
-        { id: 505, direction: 'outbound', channel: 'Email', text: "Hi David, don't worry, your package wasn't stolen! Because this order required a signature and no one was home yesterday at 1:45 PM, the driver safely redirected it to the local FedEx OnSite for you to pick up at your convenience. \n\nIt is currently waiting for you at the Walgreens at 400 Broad St. Just bring a valid photo ID matching the shipping address to claim it. Let me know if you need any other help!", time: '11/08, 09:12 AM', sender: 'Siddhant', isAiSuggested: true },
-      ],
-      copilotSuggestion: "Hi David, your package is safe! It required a signature and has been held at the Walgreens at 400 Broad St, Seattle. Please bring a valid photo ID to pick it up at your convenience.",
+  // ── Case #US-9105 (Story 3 — Signature Required Redirect) ──────────
+  {
+    id: '#US-9105', orderId: 'WA-FedEx-9105', zip: '98109', source: 'Customer',
+    status: 'New', sla: '01d 12h', slaColor: 'sla-green',
+    summary: 'Customer reported missing delivery. Carrier logs confirm failed delivery attempt (Signature Required), package redirected to local FedEx OnSite.',
+    updates: '1 unread message', isVantageAlert: false,
+    integrationSource: 'FedEx API', techStatus: 'Success', lastPing: '11/08, 09:30 AM',
+    breachProb: '5%', priority: 'Low', customerName: 'David L.',
+    carrier: 'FedEx', warehouse: 'SEA-02', assignee: 'Simran', date: '11/08',
+    deliveryStatus: 'Held at FedEx OnSite',
+    fulfillmentCenter: 'Seattle WA (SEA-02)',
+    intelligence: {
+      breachProbability: 5, resolutionRunway: "36h 00m",
+      riskAssessment: "MINIMAL — The package is physically secure and the SLA window is healthy at 1d 12h. The only risk here is reputational: the customer is alarmed and believes their package was stolen. A fast, clear, empathetic response will fully resolve this case. Delayed response risks an unnecessary chargeback or social media escalation from a frustrated first-time buyer.",
+      caseSynthesis: "Customer believes their package was stolen because tracking shows 'Delivered' but their porch is empty. In reality, the delivery required a signature and no one was home at 1:45 PM yesterday. Per FedEx protocol, the driver redirected the package to the nearest OnSite location (Walgreens, 400 Broad St, Seattle, WA 98109). The package has been scanned and is safely held there since 4:00 PM yesterday.",
+      suggestedAction: "Use Vantage Copilot to draft a reassurance email to the customer. Key points to include: (1) Package was NOT stolen, (2) It requires a signature, (3) It is being held at Walgreens on 400 Broad St, (4) Customer needs a valid photo ID to pick up. No carrier action needed — the package is exactly where it should be.",
+      humanTouchAdvice: "No operational action required — the carrier workflow completed correctly. This is purely a customer communication task. The Vantage Copilot has already pre-generated an accurate response. Review, personalize tone, and send immediately."
     },
+    customer: { name: 'David L.', email: 'david.l@example.com', phone: '+1 (206) 555-0122', city: 'Seattle', state: 'WA', zipCode: '98109', fullAddress: '1200 Aloha St, Seattle, WA 98109', localTimezone: 'US Pacific (PST)', type: 'NEW', ltv: '', totalOrders: 1, orderWindow: '12 months', localTimeNow: '10:15 AM PST', isQuietHours: false },
+    milestones: [
+      { id: 1, action: 'Out for Delivery', location: 'Seattle, WA', time: '11/07, 08:30 AM', status: 'Completed', colorClass: 'green', icon: 'check', connectorTime: '5h 15m', connectorColor: '#10b981' },
+      { id: 2, action: 'Delivery Attempted', location: 'Seattle, WA', time: '11/07, 01:45 PM', status: 'Completed', colorClass: 'red', icon: 'alert', connectorTime: '0h 45m', connectorColor: '#ef4444' },
+      { id: 3, action: 'Redirected to Hold', location: 'Seattle, WA', time: '11/07, 02:30 PM', status: 'Completed', colorClass: 'green', icon: 'check', connectorTime: '1h 30m', connectorColor: '#10b981' },
+      { id: 4, action: 'Ready for Pickup', location: 'FedEx OnSite', time: '11/07, 04:00 PM', status: 'Current', colorClass: 'green', icon: 'check', connectorTime: 'Pending', connectorColor: 'gray' },
+      { id: 5, action: 'Delivered to Buyer', location: 'Pending', time: 'Pending', status: 'Pending', colorClass: 'gray', icon: 'clock', connectorTime: null, connectorColor: 'gray' },
+    ],
+    caseAuditLogs: [
+      { id: 3007, type: 'Customer', title: 'Agent Response Sent', time: '11/08, 09:12 AM', details: 'Associate utilized Vantage Copilot to send resolution email to customer.', isVantage: false },
+      { id: 3005, type: 'Customer', title: 'Inbound Customer Message', time: '11/08, 09:10 AM', details: 'Customer initiated support ticket via Email. Subject: Missing Package.', isVantage: false },
+      { id: 3004, type: 'Carrier', title: 'Ready for Pickup', time: '11/07, 04:00 PM', details: 'Package scanned and held at FedEx OnSite (Walgreens, 400 Broad St, Seattle, WA 98109).', isVantage: false },
+      { id: 3003, type: 'Carrier', title: 'Package Redirected', time: '11/07, 02:30 PM', details: 'Package redirected to nearby FedEx OnSite location per carrier protocol.', isVantage: false },
+      { id: 3002, type: 'Carrier', title: 'Delivery Exception', time: '11/07, 01:45 PM', details: 'Delivery attempt failed. Reason: Customer not available or business closed. Signature required.', isVantage: false },
+      { id: 3001, type: 'Carrier', title: 'Out for Delivery', time: '11/07, 08:30 AM', details: 'Package loaded onto final mile delivery vehicle. Signature Required flag active.', isVantage: false },
+    ],
+    caseVantageActions: [
+      { id: 3006, type: 'VantageAction', title: 'Case Intelligence Synthesized', time: '11/08, 09:10 AM', details: 'Vantage analyzed carrier logs against customer complaint. Root cause identified as redirected signature-required delivery. Copilot response generated.', isVantage: true, actionCategory: 'detection' },
+    ],
+    omniMessages: [
+      { id: 504, direction: 'inbound', channel: 'Email', text: "Hi, my tracking says my package was delivered yesterday, but my porch is empty! I've checked everywhere. Was it stolen?! Please help, I need this for the weekend.", time: '11/08, 09:10 AM', sender: 'David L.' },
+      { id: 505, direction: 'outbound', channel: 'Email', text: "Hi David, don't worry, your package wasn't stolen! Because this order required a signature and no one was home yesterday at 1:45 PM, the driver safely redirected it to the local FedEx OnSite for you to pick up at your convenience. \n\nIt is currently waiting for you at the Walgreens at 400 Broad St. Just bring a valid photo ID matching the shipping address to claim it. Let me know if you need any other help!", time: '11/08, 09:12 AM', sender: 'Siddhant', isAiSuggested: true },
+    ],
+    copilotSuggestion: "Hi David, your package is safe! It required a signature and has been held at the Walgreens at 400 Broad St, Seattle. Please bring a valid photo ID to pick it up at your convenience.",
+  },
 
-    // ── Case INFRA-3092 (Story 4 — UPS Webhook Outage) ─────────────────
-    {
-      id: 'INFRA-3092', orderId: 'US-Cluster-3092', zip: 'GLOBAL', source: 'Infrastructure',
-      status: 'Identified', sla: '--', slaColor: '',
-      summary: 'UPS Webhook — 502 Bad Gateway Outage affecting 82 orders.',
-      updates: 'Incident Active', isVantageAlert: true,
-      integrationSource: 'UPS API', techStatus: 'Critical Error', lastPing: '14:18',
-      breachProb: '100%', priority: 'Critical', customerName: 'SYSTEM',
-      carrier: 'UPS', warehouse: 'NAT-01', assignee: 'Shankar', date: '11/08',
-      deliveryStatus: 'Infrastructure Incident',
-      fulfillmentCenter: 'National (NAT-01)',
-      intelligence: null,
-      customer: null,
-      milestones: [],
-      caseAuditLogs: [],
-      caseVantageActions: [],
-      omniMessages: [],
-      copilotSuggestion: '',
-      infraData: {
-        title: 'UPS Webhook — 502 Bad Gateway Outage',
-        incidentType: 'Webhook Failure',
-        severity: 'HIGH',
-        detectedAt: '13:45',
-        activeDuration: '0h 35m',
-        whatHappened: 'Vantage infrastructure monitor detected a 100% drop in incoming UPS tracking webhook payloads. The endpoint is returning HTTP 502 Bad Gateway errors across all polling requests, freezing tracking state updates in the Vantage UI.',
-        blastRadiusNarrative: '82 active customer orders currently in transit via UPS are experiencing frozen tracking states. SLA remains fully intact for all affected orders as physical packages are still moving, but associate visibility is temporarily compromised.',
-        anomalySource: 'UPS Webhook',
-        detectionMethod: 'Webhook Drop Rate Monitor',
-        affectedCarrier: 'UPS Ground',
-        affectedRegion: 'National (US)',
-        ordersInBlastRadius: 82,
-        openTickets: '82 (12V / 70C)',
-        slaCriticalCount: '0 (Breaching <6h)',
-        errorRatePeak: '100%',
-        latencyP95: '5000ms (Timeout)',
-        endpoints: [
-          { name: 'api.ups.com/track/v1/webhook', count: '1450', code: '502 Bad Gateway', time: '14:18' },
-        ],
-        affectedTickets: [
-          { id: '#US-9112', source: '👤 Customer', assigned: 'Siddhant', stage: 'In Transit', carrier: 'UPS Ground', sla: '02d 10h', slaColor: 'var(--accent-lime)', critical: false },
-          { id: '#US-9145', source: '🤖 Vantage', assigned: 'Simran', stage: 'Out for Delivery', carrier: 'UPS Ground', sla: '14h 30m', slaColor: 'var(--accent-lime)', critical: false },
-          { id: '#US-9201', source: '👤 Customer', assigned: 'Rupesh', stage: 'In Transit', carrier: 'UPS Ground', sla: '01d 22h', slaColor: 'var(--accent-lime)', critical: false },
-          { id: '#US-9233', source: '🤖 Vantage', assigned: 'Piyush', stage: 'Pending Scan', carrier: 'UPS Ground', sla: '03d 08h', slaColor: 'var(--accent-lime)', critical: false },
-        ],
-        broadcastPreviewText: '⚠️ Tech Incident Notice — INFRA-3092: UPS webhook outage. Tracking statuses will remain frozen for ~2 hours. Do not manually escalate to carrier.',
-        totalTickets: 82,
-        slaCriticalTickets: 0,
-        normalTickets: 82,
-        vitals: [
-          { label: 'Anomaly Source', value: 'UPS Webhook' },
-          { label: 'Detection Method', value: 'Webhook Drop Rate Monitor' },
-          { label: 'Affected Carrier', value: 'UPS Ground' },
-          { label: 'Affected Region', value: 'National (US)' },
-          { label: 'Orders in Blast Radius', value: '82' },
-          { label: 'Open Tickets', value: '82 (12V / 70C)' },
-          { label: 'SLA-Critical', value: '0 (Breaching <6h)', color: 'var(--accent-lime)' },
-        ],
-        timeline: [
-          { id: 4006, type: 'Broadcast', text: "Broadcast sent: '⚠️ Tech Incident Notice — INFRA-3092: UPS webhook outage. Tracking statuses will remain frozen for ~2 hours. Do not manually escalate to carrier.' targeting 82 tickets.", time: '14:15' },
-          { id: 4005, type: 'Status', text: 'Incident status changed to Identified.', time: '14:12', user: 'Shankar' },
-          { id: 4004, type: 'Note', text: 'UPS Dev Support responded. Confirmed regional load balancer failure. Physical packages are unaffected and moving normally. ETA for API restoration is 2 hours.', time: '14:10', user: 'Shankar' },
-          { id: 4003, type: 'Note', text: 'Verified internal systems are operational. Issue isolated to UPS remote servers. Raised priority ticket #UPS-DEV-88 via developer portal.', time: '14:00', user: 'Shankar' },
-          { id: 4002, type: 'Status', text: 'Incident status changed to Investigating.', time: '13:50', user: 'System' },
-          { id: 4001, type: 'Detection', text: 'Automated alert triggered: UPS Webhook returning consecutive 502 Gateway Timeout errors. Error rate exceeded 5% threshold.', time: '13:45' },
-        ],
-      },
+  // ── Case INFRA-3092 (Story 4 — UPS Webhook Outage) ─────────────────
+  {
+    id: 'INFRA-3092', orderId: 'US-Cluster-3092', zip: 'GLOBAL', source: 'Infrastructure',
+    status: 'Identified', sla: '--', slaColor: '',
+    summary: 'UPS Webhook — 502 Bad Gateway Outage affecting 82 orders.',
+    updates: 'Incident Active', isVantageAlert: true,
+    integrationSource: 'UPS API', techStatus: 'Critical Error', lastPing: '14:18',
+    breachProb: '100%', priority: 'Critical', customerName: 'SYSTEM',
+    carrier: 'UPS', warehouse: 'NAT-01', assignee: 'Shankar', date: '11/08',
+    deliveryStatus: 'Infrastructure Incident',
+    fulfillmentCenter: 'National (NAT-01)',
+    intelligence: null,
+    customer: null,
+    milestones: [],
+    caseAuditLogs: [],
+    caseVantageActions: [],
+    omniMessages: [],
+    copilotSuggestion: '',
+    infraData: {
+      title: 'UPS Webhook — 502 Bad Gateway Outage',
+      incidentType: 'Webhook Failure',
+      severity: 'HIGH',
+      detectedAt: '13:45',
+      activeDuration: '0h 35m',
+      whatHappened: 'Vantage infrastructure monitor detected a 100% drop in incoming UPS tracking webhook payloads. The endpoint is returning HTTP 502 Bad Gateway errors across all polling requests, freezing tracking state updates in the Vantage UI.',
+      blastRadiusNarrative: '82 active customer orders currently in transit via UPS are experiencing frozen tracking states. SLA remains fully intact for all affected orders as physical packages are still moving, but associate visibility is temporarily compromised.',
+      anomalySource: 'UPS Webhook',
+      detectionMethod: 'Webhook Drop Rate Monitor',
+      affectedCarrier: 'UPS Ground',
+      affectedRegion: 'National (US)',
+      ordersInBlastRadius: 82,
+      openTickets: '82 (12V / 70C)',
+      slaCriticalCount: '0 (Breaching <6h)',
+      errorRatePeak: '100%',
+      latencyP95: '5000ms (Timeout)',
+      endpoints: [
+        { name: 'api.ups.com/track/v1/webhook', count: '1450', code: '502 Bad Gateway', time: '14:18' },
+      ],
+      affectedTickets: [
+        { id: '#US-9112', source: '👤 Customer', assigned: 'Siddhant', stage: 'In Transit', carrier: 'UPS Ground', sla: '02d 10h', slaColor: 'var(--accent-lime)', critical: false },
+        { id: '#US-9145', source: '🤖 Vantage', assigned: 'Simran', stage: 'Out for Delivery', carrier: 'UPS Ground', sla: '14h 30m', slaColor: 'var(--accent-lime)', critical: false },
+        { id: '#US-9201', source: '👤 Customer', assigned: 'Rupesh', stage: 'In Transit', carrier: 'UPS Ground', sla: '01d 22h', slaColor: 'var(--accent-lime)', critical: false },
+        { id: '#US-9233', source: '🤖 Vantage', assigned: 'Piyush', stage: 'Pending Scan', carrier: 'UPS Ground', sla: '03d 08h', slaColor: 'var(--accent-lime)', critical: false },
+      ],
+      broadcastPreviewText: '⚠️ Tech Incident Notice — INFRA-3092: UPS webhook outage. Tracking statuses will remain frozen for ~2 hours. Do not manually escalate to carrier.',
+      totalTickets: 82,
+      slaCriticalTickets: 0,
+      normalTickets: 82,
+      vitals: [
+        { label: 'Anomaly Source', value: 'UPS Webhook' },
+        { label: 'Detection Method', value: 'Webhook Drop Rate Monitor' },
+        { label: 'Affected Carrier', value: 'UPS Ground' },
+        { label: 'Affected Region', value: 'National (US)' },
+        { label: 'Orders in Blast Radius', value: '82' },
+        { label: 'Open Tickets', value: '82 (12V / 70C)' },
+        { label: 'SLA-Critical', value: '0 (Breaching <6h)', color: 'var(--accent-lime)' },
+      ],
+      timeline: [
+        { id: 4006, type: 'Broadcast', text: "Broadcast sent: '⚠️ Tech Incident Notice — INFRA-3092: UPS webhook outage. Tracking statuses will remain frozen for ~2 hours. Do not manually escalate to carrier.' targeting 82 tickets.", time: '14:15' },
+        { id: 4005, type: 'Status', text: 'Incident status changed to Identified.', time: '14:12', user: 'Shankar' },
+        { id: 4004, type: 'Note', text: 'UPS Dev Support responded. Confirmed regional load balancer failure. Physical packages are unaffected and moving normally. ETA for API restoration is 2 hours.', time: '14:10', user: 'Shankar' },
+        { id: 4003, type: 'Note', text: 'Verified internal systems are operational. Issue isolated to UPS remote servers. Raised priority ticket #UPS-DEV-88 via developer portal.', time: '14:00', user: 'Shankar' },
+        { id: 4002, type: 'Status', text: 'Incident status changed to Investigating.', time: '13:50', user: 'System' },
+        { id: 4001, type: 'Detection', text: 'Automated alert triggered: UPS Webhook returning consecutive 502 Gateway Timeout errors. Error rate exceeded 5% threshold.', time: '13:45' },
+      ],
     },
-    ...universalOrdersData
-  ];
+  },
+  ...universalOrdersData
+];
 
-  const mockOrders = [
-    { id: 'TX-FedEx-8911', caseId: '#US-8911', status: 'Stalled', sla: '03d 14h', summary: 'Stalled at picking phase in Austin facility after address correction.', customerName: 'Jordan P.', carrier: 'FedEx', warehouse: 'AUS-01', priority: 'High', assignee: 'Siddhant', date: '11/08' },
-    { id: 'GA-FedEx-9024', caseId: '#US-9024', status: 'In Transit (Delayed)', sla: '00d 14h', summary: 'Sequential hub delays at Memphis and Indianapolis. Service level upgrade needed.', customerName: 'Michael T.', carrier: 'FedEx', warehouse: 'ATL-01', priority: 'Critical', assignee: 'Rupesh', date: '11/08' },
-    { id: 'WA-FedEx-9105', caseId: '#US-9105', status: 'Held', sla: '01d 12h', summary: 'Held at FedEx OnSite Walgreens; awaiting customer pickup with photo ID.', customerName: 'David L.', carrier: 'FedEx', warehouse: 'SEA-02', priority: 'Low', assignee: 'Simran', date: '11/08' },
-    ...universalOrdersData.map(o => ({ id: o.id, caseId: null, status: o.status, sla: o.sla, summary: o.summary, customerName: o.customerName, carrier: o.carrier, warehouse: o.fulfillmentCenter, priority: o.priority, assignee: o.assignee, date: o.date }))
-  ];
+const mockOrders = [
+  { id: 'TX-FedEx-8911', caseId: '#US-8911', status: 'Stalled', sla: '03d 14h', summary: 'Stalled at picking phase in Austin facility after address correction.', customerName: 'Jordan P.', carrier: 'FedEx', warehouse: 'AUS-01', priority: 'High', assignee: 'Siddhant', date: '11/08' },
+  { id: 'GA-FedEx-9024', caseId: '#US-9024', status: 'In Transit (Delayed)', sla: '00d 14h', summary: 'Sequential hub delays at Memphis and Indianapolis. Service level upgrade needed.', customerName: 'Michael T.', carrier: 'FedEx', warehouse: 'ATL-01', priority: 'Critical', assignee: 'Rupesh', date: '11/08' },
+  { id: 'WA-FedEx-9105', caseId: '#US-9105', status: 'Held', sla: '01d 12h', summary: 'Held at FedEx OnSite Walgreens; awaiting customer pickup with photo ID.', customerName: 'David L.', carrier: 'FedEx', warehouse: 'SEA-02', priority: 'Low', assignee: 'Simran', date: '11/08' },
+  ...universalOrdersData.map(o => ({ id: o.id, caseId: null, status: o.status, sla: o.sla, summary: o.summary, customerName: o.customerName, carrier: o.carrier, warehouse: o.fulfillmentCenter, priority: o.priority, assignee: o.assignee, date: o.date }))
+];
 
 export default function Home() {
   const [selectedPersona, setSelectedPersona] = useState<Persona | null>(null);
-  
+
   // Dashboard Filters
   const [filterSource, setFilterSource] = useState<string>('All');
   const [filterStatus, setFilterStatus] = useState<string>('All');
@@ -505,18 +505,18 @@ export default function Home() {
   const [filterSystemHealth, setFilterSystemHealth] = useState<string>('All');
   const [filterAPIStatus, setFilterAPIStatus] = useState<string>('All');
   const [filterIntegrationSource, setFilterIntegrationSource] = useState<string>('All');
-  
+
   // Expanded Global Filters
   const [filterPriority, setFilterPriority] = useState<string>('All');
   const [filterAssignee, setFilterAssignee] = useState<string>('All');
   const [filterDateRange, setFilterDateRange] = useState<string>('All');
   const [filterCarrier, setFilterCarrier] = useState<string[]>([]);
   const [filterWarehouse, setFilterWarehouse] = useState<string[]>([]);
-  
+
   // Detail State
   const [activeCaseId, setActiveCaseId] = useState<string | null>(null);
   const [expandTimeline, setExpandTimeline] = useState<boolean>(false);
-  
+
   // Pagination State
   const [casesPage, setCasesPage] = useState<number>(1);
   const [ordersPage, setOrdersPage] = useState<number>(1);
@@ -531,14 +531,14 @@ export default function Home() {
   const activeCase = useMemo(() => {
     return mockCases.find(c => c.id === activeCaseId) || mockCases[0];
   }, [activeCaseId, mockCases]);
-  
+
   // Ask Vantage AI Chat Module Settings
   const [showVantageModal, setShowVantageModal] = useState<boolean>(false);
   const [vantageInput, setVantageInput] = useState<string>("");
-  const [vantageChat, setVantageChat] = useState<{id: number, sender: 'user'|'vantage', text: string, time: string}[]>([
+  const [vantageChat, setVantageChat] = useState<{ id: number, sender: 'user' | 'vantage', text: string, time: string }[]>([
     { id: 1, sender: 'vantage', text: 'Hello! I am your Vantage Assistant. I have analyzed all system logs and node constraints for this case. You can ask me to summarize customer history, trace tracking exceptions, or generate response templates.', time: 'Initial' }
   ]);
-  
+
   // Omnichannel Input
   const [omniInput, setOmniInput] = useState<string>("");
   const [omniChannel, setOmniChannel] = useState<string>("SMS");
@@ -554,16 +554,16 @@ export default function Home() {
 
   // Contextual Data Modals & Global Timezone logic
   const [showTimezoneMenu, setShowTimezoneMenu] = useState<boolean>(false);
-  
+
   // Top Right Management Actions
   const [showActionDropdown, setShowActionDropdown] = useState<boolean>(false);
-  const [actionMenuState, setActionMenuState] = useState<'Main'|'Escalate'|'Approval'>('Main');
+  const [actionMenuState, setActionMenuState] = useState<'Main' | 'Escalate' | 'Approval'>('Main');
   const [escalateNote, setEscalateNote] = useState<string>("");
 
   // Multi-Tab Workspace
   const [activeWorkspaceTab, setActiveWorkspaceTab] = useState<string>('Internal Comments');
   const [contactCustomerUnlocked, setContactCustomerUnlocked] = useState<boolean>(false);
-  
+
   // Internal Comments Tab Input
   const [internalCommentInput, setInternalCommentInput] = useState<string>("");
 
@@ -612,15 +612,15 @@ export default function Home() {
       // Fuzzy Universal Search
       const searchStr = searchQuery.toLowerCase();
       const associatedCaseId = c.id.toLowerCase(); // In our mock, the case id IS the primary ID
-      const matchSearch = searchQuery === '' || 
-        c.id.toLowerCase().includes(searchStr) || 
+      const matchSearch = searchQuery === '' ||
+        c.id.toLowerCase().includes(searchStr) ||
         (c.orderId && c.orderId.toLowerCase().includes(searchStr)) ||
-        c.customerName.toLowerCase().includes(searchStr) || 
+        c.customerName.toLowerCase().includes(searchStr) ||
         c.summary.toLowerCase().includes(searchStr);
-      
+
       // Global Shared Filters
       const matchStatus = filterStatus === 'All' || c.status === filterStatus;
-      const matchSLAHealth = filterSLAHealth === 'All' || 
+      const matchSLAHealth = filterSLAHealth === 'All' ||
         (filterSLAHealth === 'Breached' && c.sla === '00d 00h') ||
         (filterSLAHealth === 'Breach risk' && c.slaColor === 'sla-red' && c.sla !== '00d 00h') ||
         (filterSLAHealth === 'On time' && c.slaColor === 'sla-green');
@@ -631,7 +631,7 @@ export default function Home() {
 
       // Source Filter (Cases Only)
       const matchSource = filterSource === 'All' || c.source === filterSource;
-      
+
       if (selectedPersona?.name === 'Shankar') {
         const isInfra = c.id.startsWith('INFRA-');
         if (!isInfra) return false;
@@ -641,7 +641,7 @@ export default function Home() {
         if (filterAPIStatus === 'Success') matchAPI = c.techStatus === 'Success';
         if (filterAPIStatus === '5xx Error') matchAPI = c.techStatus !== 'Success' && c.techStatus !== 'Critical Error';
         if (filterAPIStatus === 'Pings Failed') matchAPI = c.techStatus === 'Critical Error';
-        
+
         return matchSearch && matchIntegration && matchAPI;
       }
 
@@ -661,9 +661,9 @@ export default function Home() {
       const associatedCase = mockCases.find(c => c.id === o.id);
       const caseIdMatch = associatedCase ? associatedCase.id.toLowerCase().includes(searchStr) : false;
 
-      const matchSearch = searchQuery === '' || 
-        o.id.toLowerCase().includes(searchStr) || 
-        o.customerName.toLowerCase().includes(searchStr) || 
+      const matchSearch = searchQuery === '' ||
+        o.id.toLowerCase().includes(searchStr) ||
+        o.customerName.toLowerCase().includes(searchStr) ||
         o.summary.toLowerCase().includes(searchStr) ||
         caseIdMatch;
 
@@ -672,7 +672,7 @@ export default function Home() {
       const matchAssignee = filterAssignee === 'All' || o.assignee === filterAssignee;
       const matchCarrier = filterCarrier.length === 0 || filterCarrier.includes(o.carrier);
       const matchWarehouse = filterWarehouse.length === 0 || filterWarehouse.includes(o.warehouse);
-      
+
       return matchSearch && matchStatus && matchPriority && matchAssignee && matchCarrier && matchWarehouse;
     });
   }, [searchQuery, filterStatus, filterPriority, filterAssignee, filterCarrier, filterWarehouse, mockCases]);
@@ -695,7 +695,7 @@ export default function Home() {
     if (totalPages <= 1) return null;
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '16px', padding: '24px', borderTop: '1px solid var(--bg-border)' }}>
-        <button 
+        <button
           onClick={() => setPage(Math.max(1, currentPage - 1))}
           disabled={currentPage === 1}
           style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', color: 'var(--text-white)', padding: '6px 12px', borderRadius: '4px', cursor: currentPage === 1 ? 'not-allowed' : 'pointer', opacity: currentPage === 1 ? 0.5 : 1, fontSize: '12px' }}
@@ -703,7 +703,7 @@ export default function Home() {
           Previous
         </button>
         <span style={{ fontSize: '12px', color: 'var(--text-gray)' }}>Page {currentPage} of {totalPages}</span>
-        <button 
+        <button
           onClick={() => setPage(Math.min(totalPages, currentPage + 1))}
           disabled={currentPage === totalPages}
           style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', color: 'var(--text-white)', padding: '6px 12px', borderRadius: '4px', cursor: currentPage === totalPages ? 'not-allowed' : 'pointer', opacity: currentPage === totalPages ? 0.5 : 1, fontSize: '12px' }}
@@ -711,6 +711,7 @@ export default function Home() {
           Next
         </button>
       </div>
+    );
   }
 
   const vantageCases = filteredCases.filter(c => c.isVantageAlert);
@@ -718,17 +719,17 @@ export default function Home() {
 
   // Helper to get icon for audit log type
   const getLogIcon = (type: string) => {
-    switch(type) {
-      case 'Internal': return <Users size={14}/>;
-      case 'Carrier': return <Truck size={14}/>;
-      case 'Warehouse': return <Factory size={14}/>;
-      case 'Fulfillment': return <Package size={14}/>;
-      case 'Customer': return <Mail size={14}/>;
-      case 'Source': return <ShoppingBag size={14}/>;
-      case 'System': return <Settings size={14}/>;
-      case 'Call': return <PhoneCall size={14}/>;
-      case 'VantageAction': return <Bot size={14}/>;
-      default: return <Settings size={14}/>;
+    switch (type) {
+      case 'Internal': return <Users size={14} />;
+      case 'Carrier': return <Truck size={14} />;
+      case 'Warehouse': return <Factory size={14} />;
+      case 'Fulfillment': return <Package size={14} />;
+      case 'Customer': return <Mail size={14} />;
+      case 'Source': return <ShoppingBag size={14} />;
+      case 'System': return <Settings size={14} />;
+      case 'Call': return <PhoneCall size={14} />;
+      case 'VantageAction': return <Bot size={14} />;
+      default: return <Settings size={14} />;
     }
   };
 
@@ -743,23 +744,23 @@ export default function Home() {
       'US Central (CST)': 2,
       'US Eastern (EST)': 3,
     };
-    
+
     const offset = tzOffsets[globalTimezone] || 0;
     if (offset === 0) return baseTime;
-    
+
     if (baseTime === 'Initial') return getLogTimestamp();
 
     const match = baseTime.match(/(.+), (\d+):(\d+) (AM|PM)/);
-    if (!match) return baseTime; 
+    if (!match) return baseTime;
 
     let [_, datePart, hh, mm, ampm] = match;
     let hours = parseInt(hh, 10);
     if (ampm === 'PM' && hours !== 12) hours += 12;
     if (ampm === 'AM' && hours === 12) hours = 0;
-    
+
     hours += offset;
-    
-    if (hours >= 24) { hours -= 24; } 
+
+    if (hours >= 24) { hours -= 24; }
     else if (hours < 0) { hours += 24; }
 
     const newAmpm = hours >= 12 ? 'PM' : 'AM';
@@ -775,7 +776,7 @@ export default function Home() {
     let hours = now.getHours();
     const ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
-    hours = hours ? hours : 12; 
+    hours = hours ? hours : 12;
     return `${formattedDate}, ${String(hours).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} ${ampm}`;
   };
 
@@ -786,31 +787,31 @@ export default function Home() {
 
   const submitVantageQuery = () => {
     if (!vantageInput.trim()) return;
-    
+
     const timeRef = getLogTimestamp();
 
     const newChatMsg = { id: Date.now(), sender: 'user' as const, text: vantageInput, time: timeRef };
     setVantageChat(prev => [...prev, newChatMsg]);
     setVantageInput("");
-    
+
     setTimeout(() => {
-        const botResponse = {
-            id: Date.now() + 1,
-            sender: 'vantage' as const,
-            text: 'Based on cross-referencing recent logs, the exception matches localized extreme weather loops preventing immediate hub deployment natively successfully. Re-routing recommended.',
-            time: getLogTimestamp()
-        };
-        setVantageChat(prev => [...prev, botResponse]);
+      const botResponse = {
+        id: Date.now() + 1,
+        sender: 'vantage' as const,
+        text: 'Based on cross-referencing recent logs, the exception matches localized extreme weather loops preventing immediate hub deployment natively successfully. Re-routing recommended.',
+        time: getLogTimestamp()
+      };
+      setVantageChat(prev => [...prev, botResponse]);
     }, 1200);
   };
 
   const submitHandoffAssignment = () => {
     if (!handoffNote.trim() || !targetAssignee) return;
-    
+
     const newLog = {
       id: Date.now(),
       type: 'Internal',
-      icon: <Users size={14}/>,
+      icon: <Users size={14} />,
       title: 'Case Reassignment',
       time: getLogTimestamp(),
       details: `Case reassigned from ${selectedPersona?.name} to new Associate ${targetAssignee.name}. Note: "${handoffNote}"`,
@@ -829,7 +830,7 @@ export default function Home() {
     const newLog = {
       id: Date.now(),
       type: 'Internal',
-      icon: <Users size={14}/>,
+      icon: <Users size={14} />,
       title: 'Internal Team Comment',
       time: getLogTimestamp(),
       details: `${selectedPersona?.name} posted: "${internalCommentInput}"`,
@@ -842,10 +843,10 @@ export default function Home() {
 
   const sendOmniChannelMessage = () => {
     if (!omniInput.trim()) return;
-    
-    let iconToUse = <Mail size={14}/>;
-    if (omniChannel === 'SMS') iconToUse = <MessageSquare size={14}/>;
-    if (omniChannel === 'WhatsApp') iconToUse = <MessageSquare size={14}/>;
+
+    let iconToUse = <Mail size={14} />;
+    if (omniChannel === 'SMS') iconToUse = <MessageSquare size={14} />;
+    if (omniChannel === 'WhatsApp') iconToUse = <MessageSquare size={14} />;
 
     const newLog = {
       id: Date.now(),
@@ -868,7 +869,7 @@ export default function Home() {
     const newLog = {
       id: Date.now(),
       type: mappingType === 'Activity Log' ? 'System' : mappingType,
-      icon: <PhoneCall size={14}/>,
+      icon: <PhoneCall size={14} />,
       title: 'Voice Call',
       time: getLogTimestamp(),
       duration: '02m 45s',
@@ -876,82 +877,82 @@ export default function Home() {
       transcript: `Associate: Hello, calling regarding Inito order #US-8821.\n${entityName} Rep: Let me pull that up. Looks like it's currently at the sort facility.\nAssociate: Correct, we need to bypass the standard sort to avoid SLA breach.\n${entityName} Rep: Okay, I have authorization to reroute. Tracking should be updated natively within 30 minutes.`,
       isVantage: false
     };
-    
+
     setAuditLogs([newLog, ...auditLogs]);
-    setExpandedTranscripts(prev => ({...prev, [newLog.id]: true}));
+    setExpandedTranscripts(prev => ({ ...prev, [newLog.id]: true }));
   }
 
   function renderGlobalControlBar() {
     return (
-    <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '0 0 16px 0' }}>
-      <button onClick={() => {setShowTimezoneMenu(!showTimezoneMenu);}} style={{ background: 'var(--bg-deep)', border: '1px solid var(--accent-sentry)', color: 'var(--text-white)', padding: '8px 16px', fontSize: '11px', fontWeight: 'bold', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', whiteSpace: 'nowrap' }}>
-        <Globe size={14} color="var(--accent-sentry)" />
-        {globalTimezone}
-      </button>
-    </div>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '0 0 16px 0' }}>
+        <button onClick={() => { setShowTimezoneMenu(!showTimezoneMenu); }} style={{ background: 'var(--bg-deep)', border: '1px solid var(--accent-sentry)', color: 'var(--text-white)', padding: '8px 16px', fontSize: '11px', fontWeight: 'bold', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', whiteSpace: 'nowrap' }}>
+          <Globe size={14} color="var(--accent-sentry)" />
+          {globalTimezone}
+        </button>
+      </div>
     );
   }
 
   function renderDashboardTabs() {
     return (
-    <div style={{ display: 'flex', gap: '24px', margin: '24px 0 0px 0', borderBottom: '1px solid var(--bg-border)', paddingBottom: '0', paddingLeft: '32px', paddingRight: '32px' }}>
-      <button 
-        onClick={() => { setDashboardTab('Cases'); setCasesPage(1); }}
-        style={{ 
-          padding: '12px 0', 
-          background: 'none', 
-          border: 'none', 
-          borderBottom: dashboardTab === 'Cases' ? '2px solid var(--accent-sentry)' : '2px solid transparent',
-          color: dashboardTab === 'Cases' ? 'var(--text-white)' : 'var(--text-gray)',
-          fontSize: '14px',
-          fontWeight: dashboardTab === 'Cases' ? 'bold' : 'normal',
-          cursor: 'pointer',
-          transition: 'all 0.2s'
-        }}
-      >
-        Open Cases
-      </button>
-      <button 
-        onClick={() => { setDashboardTab('Orders'); setOrdersPage(1); }}
-        style={{ 
-          padding: '12px 0', 
-          background: 'none', 
-          border: 'none', 
-          borderBottom: dashboardTab === 'Orders' ? '2px solid var(--accent-sentry)' : '2px solid transparent',
-          color: dashboardTab === 'Orders' ? 'var(--text-white)' : 'var(--text-gray)',
-          fontSize: '14px',
-          fontWeight: dashboardTab === 'Orders' ? 'bold' : 'normal',
-          cursor: 'pointer',
-          transition: 'all 0.2s'
-        }}
-      >
-        All Active Orders
-      </button>
-      {selectedPersona?.name === 'Simran' && (
-        <button 
-          onClick={() => { setDashboardTab('Operations'); setCasesPage(1); setOrdersPage(1); }}
-          style={{ 
-            padding: '12px 0', 
-            background: 'none', 
-            border: 'none', 
-            borderBottom: dashboardTab === 'Operations' ? '2px solid var(--accent-sentry)' : '2px solid transparent',
-            color: dashboardTab === 'Operations' ? 'var(--text-white)' : 'var(--text-gray)',
+      <div style={{ display: 'flex', gap: '24px', margin: '24px 0 0px 0', borderBottom: '1px solid var(--bg-border)', paddingBottom: '0', paddingLeft: '32px', paddingRight: '32px' }}>
+        <button
+          onClick={() => { setDashboardTab('Cases'); setCasesPage(1); }}
+          style={{
+            padding: '12px 0',
+            background: 'none',
+            border: 'none',
+            borderBottom: dashboardTab === 'Cases' ? '2px solid var(--accent-sentry)' : '2px solid transparent',
+            color: dashboardTab === 'Cases' ? 'var(--text-white)' : 'var(--text-gray)',
             fontSize: '14px',
-            fontWeight: dashboardTab === 'Operations' ? 'bold' : 'normal',
+            fontWeight: dashboardTab === 'Cases' ? 'bold' : 'normal',
             cursor: 'pointer',
             transition: 'all 0.2s'
           }}
         >
-          Operations
+          Open Cases
         </button>
-      )}
-    </div>
+        <button
+          onClick={() => { setDashboardTab('Orders'); setOrdersPage(1); }}
+          style={{
+            padding: '12px 0',
+            background: 'none',
+            border: 'none',
+            borderBottom: dashboardTab === 'Orders' ? '2px solid var(--accent-sentry)' : '2px solid transparent',
+            color: dashboardTab === 'Orders' ? 'var(--text-white)' : 'var(--text-gray)',
+            fontSize: '14px',
+            fontWeight: dashboardTab === 'Orders' ? 'bold' : 'normal',
+            cursor: 'pointer',
+            transition: 'all 0.2s'
+          }}
+        >
+          All Active Orders
+        </button>
+        {selectedPersona?.name === 'Simran' && (
+          <button
+            onClick={() => { setDashboardTab('Operations'); setCasesPage(1); setOrdersPage(1); }}
+            style={{
+              padding: '12px 0',
+              background: 'none',
+              border: 'none',
+              borderBottom: dashboardTab === 'Operations' ? '2px solid var(--accent-sentry)' : '2px solid transparent',
+              color: dashboardTab === 'Operations' ? 'var(--text-white)' : 'var(--text-gray)',
+              fontSize: '14px',
+              fontWeight: dashboardTab === 'Operations' ? 'bold' : 'normal',
+              cursor: 'pointer',
+              transition: 'all 0.2s'
+            }}
+          >
+            Operations
+          </button>
+        )}
+      </div>
     );
   }
 
   function renderFilterRow() {
     const isShankar = selectedPersona?.name === 'Shankar';
-    
+
     return (
       <div className="filter-row" style={{ display: 'grid', gridTemplateColumns: isShankar ? 'repeat(5, 1fr) 1.2fr 120px' : 'repeat(4, 1fr) 1.5fr', gap: '12px', padding: '16px 0' }}>
         {/* Basic Filters */}
@@ -987,29 +988,29 @@ export default function Home() {
         {/* Logistics Multi-Selects */}
         <div style={{ display: 'flex', gap: '8px' }}>
           <div style={{ position: 'relative', flex: 1 }}>
-             <select className="filter-select" style={{ width: '100%', opacity: 0.5 }}>
-               <option>{filterCarrier.length > 0 ? `${filterCarrier.length} Carriers` : 'All Carriers'}</option>
-             </select>
-             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0, cursor: 'pointer' }}>
-               <select multiple value={filterCarrier} onChange={(e) => setFilterCarrier(Array.from(e.target.selectedOptions, option => option.value))} style={{ width: '100%', height: '100%' }}>
-                 <option value="FedEx">FedEx</option>
-                 <option value="UPS">UPS</option>
-                 <option value="USPS">USPS</option>
-                 <option value="DHL">DHL</option>
-               </select>
-             </div>
+            <select className="filter-select" style={{ width: '100%', opacity: 0.5 }}>
+              <option>{filterCarrier.length > 0 ? `${filterCarrier.length} Carriers` : 'All Carriers'}</option>
+            </select>
+            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0, cursor: 'pointer' }}>
+              <select multiple value={filterCarrier} onChange={(e) => setFilterCarrier(Array.from(e.target.selectedOptions, option => option.value))} style={{ width: '100%', height: '100%' }}>
+                <option value="FedEx">FedEx</option>
+                <option value="UPS">UPS</option>
+                <option value="USPS">USPS</option>
+                <option value="DHL">DHL</option>
+              </select>
+            </div>
           </div>
           <div style={{ position: 'relative', flex: 1 }}>
-             <select className="filter-select" style={{ width: '100%', opacity: 0.5 }}>
-               <option>{filterWarehouse.length > 0 ? `${filterWarehouse.length} Warehouses` : 'All Warehouses'}</option>
-             </select>
-             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0, cursor: 'pointer' }}>
-               <select multiple value={filterWarehouse} onChange={(e) => setFilterWarehouse(Array.from(e.target.selectedOptions, option => option.value))} style={{ width: '100%', height: '100%' }}>
-                 <option value="CHI-01">CHI-01</option>
-                 <option value="MEM-04">MEM-04</option>
-                 <option value="ATL-02">ATL-02</option>
-               </select>
-             </div>
+            <select className="filter-select" style={{ width: '100%', opacity: 0.5 }}>
+              <option>{filterWarehouse.length > 0 ? `${filterWarehouse.length} Warehouses` : 'All Warehouses'}</option>
+            </select>
+            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0, cursor: 'pointer' }}>
+              <select multiple value={filterWarehouse} onChange={(e) => setFilterWarehouse(Array.from(e.target.selectedOptions, option => option.value))} style={{ width: '100%', height: '100%' }}>
+                <option value="CHI-01">CHI-01</option>
+                <option value="MEM-04">MEM-04</option>
+                <option value="ATL-02">ATL-02</option>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -1033,7 +1034,6 @@ export default function Home() {
                 </select>
               )}
             </>
-      )}
           )}
           <select className="filter-select" value={filterSLAHealth} onChange={(e) => setFilterSLAHealth(e.target.value)} style={{ flex: 1 }}>
             <option value="All">All SLA</option>
@@ -1057,10 +1057,10 @@ export default function Home() {
         )}
 
         {/* Unified Search */}
-        <input 
-          type="text" 
-          className="search-input" 
-          placeholder="Search by ID, Case ID, or Customer Name..." 
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Search by ID, Case ID, or Customer Name..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           style={{ width: '100%' }}
@@ -1083,11 +1083,11 @@ export default function Home() {
             <div className="data-cell">Summary</div>
           </div>
           {paginatedOrders.map(order => {
-            const associatedCase = mockCases.find(c => c.id === (order as any).caseId); 
+            const associatedCase = mockCases.find(c => c.id === (order as any).caseId);
             return (
-              <div 
-                className="data-row" 
-                key={order.id} 
+              <div
+                className="data-row"
+                key={order.id}
                 onClick={() => handleCaseSelection(order.id)}
                 style={{ gridTemplateColumns: 'minmax(120px, 1.5fr) 140px 1.2fr 100px 1.2fr 2fr', cursor: 'pointer' }}
               >
@@ -1144,17 +1144,17 @@ export default function Home() {
 
   const handleCreateTicket = () => {
     if (!ticketComment.trim()) return;
-    
+
     const newLog = {
       id: Date.now(),
       type: ticketEntity,
-      icon: <Ticket size={14}/>,
+      icon: <Ticket size={14} />,
       title: `${ticketEntity} Ticket Raised`,
       time: getLogTimestamp(),
       details: `Severity: [${ticketSeverity}] | Context: "${ticketComment}" | Image attachments mapped explicitly securely resolving perfectly properly reliably intelligently exactly elegantly properly appropriately automatically exactly seamlessly successfully.`,
       isVantage: false
     };
-    
+
     setAuditLogs([newLog, ...auditLogs]);
     setShowTicketModal(false);
     setTicketComment("");
@@ -1164,18 +1164,18 @@ export default function Home() {
   const handleActionExecute = (actionType: string, note?: string) => {
     let actionLog = '';
     if (actionType === 'Escalate') {
-        if (!note?.trim()) return;
-        actionLog = `Case internally escalated to assigned Manager (Sarah Jenkins). Note: "${note}"`;
+      if (!note?.trim()) return;
+      actionLog = `Case internally escalated to assigned Manager (Sarah Jenkins). Note: "${note}"`;
     } else if (actionType === 'Refund') {
-        actionLog = `Refund processing request formally initialized for approval.`;
+      actionLog = `Refund processing request formally initialized for approval.`;
     } else if (actionType === 'Cancel') {
-        actionLog = `Order cancellation request formally initialized for approval.`;
+      actionLog = `Order cancellation request formally initialized for approval.`;
     }
 
     const newLog = {
       id: Date.now(),
       type: 'Internal',
-      icon: <Briefcase size={14}/>,
+      icon: <Briefcase size={14} />,
       title: `Management Action: ${actionType}`,
       time: getLogTimestamp(),
       details: actionLog,
@@ -1190,124 +1190,124 @@ export default function Home() {
 
   function renderShankarDashboard() {
     return (
-    <>
-      {renderGlobalControlBar()}
+      <>
+        {renderGlobalControlBar()}
 
-      <div className="dashboard-layer">
-        <div className="data-card" style={{ borderLeft: '4px solid var(--accent-lime)' }}>
-          <div className="data-card-title">System Health</div>
-          <div className="data-card-value" style={{ fontSize: '18px', color: 'var(--accent-lime)' }}>Operational</div>
-          <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginTop: '4px' }}>Avg API Latency: 42ms</div>
-        </div>
-        <div className="data-card">
-          <div className="data-card-title">Global System Latency</div>
-          <div style={{ width: '100%', height: '40px', marginTop: '4px' }}>
-            <svg viewBox="0 0 100 40" style={{ width: '100%', height: '100%' }}>
-              <path d="M0 35 Q 10 32, 20 25 T 40 30 T 60 15 T 80 18 T 100 5" fill="none" stroke="var(--accent-lime)" strokeWidth="2" />
-            </svg>
+        <div className="dashboard-layer">
+          <div className="data-card" style={{ borderLeft: '4px solid var(--accent-lime)' }}>
+            <div className="data-card-title">System Health</div>
+            <div className="data-card-value" style={{ fontSize: '18px', color: 'var(--accent-lime)' }}>Operational</div>
+            <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginTop: '4px' }}>Avg API Latency: 42ms</div>
           </div>
-          <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginTop: '4px' }}>P99: 242ms (Avg)</div>
-        </div>
-        <div className="data-card">
-          <div className="data-card-title" style={{ color: 'var(--accent-coral)' }}>Error Rate (24h)</div>
-          <div className="data-card-value">1.2%</div>
-          <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginTop: '4px' }}>Failed Webhooks: 18</div>
-        </div>
-      </div>
-
-      {renderDashboardTabs()}
-
-      {renderFilterRow()}
-
-      {dashboardTab === 'Cases' && (
-        <>
-          <div className="main-workspace overflow-auto">
-            <div className="list-section-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                Technical Operations Command Center
-                <span title="Technical view focused on API health, Integration state, and System-to-System handshakes." style={{cursor: 'help', display: 'flex'}}>
-                  <Info size={16} />
-                </span>
-              </div>
-              <div style={{ fontSize: '11px', color: 'var(--accent-lime)', background: 'rgba(194, 239, 78, 0.05)', padding: '4px 12px', borderRadius: '16px', border: '1px solid rgba(194, 239, 78, 0.2)' }}>
-                Observability: Active (Pings: 0.2s)
-              </div>
+          <div className="data-card">
+            <div className="data-card-title">Global System Latency</div>
+            <div style={{ width: '100%', height: '40px', marginTop: '4px' }}>
+              <svg viewBox="0 0 100 40" style={{ width: '100%', height: '100%' }}>
+                <path d="M0 35 Q 10 32, 20 25 T 40 30 T 60 15 T 80 18 T 100 5" fill="none" stroke="var(--accent-lime)" strokeWidth="2" />
+              </svg>
             </div>
+            <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginTop: '4px' }}>P99: 242ms (Avg)</div>
+          </div>
+          <div className="data-card">
+            <div className="data-card-title" style={{ color: 'var(--accent-coral)' }}>Error Rate (24h)</div>
+            <div className="data-card-value">1.2%</div>
+            <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginTop: '4px' }}>Failed Webhooks: 18</div>
+          </div>
+        </div>
 
-            <div className="data-table">
-              <div className="data-row data-header" style={{ gridTemplateColumns: 'minmax(100px, 1fr) 1fr 1.5fr 1.5fr 1fr 1fr' }}>
-                <div className="data-cell">Source</div>
-                <div className="data-cell">Case ID</div>
-                <div className="data-cell">Integration</div>
-                <div className="data-cell">Tech Status</div>
-                <div className="data-cell">Breach Risk</div>
-                <div className="data-cell">Last Ping</div>
-              </div>
-              {filteredCases.map(c => (
-                <div key={c.id} className="data-row" style={{ gridTemplateColumns: 'minmax(100px, 1fr) 1fr 1.5fr 1.5fr 1fr 1fr', cursor: 'pointer' }} onClick={() => handleCaseSelection(c.id)}>
-                  <div className="data-cell" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <Bot size={14} color="var(--accent-lime)" />
-                    {c.source}
-                  </div>
-                  <div className="data-cell">{c.id}</div>
-                  <div className="data-cell">{c.integrationSource}</div>
-                  <div className="data-cell">
-                    <span style={{ fontSize: '11px', padding: '2px 8px', borderRadius: '4px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
-                      {c.techStatus}
-                    </span>
-                  </div>
-                  <div className="data-cell" style={{ color: parseInt(c.breachProb) > 80 ? 'var(--accent-coral)' : 'var(--accent-lime)' }}>{c.breachProb}</div>
-                  <div className="data-cell">{c.lastPing}</div>
+        {renderDashboardTabs()}
+
+        {renderFilterRow()}
+
+        {dashboardTab === 'Cases' ? (
+          <>
+            <div className="main-workspace overflow-auto">
+              <div className="list-section-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  Technical Operations Command Center
+                  <span title="Technical view focused on API health, Integration state, and System-to-System handshakes." style={{ cursor: 'help', display: 'flex' }}>
+                    <Info size={16} />
+                  </span>
                 </div>
-              ))}
+                <div style={{ fontSize: '11px', color: 'var(--accent-lime)', background: 'rgba(194, 239, 78, 0.05)', padding: '4px 12px', borderRadius: '16px', border: '1px solid rgba(194, 239, 78, 0.2)' }}>
+                  Observability: Active (Pings: 0.2s)
+                </div>
+              </div>
+
+              <div className="data-table">
+                <div className="data-row data-header" style={{ gridTemplateColumns: 'minmax(100px, 1fr) 1fr 1.5fr 1.5fr 1fr 1fr' }}>
+                  <div className="data-cell">Source</div>
+                  <div className="data-cell">Case ID</div>
+                  <div className="data-cell">Integration</div>
+                  <div className="data-cell">Tech Status</div>
+                  <div className="data-cell">Breach Risk</div>
+                  <div className="data-cell">Last Ping</div>
+                </div>
+                {filteredCases.map(c => (
+                  <div key={c.id} className="data-row" style={{ gridTemplateColumns: 'minmax(100px, 1fr) 1fr 1.5fr 1.5fr 1fr 1fr', cursor: 'pointer' }} onClick={() => handleCaseSelection(c.id)}>
+                    <div className="data-cell" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <Bot size={14} color="var(--accent-lime)" />
+                      {c.source}
+                    </div>
+                    <div className="data-cell">{c.id}</div>
+                    <div className="data-cell">{c.integrationSource}</div>
+                    <div className="data-cell">
+                      <span style={{ fontSize: '11px', padding: '2px 8px', borderRadius: '4px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                        {c.techStatus}
+                      </span>
+                    </div>
+                    <div className="data-cell" style={{ color: parseInt(c.breachProb) > 80 ? 'var(--accent-coral)' : 'var(--accent-lime)' }}>{c.breachProb}</div>
+                    <div className="data-cell">{c.lastPing}</div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </>
-      ) : renderAllOpenOrders()}
-    </>
+          </>
+        ) : renderAllOpenOrders()}
+      </>
     );
   }
 
   function renderDashboard() {
     return (
     <>
-      {renderGlobalControlBar()}
+        {renderGlobalControlBar()}
 
-      <div className="dashboard-layer">
-        <div className="data-card">
-          <button className="view-all-link" onClick={() => setFilterSource('Vantage')}>View all</button>
-          <div className="data-card-title">Vantage alert</div>
-          <div className="data-card-value">3</div>
-          <div className="incremental-metric">+1</div>
+        <div className="dashboard-layer">
+          <div className="data-card">
+            <button className="view-all-link" onClick={() => setFilterSource('Vantage')}>View all</button>
+            <div className="data-card-title">Vantage alert</div>
+            <div className="data-card-value">3</div>
+            <div className="incremental-metric">+1</div>
+          </div>
+          <div className="data-card">
+            <button className="view-all-link" onClick={() => setFilterStatus('New')}>View all</button>
+            <div className="data-card-title">New</div>
+            <div className="data-card-value">4</div>
+            <div className="incremental-metric">+2</div>
+          </div>
+          <div className="data-card">
+            <button className="view-all-link" onClick={() => setFilterStatus('In-progress')}>View all</button>
+            <div className="data-card-title">In-progress</div>
+            <div className="data-card-value">6</div>
+          </div>
+          <div className="data-card">
+            <button className="view-all-link" onClick={() => setFilterStatus('Escalated')}>View all</button>
+            <div className="data-card-title">Escalated</div>
+            <div className="data-card-value">1</div>
+            <div className="incremental-metric">+1</div>
+          </div>
+          <div className="data-card">
+            <button className="view-all-link" onClick={() => setFilterSLAHealth('Breach risk')}>View all</button>
+            <div className="data-card-title">Breach Risk</div>
+            <div className="data-card-value">2</div>
+          </div>
         </div>
-        <div className="data-card">
-          <button className="view-all-link" onClick={() => setFilterStatus('New')}>View all</button>
-          <div className="data-card-title">New</div>
-          <div className="data-card-value">4</div>
-          <div className="incremental-metric">+2</div>
-        </div>
-        <div className="data-card">
-          <button className="view-all-link" onClick={() => setFilterStatus('In-progress')}>View all</button>
-          <div className="data-card-title">In-progress</div>
-          <div className="data-card-value">6</div>
-        </div>
-        <div className="data-card">
-          <button className="view-all-link" onClick={() => setFilterStatus('Escalated')}>View all</button>
-          <div className="data-card-title">Escalated</div>
-          <div className="data-card-value">1</div>
-          <div className="incremental-metric">+1</div>
-        </div>
-        <div className="data-card">
-          <button className="view-all-link" onClick={() => setFilterSLAHealth('Breach risk')}>View all</button>
-          <div className="data-card-title">Breach Risk</div>
-          <div className="data-card-value">2</div>
-        </div>
-      </div>
-      {renderDashboardTabs()}
+        {renderDashboardTabs()}
 
-      {renderFilterRow()}
+        {renderFilterRow()}
 
-      {dashboardTab === 'Cases' ? (
+        {dashboardTab === 'Cases' ? (
         <>
           <div className="main-workspace overflow-auto">
             <div className="list-section-header">Active Tickets & Alerts</div>
@@ -1337,7 +1337,8 @@ export default function Home() {
             {renderPagination(casesPage, totalCasesPages, setCasesPage)}
           </div>
         </>
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '16px', marginBottom: '32px' }}>
+      ) : (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '16px', marginBottom: '32px' }}>
       {managerMetrics.map((card, i) => (
         <div key={i} className="data-card" style={{ height: '140px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '20px' }}>
           <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase' }}>{card.label}</div>
@@ -1352,313 +1353,336 @@ export default function Home() {
           </div>
         </div>
       ))}
-    </div>
-    );
-  }
-
-  function renderSmartAlertStrip() {
-    return (
-    <div style={{ display: 'flex', gap: '16px', marginBottom: '32px', overflowX: 'auto', paddingBottom: '8px' }}>
-      {smartAlerts.map(alert => (
-        <div key={alert.id} style={{ 
-          flex: '0 0 400px', 
-          background: 'var(--bg-deep)', 
-          border: '1px solid var(--bg-border)', 
-          borderRadius: '12px', 
-          padding: '16px 20px', 
-          display: 'flex', 
-          alignItems: 'center', 
-          gap: '16px',
-          borderLeft: `4px solid ${alert.severity === 'critical' ? 'var(--accent-coral)' : (alert.severity === 'urgent' ? '#f59e0b' : '#3b82f6')}`
-        }}>
-          <div style={{ flex: 1 }}>
-            <div style={{ fontSize: '10px', textTransform: 'uppercase', fontWeight: 'bold', color: 'var(--text-gray)', marginBottom: '4px' }}>{alert.type}</div>
-            <div style={{ fontSize: '13px', color: 'var(--text-white)', fontWeight: '500' }}>{alert.text}</div>
-          </div>
-          <button style={{ 
-            background: 'rgba(255,255,255,0.05)', 
-            border: '1px solid var(--bg-border)', 
-            color: 'var(--text-white)', 
-            padding: '8px 12px', 
-            borderRadius: '6px', 
-            fontSize: '11px', 
-            fontWeight: 'bold', 
-            cursor: 'pointer',
-            whiteSpace: 'nowrap'
-          }}>
-            {alert.cta}
-          </button>
         </div>
-      ))}
-    </div>
+      )}
+    </>
     );
   }
 
-  function renderManagerTabbedWorkspace() {
+  function renderManagerMetricCards() {
+    return (
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '16px', marginBottom: '32px' }}>
+        {managerMetrics.map((card, i) => (
+          <div key={i} className="data-card" style={{ height: '140px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '20px' }}>
+            <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase' }}>{card.label}</div>
+            <div style={{ fontSize: '32px', fontWeight: 'bold', color: 'var(--text-white)' }}>{card.value}</div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <span style={{ fontSize: '11px', color: card.change.includes('+') ? 'var(--accent-lime)' : 'var(--accent-coral)', fontWeight: 'bold' }}>{card.change} vs avg</span>
+              <div style={{ display: 'flex', gap: '2px', alignItems: 'flex-end', height: '16px' }}>
+                {[...Array(6)].map((_, idx) => (
+                  <div key={idx} style={{ width: '3px', background: 'var(--bg-border)', height: `${Math.random() * 100}%`, borderRadius: '1px' }}></div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+        function renderSmartAlertStrip() {
+    return (
+        <div style={{ display: 'flex', gap: '16px', marginBottom: '32px', overflowX: 'auto', paddingBottom: '8px' }}>
+          {smartAlerts.map(alert => (
+            <div key={alert.id} style={{
+              flex: '0 0 400px',
+              background: 'var(--bg-deep)',
+              border: '1px solid var(--bg-border)',
+              borderRadius: '12px',
+              padding: '16px 20px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '16px',
+              borderLeft: `4px solid ${alert.severity === 'critical' ? 'var(--accent-coral)' : (alert.severity === 'urgent' ? '#f59e0b' : '#3b82f6')}`
+            }}>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: '10px', textTransform: 'uppercase', fontWeight: 'bold', color: 'var(--text-gray)', marginBottom: '4px' }}>{alert.type}</div>
+                <div style={{ fontSize: '13px', color: 'var(--text-white)', fontWeight: '500' }}>{alert.text}</div>
+              </div>
+              <button style={{
+                background: 'rgba(255,255,255,0.05)',
+                border: '1px solid var(--bg-border)',
+                color: 'var(--text-white)',
+                padding: '8px 12px',
+                borderRadius: '6px',
+                fontSize: '11px',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                whiteSpace: 'nowrap'
+              }}>
+                {alert.cta}
+              </button>
+            </div>
+          ))}
+        </div>
+        );
+  }
+
+        function renderManagerTabbedWorkspace() {
     // Shared filtering for manager view
     const items = mockCases.filter(c => {
       if (mgrActiveTab === 'Escalations') return c.status === 'Escalated' && c.escalatedBy;
-      if (mgrActiveTab === 'Approvals') return c.updates === 'Approval Needed';
-      if (mgrActiveTab === 'AI Flags') return c.isVantageAlert && c.assignee === 'Simran';
-      return false;
+        if (mgrActiveTab === 'Approvals') return c.updates === 'Approval Needed';
+        if (mgrActiveTab === 'AI Flags') return c.isVantageAlert && c.assignee === 'Simran';
+        return false;
     });
 
-    return (
-      <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-        <div style={{ display: 'flex', gap: '32px', padding: '0 32px', borderBottom: '1px solid var(--bg-border)', background: 'rgba(255,255,255,0.02)' }}>
-          {['Escalations', 'Approvals', 'AI Flags'].map((tab: any) => (
-            <button 
-              key={tab}
-              onClick={() => { setMgrActiveTab(tab); setMgrPagination(1); }}
-              style={{ padding: '16px 0', background: 'none', border: 'none', borderBottom: mgrActiveTab === tab ? '2px solid var(--accent-sentry)' : '2px solid transparent', color: mgrActiveTab === tab ? 'var(--text-white)' : 'var(--text-gray)', fontSize: '13px', fontWeight: 'bold', cursor: 'pointer' }}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
-        
-        <div style={{ flex: 1, padding: '16px' }}>
-          {items.length === 0 ? (
-            <div style={{ padding: '40px', textAlign: 'center', color: 'var(--text-gray)', fontSize: '13px' }}>No active items in this queue.</div>
-          ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {items.map(item => (
-                <div key={item.id} style={{ border: '1px solid var(--bg-border)', borderRadius: '8px', overflow: 'hidden' }}>
-                  <div 
-                    onClick={() => toggleMgrRow(item.id)}
-                    style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', background: 'var(--bg-primary)', cursor: 'pointer', gap: '20px' }}
-                  >
-                   <div style={{ width: '80px', fontSize: '12px', fontWeight: 'bold', color: 'var(--accent-sentry)' }}>{item.id}</div>
-                   <div style={{ flex: 1, fontSize: '13px', color: 'var(--text-white)', fontWeight: '500' }}>{item.summary}</div>
-                   <div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>{item.escalatedBy ? `via ${item.escalatedBy}` : item.source}</div>
-                   <div style={{ fontSize: '11px', padding: '4px 8px', borderRadius: '4px', background: 'rgba(239, 68, 68, 0.1)', color: 'var(--accent-coral)', fontWeight: 'bold' }}>{item.priority}</div>
-                   <ChevronRight size={16} style={{ transition: 'transform 0.2s', transform: mgrExpandedRows.has(item.id) ? 'rotate(90deg)' : 'none' }} />
-                  </div>
-                  
-                  <AnimatePresence>
-                    {mgrExpandedRows.has(item.id) && (
-                      <motion.div 
-                        initial={{ height: 0 }} 
-                        animate={{ height: 'auto' }} 
-                        exit={{ height: 0 }}
-                        style={{ overflow: 'hidden', background: 'rgba(0,0,0,0.2)' }}
-                      >
-                         <div style={{ padding: '20px', borderTop: '1px solid var(--bg-border)', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        return (
+        <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ display: 'flex', gap: '32px', padding: '0 32px', borderBottom: '1px solid var(--bg-border)', background: 'rgba(255,255,255,0.02)' }}>
+            {['Escalations', 'Approvals', 'AI Flags'].map((tab: any) => (
+              <button
+                key={tab}
+                onClick={() => { setMgrActiveTab(tab); setMgrPagination(1); }}
+                style={{ padding: '16px 0', background: 'none', border: 'none', borderBottom: mgrActiveTab === tab ? '2px solid var(--accent-sentry)' : '2px solid transparent', color: mgrActiveTab === tab ? 'var(--text-white)' : 'var(--text-gray)', fontSize: '13px', fontWeight: 'bold', cursor: 'pointer' }}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+
+          <div style={{ flex: 1, padding: '16px' }}>
+            {items.length === 0 ? (
+              <div style={{ padding: '40px', textAlign: 'center', color: 'var(--text-gray)', fontSize: '13px' }}>No active items in this queue.</div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {items.map(item => (
+                  <div key={item.id} style={{ border: '1px solid var(--bg-border)', borderRadius: '8px', overflow: 'hidden' }}>
+                    <div
+                      onClick={() => toggleMgrRow(item.id)}
+                      style={{ padding: '16px 20px', display: 'flex', alignItems: 'center', background: 'var(--bg-primary)', cursor: 'pointer', gap: '20px' }}
+                    >
+                      <div style={{ width: '80px', fontSize: '12px', fontWeight: 'bold', color: 'var(--accent-sentry)' }}>{item.id}</div>
+                      <div style={{ flex: 1, fontSize: '13px', color: 'var(--text-white)', fontWeight: '500' }}>{item.summary}</div>
+                      <div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>{item.escalatedBy ? `via ${item.escalatedBy}` : item.source}</div>
+                      <div style={{ fontSize: '11px', padding: '4px 8px', borderRadius: '4px', background: 'rgba(239, 68, 68, 0.1)', color: 'var(--accent-coral)', fontWeight: 'bold' }}>{item.priority}</div>
+                      <ChevronRight size={16} style={{ transition: 'transform 0.2s', transform: mgrExpandedRows.has(item.id) ? 'rotate(90deg)' : 'none' }} />
+                    </div>
+
+                    <AnimatePresence>
+                      {mgrExpandedRows.has(item.id) && (
+                        <motion.div
+                          initial={{ height: 0 }}
+                          animate={{ height: 'auto' }}
+                          exit={{ height: 0 }}
+                          style={{ overflow: 'hidden', background: 'rgba(0,0,0,0.2)' }}
+                        >
+                          <div style={{ padding: '20px', borderTop: '1px solid var(--bg-border)', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                             {mgrActiveTab === 'AI Flags' ? (
-                               <div style={{ background: 'var(--bg-deep)', borderRadius: '12px', border: '1px solid var(--accent-sentry)', overflow: 'hidden', display: 'flex' }}>
-                                  <div style={{ flex: 1, padding: '16px', borderRight: '1px solid var(--bg-border)' }}>
-                                    <div style={{ fontSize: '10px', color: 'var(--accent-coral)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '8px' }}>Risk Assessment</div>
-                                    <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--accent-coral)' }}>{item.intelligence?.breachProbability}%</div>
-                                    <div style={{ fontSize: '12px', color: 'var(--text-gray)', marginTop: '4px' }}>{item.intelligence?.riskAssessment}</div>
-                                  </div>
-                                  <div style={{ flex: 2, padding: '16px', borderRight: '1px solid var(--bg-border)' }}>
-                                    <div style={{ fontSize: '10px', color: 'var(--accent-lime)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '8px' }}>Vantage Synthesis</div>
-                                    <div style={{ fontSize: '12px', color: 'var(--text-white)', lineHeight: '1.5' }}>{item.intelligence?.caseSynthesis}</div>
-                                  </div>
-                                  <div style={{ flex: 1, padding: '16px', background: 'rgba(194, 239, 78, 0.03)' }}>
-                                    <div style={{ fontSize: '10px', color: 'var(--accent-coral)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '8px' }}>Suggested Action</div>
-                                    <div style={{ fontSize: '12px', color: 'var(--accent-lime)', fontWeight: 'bold' }}>{item.intelligence?.suggestedAction}</div>
-                                  </div>
-                               </div>
+                              <div style={{ background: 'var(--bg-deep)', borderRadius: '12px', border: '1px solid var(--accent-sentry)', overflow: 'hidden', display: 'flex' }}>
+                                <div style={{ flex: 1, padding: '16px', borderRight: '1px solid var(--bg-border)' }}>
+                                  <div style={{ fontSize: '10px', color: 'var(--accent-coral)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '8px' }}>Risk Assessment</div>
+                                  <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--accent-coral)' }}>{item.intelligence?.breachProbability}%</div>
+                                  <div style={{ fontSize: '12px', color: 'var(--text-gray)', marginTop: '4px' }}>{item.intelligence?.riskAssessment}</div>
+                                </div>
+                                <div style={{ flex: 2, padding: '16px', borderRight: '1px solid var(--bg-border)' }}>
+                                  <div style={{ fontSize: '10px', color: 'var(--accent-lime)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '8px' }}>Vantage Synthesis</div>
+                                  <div style={{ fontSize: '12px', color: 'var(--text-white)', lineHeight: '1.5' }}>{item.intelligence?.caseSynthesis}</div>
+                                </div>
+                                <div style={{ flex: 1, padding: '16px', background: 'rgba(194, 239, 78, 0.03)' }}>
+                                  <div style={{ fontSize: '10px', color: 'var(--accent-coral)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '8px' }}>Suggested Action</div>
+                                  <div style={{ fontSize: '12px', color: 'var(--accent-lime)', fontWeight: 'bold' }}>{item.intelligence?.suggestedAction}</div>
+                                </div>
+                              </div>
                             ) : (
-                               <>
+                              <>
                                 <div style={{ background: 'rgba(106, 95, 193, 0.05)', border: '1px solid rgba(106, 95, 193, 0.3)', padding: '16px', borderRadius: '8px' }}>
                                   <div style={{ fontSize: '11px', color: 'var(--accent-sentry)', fontWeight: 'bold', marginBottom: '6px' }}>ASSOCIATE RECOMMENDATION</div>
                                   <div style={{ fontSize: '13px', color: 'var(--text-white)', fontStyle: 'italic' }}>"{item.associateMessage}"</div>
                                 </div>
                                 <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end' }}>
-                                   <button 
-                                      onClick={() => handleCaseSelection(item.id)}
-                                      style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--bg-border)', color: 'white', padding: '8px 16px', borderRadius: '6px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}
-                                   >
-                                      View Details
-                                   </button>
-                                   <button style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid var(--accent-coral)', color: 'var(--accent-coral)', padding: '8px 16px', borderRadius: '6px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>Escalate Further</button>
-                                   <button style={{ background: 'var(--accent-lime)', color: 'black', border: 'none', padding: '8px 24px', borderRadius: '6px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>{mgrActiveTab === 'Approvals' ? 'Approve Action' : 'Resolve'}</button>
+                                  <button
+                                    onClick={() => handleCaseSelection(item.id)}
+                                    style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--bg-border)', color: 'white', padding: '8px 16px', borderRadius: '6px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}
+                                  >
+                                    View Details
+                                  </button>
+                                  <button style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid var(--accent-coral)', color: 'var(--accent-coral)', padding: '8px 16px', borderRadius: '6px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>Escalate Further</button>
+                                  <button style={{ background: 'var(--accent-lime)', color: 'black', border: 'none', padding: '8px 24px', borderRadius: '6px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>{mgrActiveTab === 'Approvals' ? 'Approve Action' : 'Resolve'}</button>
                                 </div>
-                               </>
+                              </>
                             )}
-                         </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+        );
+  };
+
+        function renderTeamWorkloadPanel() {
+    return (
+        <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', display: 'flex', flexDirection: 'column' }}>
+          <div style={{ padding: '20px', borderBottom: '1px solid var(--bg-border)', fontSize: '14px', fontWeight: 'bold', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            Team Workload
+            <Users size={16} color="var(--text-gray)" />
+          </div>
+          <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            {teamWorkload.map(member => (
+              <div key={member.name} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                  <div style={{ fontSize: '13px', fontWeight: 'bold', color: 'var(--text-white)' }}>{member.name}</div>
+                  <div style={{ fontSize: '11px', color: member.color }}>{member.status}</div>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{ flex: 1, height: '6px', background: 'rgba(255,255,255,0.05)', borderRadius: '3px', position: 'relative', overflow: 'hidden' }}>
+                    <div style={{ position: 'absolute', top: 0, left: 0, height: '100%', width: `${(member.total / 30) * 100}%`, background: 'var(--accent-sentry)' }}></div>
+                  </div>
+                  <div style={{ fontSize: '12px', color: 'var(--text-white)', width: '40px' }}>{member.total} <span style={{ fontSize: '10px', color: 'var(--text-gray)' }}>cs</span></div>
+                </div>
+                <div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>{member.high} High-priority assignments</div>
+              </div>
+            ))}
+            <button style={{ marginTop: '12px', width: '100%', padding: '12px', background: 'rgba(194, 239, 78, 0.1)', border: '1px solid var(--accent-lime)', color: 'var(--accent-lime)', borderRadius: '8px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>
+              Auto-Rebalance Queue
+            </button>
+          </div>
+        </div>
+        );
+  }
+
+        function renderUSDeliveryMap() {
+    return (
+        <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px', position: 'relative' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
+            <div>
+              <div style={{ fontSize: '14px', fontWeight: 'bold', color: 'var(--text-white)', marginBottom: '4px' }}>US Delivery Anomaly Density</div>
+              <div style={{ fontSize: '12px', color: 'var(--text-gray)' }}>Ratio of at-risk shipments to total LOC-XXXX orders by region.</div>
+            </div>
+            <div style={{ display: 'flex', gap: '12px' }}>
+              {['High Density', 'Moderate', 'Nominal'].map((label, idx) => (
+                <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px' }}>
+                  <div style={{ width: '8px', height: '8px', borderRadius: '2px', background: idx === 0 ? 'var(--accent-coral)' : (idx === 1 ? '#f59e0b' : 'var(--accent-lime)') }}></div>
+                  <span style={{ color: 'var(--text-gray)' }}>{label}</span>
                 </div>
               ))}
             </div>
-          )}
+          </div>
+
+          <div style={{ height: '400px', width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <svg viewBox="0 0 650 400" style={{ height: '100%', width: 'auto' }}>
+              {Object.keys(US_STATES_MAP).map(key => {
+                const state = US_STATES_MAP[key];
+                let fill = 'var(--accent-lime)';
+                if (state.density > 40) fill = '#f59e0b';
+                if (state.density > 70) fill = 'var(--accent-coral)';
+
+                const isSelected = mgrGeoFilter === key;
+
+                return (
+                  <path
+                    key={key}
+                    d={state.path}
+                    fill={fill}
+                    fillOpacity={isSelected ? 1 : 0.6}
+                    stroke="var(--bg-deep)"
+                    strokeWidth="1"
+                    style={{ cursor: 'pointer', transition: 'all 0.2s' }}
+                    onClick={() => setMgrGeoFilter(isSelected ? null : key)}
+                    onMouseEnter={(e) => {
+                      (e.target as any).style.fillOpacity = '1';
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isSelected) (e.target as any).style.fillOpacity = '0.6';
+                    }}
+                  >
+                    <title>{state.name}: {state.density} anomalies</title>
+                  </path>
+                );
+              })}
+            </svg>
+          </div>
         </div>
-      </div>
-    );
-  };
-
-  function renderTeamWorkloadPanel() {
-    return (
-    <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', display: 'flex', flexDirection: 'column' }}>
-       <div style={{ padding: '20px', borderBottom: '1px solid var(--bg-border)', fontSize: '14px', fontWeight: 'bold', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          Team Workload
-          <Users size={16} color="var(--text-gray)" />
-       </div>
-       <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {teamWorkload.map(member => (
-            <div key={member.name} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-                  <div style={{ fontSize: '13px', fontWeight: 'bold', color: 'var(--text-white)' }}>{member.name}</div>
-                  <div style={{ fontSize: '11px', color: member.color }}>{member.status}</div>
-               </div>
-               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                  <div style={{ flex: 1, height: '6px', background: 'rgba(255,255,255,0.05)', borderRadius: '3px', position: 'relative', overflow: 'hidden' }}>
-                     <div style={{ position: 'absolute', top: 0, left: 0, height: '100%', width: `${(member.total / 30) * 100}%`, background: 'var(--accent-sentry)' }}></div>
-                  </div>
-                  <div style={{ fontSize: '12px', color: 'var(--text-white)', width: '40px' }}>{member.total} <span style={{fontSize: '10px', color: 'var(--text-gray)'}}>cs</span></div>
-               </div>
-               <div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>{member.high} High-priority assignments</div>
-            </div>
-          ))}
-          <button style={{ marginTop: '12px', width: '100%', padding: '12px', background: 'rgba(194, 239, 78, 0.1)', border: '1px solid var(--accent-lime)', color: 'var(--accent-lime)', borderRadius: '8px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>
-            Auto-Rebalance Queue
-          </button>
-       </div>
-    </div>
-    );
+        );
   }
 
-  function renderUSDeliveryMap() {
+        function renderPipelineHealthChart() {
     return (
-    <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px', position: 'relative' }}>
-       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
-          <div>
-             <div style={{ fontSize: '14px', fontWeight: 'bold', color: 'var(--text-white)', marginBottom: '4px' }}>US Delivery Anomaly Density</div>
-             <div style={{ fontSize: '12px', color: 'var(--text-gray)' }}>Ratio of at-risk shipments to total LOC-XXXX orders by region.</div>
-          </div>
-          <div style={{ display: 'flex', gap: '12px' }}>
-             {['High Density', 'Moderate', 'Nominal'].map((label, idx) => (
-                <div key={label} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px' }}>
-                   <div style={{ width: '8px', height: '8px', borderRadius: '2px', background: idx === 0 ? 'var(--accent-coral)' : (idx === 1 ? '#f59e0b' : 'var(--accent-lime)') }}></div>
-                   <span style={{ color: 'var(--text-gray)' }}>{label}</span>
-                </div>
-             ))}
-          </div>
-       </div>
-
-       <div style={{ height: '400px', width: '100%', display: 'flex', justifyContent: 'center' }}>
-          <svg viewBox="0 0 650 400" style={{ height: '100%', width: 'auto' }}>
-            {Object.keys(US_STATES_MAP).map(key => {
-              const state = US_STATES_MAP[key];
-              let fill = 'var(--accent-lime)';
-              if (state.density > 40) fill = '#f59e0b';
-              if (state.density > 70) fill = 'var(--accent-coral)';
-              
-              const isSelected = mgrGeoFilter === key;
-
-              return (
-                <path 
-                  key={key}
-                  d={state.path}
-                  fill={fill}
-                  fillOpacity={isSelected ? 1 : 0.6}
-                  stroke="var(--bg-deep)"
-                  strokeWidth="1"
-                  style={{ cursor: 'pointer', transition: 'all 0.2s' }}
-                  onClick={() => setMgrGeoFilter(isSelected ? null : key)}
-                  onMouseEnter={(e) => {
-                    (e.target as any).style.fillOpacity = '1';
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isSelected) (e.target as any).style.fillOpacity = '0.6';
-                  }}
-                >
-                  <title>{state.name}: {state.density} anomalies</title>
-                </path>
-              );
-            })}
-          </svg>
-       </div>
-    </div>
-    );
-  }
-
-  function renderPipelineHealthChart() {
-    return (
-    <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
-       <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '4px' }}>Orders Placed & Pipeline Health</div>
-       <div style={{ fontSize: '12px', color: 'var(--text-gray)', marginBottom: '24px' }}>Daily volume vs. stage distribution.</div>
-       <div style={{ height: '240px', width: '100%', position: 'relative' }}>
-          <svg viewBox="0 0 700 240" style={{ width: '100%', height: '100%' }}>
-             {/* Total Orders Bars */}
-             {opsPipelineData.map((d, i) => (
+        <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
+          <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '4px' }}>Orders Placed & Pipeline Health</div>
+          <div style={{ fontSize: '12px', color: 'var(--text-gray)', marginBottom: '24px' }}>Daily volume vs. stage distribution.</div>
+          <div style={{ height: '240px', width: '100%', position: 'relative' }}>
+            <svg viewBox="0 0 700 240" style={{ width: '100%', height: '100%' }}>
+              {/* Total Orders Bars */}
+              {opsPipelineData.map((d, i) => (
                 <rect key={i} x={i * 100 + 20} y={240 - (d.orders / 10)} width="40" height={d.orders / 10} fill="rgba(255,255,255,0.05)" />
-             ))}
-             {/* Pipeline Lines */}
-             <path d={`M40,${240 - (opsPipelineData[0].transit / 10)} ${opsPipelineData.map((d, i) => `L${i * 100 + 40},${240 - (d.transit / 10)}`).join(' ')}`} fill="none" stroke="var(--accent-lime)" strokeWidth="2" />
-             <path d={`M40,${240 - (opsPipelineData[0].exception / 5)} ${opsPipelineData.map((d, i) => `L${i * 100 + 40},${240 - (d.exception / 5)}`).join(' ')}`} fill="none" stroke="var(--accent-coral)" strokeWidth="2" strokeDasharray="4,4" />
-          </svg>
-       </div>
-       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginTop: '24px', borderTop: '1px solid var(--bg-border)', paddingTop: '16px' }}>
-          <div><div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>Total Orders</div><div style={{ fontSize: '18px', fontWeight: 'bold' }}>9,450</div></div>
-          <div><div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>Delivered</div><div style={{ fontSize: '18px', fontWeight: 'bold' }}>8,120</div></div>
-          <div><div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>In Transit</div><div style={{ fontSize: '18px', fontWeight: 'bold' }}>850</div></div>
-          <div><div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>Exception</div><div style={{ fontSize: '18px', fontWeight: 'bold', color: 'var(--accent-coral)' }}>480</div></div>
-       </div>
-    </div>
-    );
+              ))}
+              {/* Pipeline Lines */}
+              <path d={`M40,${240 - (opsPipelineData[0].transit / 10)} ${opsPipelineData.map((d, i) => `L${i * 100 + 40},${240 - (d.transit / 10)}`).join(' ')}`} fill="none" stroke="var(--accent-lime)" strokeWidth="2" />
+              <path d={`M40,${240 - (opsPipelineData[0].exception / 5)} ${opsPipelineData.map((d, i) => `L${i * 100 + 40},${240 - (d.exception / 5)}`).join(' ')}`} fill="none" stroke="var(--accent-coral)" strokeWidth="2" strokeDasharray="4,4" />
+            </svg>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginTop: '24px', borderTop: '1px solid var(--bg-border)', paddingTop: '16px' }}>
+            <div><div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>Total Orders</div><div style={{ fontSize: '18px', fontWeight: 'bold' }}>9,450</div></div>
+            <div><div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>Delivered</div><div style={{ fontSize: '18px', fontWeight: 'bold' }}>8,120</div></div>
+            <div><div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>In Transit</div><div style={{ fontSize: '18px', fontWeight: 'bold' }}>850</div></div>
+            <div><div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>Exception</div><div style={{ fontSize: '18px', fontWeight: 'bold', color: 'var(--accent-coral)' }}>480</div></div>
+          </div>
+        </div>
+        );
   }
 
-  function renderBreachRiskPanel() {
+        function renderBreachRiskPanel() {
     return (
-    <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
-       <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '24px' }}>Breach Risk — Detailed Breakdown</div>
-       
-       <div style={{ marginBottom: '32px' }}>
-          <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '12px' }}>Time-to-Breach Distribution</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-             {breachDistributionData.map(d => (
-                <div key={d.range} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                   <div style={{ width: '60px', fontSize: '11px', color: 'var(--text-gray)' }}>{d.range}</div>
-                   <div style={{ flex: 1, height: '8px', background: 'rgba(255,255,255,0.05)', borderRadius: '4px', overflow: 'hidden' }}>
-                      <div style={{ height: '100%', width: `${(d.count / 250) * 100}%`, background: d.color }}></div>
-                   </div>
-                   <div style={{ width: '30px', fontSize: '11px', fontWeight: 'bold' }}>{d.count}</div>
-                </div>
-             ))}
-          </div>
-       </div>
+        <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
+          <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '24px' }}>Breach Risk — Detailed Breakdown</div>
 
-       <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '24px' }}>
-          <div>
-             <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '12px' }}>Breach Rate Trend (%)</div>
-             <div style={{ height: '100px', width: '100%' }}>
-                <svg viewBox="0 0 400 100" style={{ width: '100%', height: '100%' }}>
-                   <path d={`M0,${100 - (dailyBreachRateTrend[0].rate * 40)} ${dailyBreachRateTrend.map((d, i) => `L${i * 66},${100 - (d.rate * 40)}`).join(' ')}`} fill="none" stroke="var(--accent-coral)" strokeWidth="2" />
-                </svg>
-             </div>
+          <div style={{ marginBottom: '32px' }}>
+            <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '12px' }}>Time-to-Breach Distribution</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              {breachDistributionData.map(d => (
+                <div key={d.range} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{ width: '60px', fontSize: '11px', color: 'var(--text-gray)' }}>{d.range}</div>
+                  <div style={{ flex: 1, height: '8px', background: 'rgba(255,255,255,0.05)', borderRadius: '4px', overflow: 'hidden' }}>
+                    <div style={{ height: '100%', width: `${(d.count / 250) * 100}%`, background: d.color }}></div>
+                  </div>
+                  <div style={{ width: '30px', fontSize: '11px', fontWeight: 'bold' }}>{d.count}</div>
+                </div>
+              ))}
+            </div>
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-             <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase' }}>Source Comparison</div>
-             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '24px' }}>
+            <div>
+              <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '12px' }}>Breach Rate Trend (%)</div>
+              <div style={{ height: '100px', width: '100%' }}>
+                <svg viewBox="0 0 400 100" style={{ width: '100%', height: '100%' }}>
+                  <path d={`M0,${100 - (dailyBreachRateTrend[0].rate * 40)} ${dailyBreachRateTrend.map((d, i) => `L${i * 66},${100 - (d.rate * 40)}`).join(' ')}`} fill="none" stroke="var(--accent-coral)" strokeWidth="2" />
+                </svg>
+              </div>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase' }}>Source Comparison</div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontSize: '12px' }}>Customer</span>
                 <span style={{ fontWeight: 'bold' }}>4.2%</span>
-             </div>
-             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontSize: '12px' }}>Vantage</span>
                 <span style={{ fontWeight: 'bold', color: 'var(--accent-lime)' }}>1.8%</span>
-             </div>
-             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontSize: '12px' }}>INFRA</span>
                 <span style={{ fontWeight: 'bold' }}>0.5%</span>
-             </div>
+              </div>
+            </div>
           </div>
-       </div>
-    </div>
-    );
+        </div>
+        );
   }
 
-  function renderCarrierHealthPanel() {
+        function renderCarrierHealthPanel() {
     return (
-    <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', overflow: 'hidden' }}>
-       <div style={{ padding: '20px', borderBottom: '1px solid var(--bg-border)', fontSize: '16px', fontWeight: 'bold' }}>Carrier Health — Quantitative View</div>
-       <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-          <thead>
-             <tr style={{ textAlign: 'left', background: 'rgba(255,255,255,0.02)', fontSize: '11px', color: 'var(--text-gray)', textTransform: 'uppercase' }}>
+        <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', overflow: 'hidden' }}>
+          <div style={{ padding: '20px', borderBottom: '1px solid var(--bg-border)', fontSize: '16px', fontWeight: 'bold' }}>Carrier Health — Quantitative View</div>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr style={{ textAlign: 'left', background: 'rgba(255,255,255,0.02)', fontSize: '11px', color: 'var(--text-gray)', textTransform: 'uppercase' }}>
                 <th style={{ padding: '12px 20px' }}>Carrier</th>
                 <th style={{ padding: '12px 20px' }}>Volume</th>
                 <th style={{ padding: '12px 20px' }}>On-Time</th>
@@ -1666,674 +1690,685 @@ export default function Home() {
                 <th style={{ padding: '12px 20px' }}>Exception</th>
                 <th style={{ padding: '12px 20px' }}>Escalation</th>
                 <th style={{ padding: '12px 20px' }}>Refund</th>
-             </tr>
-          </thead>
-          <tbody>
-             {carrierMatrixData.map(c => (
-                <tr key={c.name} 
-                    onClick={() => setVpCarrierFilter(c.name)}
-                    style={{ borderBottom: '1px solid var(--bg-border)', cursor: 'pointer', background: vpCarrierFilter === c.name ? 'rgba(194, 239, 78, 0.05)' : 'transparent' }}>
-                   <td style={{ padding: '14px 20px', fontWeight: 'bold' }}>{c.name}</td>
-                   <td style={{ padding: '14px 20px' }}>{c.total.toLocaleString()}</td>
-                   <td style={{ padding: '14px 20px' }}>{c.onTime}%</td>
-                   <td style={{ padding: '14px 20px' }}>{c.delay}h</td>
-                   <td style={{ padding: '14px 20px', color: c.exception > 4 ? 'var(--accent-coral)' : 'inherit' }}>{c.exception}%</td>
-                   <td style={{ padding: '14px 20px' }}>{c.escalation}%</td>
-                   <td style={{ padding: '14px 20px' }}>{c.refund}%</td>
+              </tr>
+            </thead>
+            <tbody>
+              {carrierMatrixData.map(c => (
+                <tr key={c.name}
+                  onClick={() => setVpCarrierFilter(c.name)}
+                  style={{ borderBottom: '1px solid var(--bg-border)', cursor: 'pointer', background: vpCarrierFilter === c.name ? 'rgba(194, 239, 78, 0.05)' : 'transparent' }}>
+                  <td style={{ padding: '14px 20px', fontWeight: 'bold' }}>{c.name}</td>
+                  <td style={{ padding: '14px 20px' }}>{c.total.toLocaleString()}</td>
+                  <td style={{ padding: '14px 20px' }}>{c.onTime}%</td>
+                  <td style={{ padding: '14px 20px' }}>{c.delay}h</td>
+                  <td style={{ padding: '14px 20px', color: c.exception > 4 ? 'var(--accent-coral)' : 'inherit' }}>{c.exception}%</td>
+                  <td style={{ padding: '14px 20px' }}>{c.escalation}%</td>
+                  <td style={{ padding: '14px 20px' }}>{c.refund}%</td>
                 </tr>
-             ))}
-          </tbody>
-       </table>
-       
-       <div style={{ padding: '24px', display: 'grid', gridTemplateColumns: '1fr 300px', gap: '32px', borderTop: '1px solid var(--bg-border)' }}>
-          <div>
-             <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '16px' }}>Carrier Exception Trend (Weekly)</div>
-             <div style={{ height: '120px', width: '100%' }}>
+              ))}
+            </tbody>
+          </table>
+
+          <div style={{ padding: '24px', display: 'grid', gridTemplateColumns: '1fr 300px', gap: '32px', borderTop: '1px solid var(--bg-border)' }}>
+            <div>
+              <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '16px' }}>Carrier Exception Trend (Weekly)</div>
+              <div style={{ height: '120px', width: '100%' }}>
                 <svg viewBox="0 0 500 120" style={{ width: '100%', height: '100%' }}>
-                   <path d="M0,80 L100,75 L200,85 L300,60 L400,65 L500,50" fill="none" stroke="#3b82f6" strokeWidth="2" />
-                   <path d="M0,90 L100,95 L200,88 L300,92 L400,85 L500,88" fill="none" stroke="var(--accent-lime)" strokeWidth="2" />
+                  <path d="M0,80 L100,75 L200,85 L300,60 L400,65 L500,50" fill="none" stroke="#3b82f6" strokeWidth="2" />
+                  <path d="M0,90 L100,95 L200,88 L300,92 L400,85 L500,88" fill="none" stroke="var(--accent-lime)" strokeWidth="2" />
                 </svg>
-             </div>
-          </div>
-          <div>
-             <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '16px' }}>{vpCarrierFilter} Regional Exceptions</div>
-             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px' }}>
+              </div>
+            </div>
+            <div>
+              <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '16px' }}>{vpCarrierFilter} Regional Exceptions</div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px' }}>
                 {Object.entries(regionalCarrierHealth[vpCarrierFilter]).map(([region, val]) => (
-                   <div key={region} style={{ background: 'rgba(255,255,255,0.03)', padding: '12px', borderRadius: '6px', textAlign: 'center' }}>
-                      <div style={{ fontSize: '9px', color: 'var(--text-gray)', marginBottom: '4px' }}>{region}</div>
-                      <div style={{ fontSize: '14px', fontWeight: 'bold' }}>{val as number}</div>
-                   </div>
+                  <div key={region} style={{ background: 'rgba(255,255,255,0.03)', padding: '12px', borderRadius: '6px', textAlign: 'center' }}>
+                    <div style={{ fontSize: '9px', color: 'var(--text-gray)', marginBottom: '4px' }}>{region}</div>
+                    <div style={{ fontSize: '14px', fontWeight: 'bold' }}>{val as number}</div>
+                  </div>
                 ))}
-             </div>
+              </div>
+            </div>
           </div>
-       </div>
-    </div>
-    );
+        </div>
+        );
   }
 
-  function renderOrderSourceHealth() {
+        function renderOrderSourceHealth() {
     return (
-    <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
-       <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '24px' }}>Order Source Health</div>
-       <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: '48px', marginBottom: '32px' }}>
-          <div style={{ position: 'relative', width: '200px', height: '200px' }}>
-             <svg viewBox="0 0 200 200">
+        <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
+          <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '24px' }}>Order Source Health</div>
+          <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: '48px', marginBottom: '32px' }}>
+            <div style={{ position: 'relative', width: '200px', height: '200px' }}>
+              <svg viewBox="0 0 200 200">
                 <circle cx="100" cy="100" r="80" fill="none" stroke="var(--accent-lime)" strokeWidth="20" strokeDasharray="251 251" />
                 <circle cx="100" cy="100" r="80" fill="none" stroke="#3b82f6" strokeWidth="20" strokeDasharray="125 502" strokeDashoffset="-251" />
-             </svg>
-             <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center' }}>
+              </svg>
+              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center' }}>
                 <div style={{ fontSize: '24px', fontWeight: 'bold' }}>{orderSourceHealthData.volume[0].value}%</div>
                 <div style={{ fontSize: '10px', color: 'var(--text-gray)' }}>WEB DIRECT</div>
-             </div>
-          </div>
-          <div>
-             <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '16px' }}>Exception Rate by Source</div>
-             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              </div>
+            </div>
+            <div>
+              <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '16px' }}>Exception Rate by Source</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 {orderSourceHealthData.exceptionRates.map(s => (
-                   <div key={s.name}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', marginBottom: '4px' }}>
-                         <span>{s.name}</span>
-                         <span style={{ fontWeight: 'bold' }}>{s.rate}%</span>
-                      </div>
-                      <div style={{ height: '4px', background: 'rgba(255,255,255,0.05)', borderRadius: '2px' }}>
-                         <div style={{ height: '100%', width: `${s.rate * 10}%`, background: s.rate > 5 ? 'var(--accent-coral)' : 'var(--accent-lime)', borderRadius: '2px' }}></div>
-                      </div>
-                   </div>
+                  <div key={s.name}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', marginBottom: '4px' }}>
+                      <span>{s.name}</span>
+                      <span style={{ fontWeight: 'bold' }}>{s.rate}%</span>
+                    </div>
+                    <div style={{ height: '4px', background: 'rgba(255,255,255,0.05)', borderRadius: '2px' }}>
+                      <div style={{ height: '100%', width: `${s.rate * 10}%`, background: s.rate > 5 ? 'var(--accent-coral)' : 'var(--accent-lime)', borderRadius: '2px' }}></div>
+                    </div>
+                  </div>
                 ))}
-             </div>
+              </div>
+            </div>
           </div>
-       </div>
-       <table style={{ width: '100%', fontSize: '12px' }}>
-          <thead>
-             <tr style={{ color: 'var(--text-gray)', textAlign: 'left' }}>
+          <table style={{ width: '100%', fontSize: '12px' }}>
+            <thead>
+              <tr style={{ color: 'var(--text-gray)', textAlign: 'left' }}>
                 <th style={{ padding: '8px 0' }}>Source</th>
                 <th>Volume</th>
                 <th>Δ Vol</th>
                 <th>Ex Rate</th>
                 <th>Δ Rate</th>
-             </tr>
-          </thead>
-          <tbody>
-             {orderSourceHealthData.trend.map(t => (
+              </tr>
+            </thead>
+            <tbody>
+              {orderSourceHealthData.trend.map(t => (
                 <tr key={t.source} style={{ borderTop: '1px solid var(--bg-border)' }}>
-                   <td style={{ padding: '12px 0', fontWeight: 'bold' }}>{t.source}</td>
-                   <td>{t.vol.toLocaleString()}</td>
-                   <td style={{ color: t.volDelta > 0 ? 'var(--accent-lime)' : 'var(--accent-coral)' }}>{t.volDelta > 0 ? '▲' : '▼'} {Math.abs(t.volDelta)}%</td>
-                   <td>{t.exc}%</td>
-                   <td style={{ color: t.excDelta < 0 ? 'var(--accent-lime)' : 'var(--accent-coral)' }}>{t.excDelta < 0 ? '▼' : '▲'} {Math.abs(t.excDelta)}%</td>
+                  <td style={{ padding: '12px 0', fontWeight: 'bold' }}>{t.source}</td>
+                  <td>{t.vol.toLocaleString()}</td>
+                  <td style={{ color: t.volDelta > 0 ? 'var(--accent-lime)' : 'var(--accent-coral)' }}>{t.volDelta > 0 ? '▲' : '▼'} {Math.abs(t.volDelta)}%</td>
+                  <td>{t.exc}%</td>
+                  <td style={{ color: t.excDelta < 0 ? 'var(--accent-lime)' : 'var(--accent-coral)' }}>{t.excDelta < 0 ? '▼' : '▲'} {Math.abs(t.excDelta)}%</td>
                 </tr>
-             ))}
-          </tbody>
-       </table>
-    </div>
-    );
-  }
-
-  function renderQueueDepthChart() {
-    return (
-    <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
-       <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '4px' }}>Queue Depth Over Time</div>
-       <div style={{ fontSize: '12px', color: 'var(--text-gray)', marginBottom: '24px' }}>Daily evolution of New, In-Progress, and Escalated cases.</div>
-       <div style={{ height: '240px', width: '100%' }}>
-          <svg viewBox="0 0 700 240" style={{ width: '100%', height: '100%' }}>
-             <path d="M0,200 L100,180 L200,190 L300,150 L400,160 L500,140 L600,150 L700,240 L0,240 Z" fill="rgba(59, 130, 246, 0.2)" />
-             <path d="M0,180 L100,160 L200,170 L300,130 L400,140 L500,120 L600,130" fill="none" stroke="#3b82f6" strokeWidth="2" />
-             <path d="M0,150 L100,140 L200,145 L300,110 L400,115 L500,105 L600,110" fill="none" stroke="var(--accent-coral)" strokeWidth="2" />
-          </svg>
-       </div>
-       <div style={{ display: 'flex', gap: '24px', marginTop: '16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px' }}><div style={{ width: '10px', height: '10px', background: 'rgba(59, 130, 246, 0.4)' }}></div> IN-PROGRESS</div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px' }}><div style={{ width: '10px', height: '10px', background: 'var(--accent-coral)' }}></div> ESCALATED</div>
-       </div>
-    </div>
-    );
-  }
-
-  function renderAIImpactHeader() {
-    return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', marginBottom: '12px' }}>
-      <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '8px' }}>Cost Avoidance</div>
-        <div style={{ fontSize: '32px', fontWeight: 'bold', color: 'var(--accent-lime)', marginBottom: '4px' }}>$124.5k</div>
-        <div style={{ fontSize: '13px', color: 'var(--text-white)', fontWeight: 'bold' }}>2,490 cases caught</div>
-        <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginTop: '4px' }}>+14% vs Prior Period</div>
-        <div style={{ position: 'absolute', bottom: '-10px', right: '-10px', opacity: 0.1 }}><ShieldCheck size={80} color="var(--accent-lime)"/></div>
-      </div>
-      <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '8px' }}>Churn Prevention</div>
-        <div style={{ fontSize: '32px', fontWeight: 'bold', color: 'var(--text-white)', marginBottom: '4px' }}>$51.5k</div>
-        <div style={{ fontSize: '13px', color: 'var(--accent-lime)', fontWeight: 'bold' }}>$42k–$61k Band</div>
-        <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginTop: '4px' }}>Modelled LTV protection</div>
-        <div style={{ position: 'absolute', bottom: '-10px', right: '-10px', opacity: 0.1 }}><Users size={80} color="white"/></div>
-      </div>
-      <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '8px' }}>Spend Reduction</div>
-        <div style={{ fontSize: '32px', fontWeight: 'bold', color: 'var(--accent-coral)', marginBottom: '4px' }}>$18.2k</div>
-        <div style={{ fontSize: '13px', color: 'white', fontWeight: 'bold' }}>Saved 12% OpEx</div>
-        <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginTop: '4px' }}>-8% refunds in ops spend</div>
-        <div style={{ position: 'absolute', bottom: '-10px', right: '-10px', opacity: 0.1 }}><Package size={80} color="var(--accent-coral)"/></div>
-      </div>
-    </div>
-    );
-  }
-
-  function renderAIAccuracyChart() {
-    return (
-    <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-        <div>
-          <div style={{ fontSize: '16px', fontWeight: 'bold' }}>AI Accuracy & Confidence Trend</div>
-          <div style={{ fontSize: '12px', color: 'var(--text-gray)' }}>Correlation of AI risk alerts vs. verified shipment outcomes.</div>
+              ))}
+            </tbody>
+          </table>
         </div>
-        <div style={{ display: 'flex', gap: '16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px' }}><div style={{ width: '10px', height: '2px', background: 'var(--accent-lime)' }}></div> TPR</div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px' }}><div style={{ width: '10px', height: '2px', background: '#f59e0b' }}></div> FPR</div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px' }}><div style={{ width: '10px', height: '2px', background: 'var(--accent-coral)' }}></div> Missed</div>
-        </div>
-      </div>
-      <div style={{ height: '200px', width: '100%', position: 'relative' }}>
-         <svg viewBox="0 0 700 200" style={{ width: '100%', height: '100%' }}>
-            {[0, 25, 50, 75, 100].map(y => (
-              <line key={y} x1="0" y1={200 - (y * 2)} x2="700" y2={200 - (y * 2)} stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
-            ))}
-            <path d={`M0,${200 - (accuracyTrendData[0].tpr * 2)} ${accuracyTrendData.map((d, i) => `L${i * 115},${200 - (d.tpr * 2)}`).join(' ')}`} fill="none" stroke="var(--accent-lime)" strokeWidth="3" />
-            <path d={`M0,${200 - (accuracyTrendData[0].fpr * 2)} ${accuracyTrendData.map((d, i) => `L${i * 115},${200 - (d.fpr * 2)}`).join(' ')}`} fill="none" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4,4" />
-            <path d={`M0,${200 - (accuracyTrendData[0].missed * 2)} ${accuracyTrendData.map((d, i) => `L${i * 115},${200 - (d.missed * 2)}`).join(' ')}`} fill="none" stroke="var(--accent-coral)" strokeWidth="2" />
-         </svg>
-      </div>
-    </div>
-    );
+        );
   }
 
-  function renderRiskDistribution() {
+        function renderQueueDepthChart() {
     return (
-    <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
-       <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '4px' }}>Risk Score Distribution</div>
-       <div style={{ fontSize: '12px', color: 'var(--text-gray)', marginBottom: '24px' }}>Intelligence Action Bar aggregate across fleet.</div>
-       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <div style={{ height: '32px', width: '100%', background: 'rgba(255,255,255,0.05)', borderRadius: '6px', overflow: 'hidden', display: 'flex' }}>
-             {riskDistributionData.map(d => (
+        <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
+          <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '4px' }}>Queue Depth Over Time</div>
+          <div style={{ fontSize: '12px', color: 'var(--text-gray)', marginBottom: '24px' }}>Daily evolution of New, In-Progress, and Escalated cases.</div>
+          <div style={{ height: '240px', width: '100%' }}>
+            <svg viewBox="0 0 700 240" style={{ width: '100%', height: '100%' }}>
+              <path d="M0,200 L100,180 L200,190 L300,150 L400,160 L500,140 L600,150 L700,240 L0,240 Z" fill="rgba(59, 130, 246, 0.2)" />
+              <path d="M0,180 L100,160 L200,170 L300,130 L400,140 L500,120 L600,130" fill="none" stroke="#3b82f6" strokeWidth="2" />
+              <path d="M0,150 L100,140 L200,145 L300,110 L400,115 L500,105 L600,110" fill="none" stroke="var(--accent-coral)" strokeWidth="2" />
+            </svg>
+          </div>
+          <div style={{ display: 'flex', gap: '24px', marginTop: '16px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px' }}><div style={{ width: '10px', height: '10px', background: 'rgba(59, 130, 246, 0.4)' }}></div> IN-PROGRESS</div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px' }}><div style={{ width: '10px', height: '10px', background: 'var(--accent-coral)' }}></div> ESCALATED</div>
+          </div>
+        </div>
+        );
+  }
+
+        function renderAIImpactHeader() {
+    return (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', marginBottom: '12px' }}>
+          <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '8px' }}>Cost Avoidance</div>
+            <div style={{ fontSize: '32px', fontWeight: 'bold', color: 'var(--accent-lime)', marginBottom: '4px' }}>$124.5k</div>
+            <div style={{ fontSize: '13px', color: 'var(--text-white)', fontWeight: 'bold' }}>2,490 cases caught</div>
+            <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginTop: '4px' }}>+14% vs Prior Period</div>
+            <div style={{ position: 'absolute', bottom: '-10px', right: '-10px', opacity: 0.1 }}><ShieldCheck size={80} color="var(--accent-lime)" /></div>
+          </div>
+          <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '8px' }}>Churn Prevention</div>
+            <div style={{ fontSize: '32px', fontWeight: 'bold', color: 'var(--text-white)', marginBottom: '4px' }}>$51.5k</div>
+            <div style={{ fontSize: '13px', color: 'var(--accent-lime)', fontWeight: 'bold' }}>$42k–$61k Band</div>
+            <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginTop: '4px' }}>Modelled LTV protection</div>
+            <div style={{ position: 'absolute', bottom: '-10px', right: '-10px', opacity: 0.1 }}><Users size={80} color="white" /></div>
+          </div>
+          <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '8px' }}>Spend Reduction</div>
+            <div style={{ fontSize: '32px', fontWeight: 'bold', color: 'var(--accent-coral)', marginBottom: '4px' }}>$18.2k</div>
+            <div style={{ fontSize: '13px', color: 'white', fontWeight: 'bold' }}>Saved 12% OpEx</div>
+            <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginTop: '4px' }}>-8% refunds in ops spend</div>
+            <div style={{ position: 'absolute', bottom: '-10px', right: '-10px', opacity: 0.1 }}><Package size={80} color="var(--accent-coral)" /></div>
+          </div>
+        </div>
+        );
+  }
+
+        function renderAIAccuracyChart() {
+    return (
+        <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+            <div>
+              <div style={{ fontSize: '16px', fontWeight: 'bold' }}>AI Accuracy & Confidence Trend</div>
+              <div style={{ fontSize: '12px', color: 'var(--text-gray)' }}>Correlation of AI risk alerts vs. verified shipment outcomes.</div>
+            </div>
+            <div style={{ display: 'flex', gap: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px' }}><div style={{ width: '10px', height: '2px', background: 'var(--accent-lime)' }}></div> TPR</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px' }}><div style={{ width: '10px', height: '2px', background: '#f59e0b' }}></div> FPR</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px' }}><div style={{ width: '10px', height: '2px', background: 'var(--accent-coral)' }}></div> Missed</div>
+            </div>
+          </div>
+          <div style={{ height: '200px', width: '100%', position: 'relative' }}>
+            <svg viewBox="0 0 700 200" style={{ width: '100%', height: '100%' }}>
+              {[0, 25, 50, 75, 100].map(y => (
+                <line key={y} x1="0" y1={200 - (y * 2)} x2="700" y2={200 - (y * 2)} stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
+              ))}
+              <path d={`M0,${200 - (accuracyTrendData[0].tpr * 2)} ${accuracyTrendData.map((d, i) => `L${i * 115},${200 - (d.tpr * 2)}`).join(' ')}`} fill="none" stroke="var(--accent-lime)" strokeWidth="3" />
+              <path d={`M0,${200 - (accuracyTrendData[0].fpr * 2)} ${accuracyTrendData.map((d, i) => `L${i * 115},${200 - (d.fpr * 2)}`).join(' ')}`} fill="none" stroke="#f59e0b" strokeWidth="2" strokeDasharray="4,4" />
+              <path d={`M0,${200 - (accuracyTrendData[0].missed * 2)} ${accuracyTrendData.map((d, i) => `L${i * 115},${200 - (d.missed * 2)}`).join(' ')}`} fill="none" stroke="var(--accent-coral)" strokeWidth="2" />
+            </svg>
+          </div>
+        </div>
+        );
+  }
+
+        function renderRiskDistribution() {
+    return (
+        <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px' }}>
+          <div style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '4px' }}>Risk Score Distribution</div>
+          <div style={{ fontSize: '12px', color: 'var(--text-gray)', marginBottom: '24px' }}>Intelligence Action Bar aggregate across fleet.</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div style={{ height: '32px', width: '100%', background: 'rgba(255,255,255,0.05)', borderRadius: '6px', overflow: 'hidden', display: 'flex' }}>
+              {riskDistributionData.map(d => (
                 <div key={d.label} style={{ height: '100%', width: `${d.value}%`, background: d.color }}></div>
-             ))}
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
-             {riskDistributionData.map(d => (
+              ))}
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+              {riskDistributionData.map(d => (
                 <div key={d.label}>
-                   <div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>{d.category}</div>
-                   <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{d.value}%</div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>{d.category}</div>
+                  <div style={{ fontSize: '18px', fontWeight: 'bold' }}>{d.value}%</div>
                 </div>
-             ))}
+              ))}
+            </div>
           </div>
-       </div>
-    </div>
-    );
+        </div>
+        );
   }
 
-  function renderAssociateAIUtil() {
+        function renderAssociateAIUtil() {
     return (
-    <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', overflow: 'hidden' }}>
-       <div style={{ padding: '20px', fontSize: '14px', fontWeight: 'bold', borderBottom: '1px solid var(--bg-border)' }}>Associate AI Utilisation & Outcomes</div>
-       <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-          <thead>
-             <tr style={{ textAlign: 'left', background: 'rgba(255,255,255,0.02)', fontSize: '11px', color: 'var(--text-gray)' }}>
+        <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', overflow: 'hidden' }}>
+          <div style={{ padding: '20px', fontSize: '14px', fontWeight: 'bold', borderBottom: '1px solid var(--bg-border)' }}>Associate AI Utilisation & Outcomes</div>
+          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+            <thead>
+              <tr style={{ textAlign: 'left', background: 'rgba(255,255,255,0.02)', fontSize: '11px', color: 'var(--text-gray)' }}>
                 <th style={{ padding: '12px 20px' }}>Associate</th>
                 <th style={{ padding: '12px 20px' }}>Cases</th>
                 <th style={{ padding: '12px 20px' }}>Followed AI</th>
                 <th style={{ padding: '12px 20px' }}>Deviated</th>
                 <th style={{ padding: '12px 20px' }}>Followed Outcomes</th>
                 <th style={{ padding: '12px 20px' }}>Deviated Outcomes</th>
-             </tr>
-          </thead>
-          <tbody>
-             {associateUtilData.map(row => (
+              </tr>
+            </thead>
+            <tbody>
+              {associateUtilData.map(row => (
                 <tr key={row.name} style={{ borderBottom: '1px solid var(--bg-border)', fontSize: '13px' }}>
-                   <td style={{ padding: '16px 20px', fontWeight: 'bold' }}>{row.name}</td>
-                   <td style={{ padding: '16px 20px' }}>{row.cases}</td>
-                   <td style={{ padding: '16px 20px', color: 'var(--accent-lime)' }}>{row.followed}%</td>
-                   <td style={{ padding: '16px 20px' }}>{row.deviated}%</td>
-                   <td style={{ padding: '16px 20px' }}>
-                      <div style={{ fontSize: '11px' }}>Avg: {row.followedTime}</div>
-                      <div style={{ fontSize: '11px', color: 'var(--accent-lime)' }}>B: {row.followedBreach}</div>
-                   </td>
-                   <td style={{ padding: '16px 20px' }}>
-                      <div style={{ fontSize: '11px' }}>Avg: {row.deviatedTime}</div>
-                      <div style={{ fontSize: '11px', color: 'var(--accent-coral)' }}>B: {row.deviatedBreach}</div>
+                  <td style={{ padding: '16px 20px', fontWeight: 'bold' }}>{row.name}</td>
+                  <td style={{ padding: '16px 20px' }}>{row.cases}</td>
+                  <td style={{ padding: '16px 20px', color: 'var(--accent-lime)' }}>{row.followed}%</td>
+                  <td style={{ padding: '16px 20px' }}>{row.deviated}%</td>
+                  <td style={{ padding: '16px 20px' }}>
+                    <div style={{ fontSize: '11px' }}>Avg: {row.followedTime}</div>
+                    <div style={{ fontSize: '11px', color: 'var(--accent-lime)' }}>B: {row.followedBreach}</div>
+                  </td>
+                  <td style={{ padding: '16px 20px' }}>
+                    <div style={{ fontSize: '11px' }}>Avg: {row.deviatedTime}</div>
+                    <div style={{ fontSize: '11px', color: 'var(--accent-coral)' }}>B: {row.deviatedBreach}</div>
 
-                    </td>
-                 </tr>
+                  </td>
+                </tr>
               ))}
-           </tbody>
-        </table>
-     </div>
-    );
+            </tbody>
+          </table>
+        </div>
+        );
   }
 
-  function renderVPDashboard() {
+        function renderVPDashboard() {
     return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '64px', padding: '32px 32px 64px 32px' }}>
-       {/* Section 1: Support Operations */}
-       <div>
-          <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--text-white)', marginBottom: '32px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-             <Activity size={24} color="var(--accent-lime)"/> Section 1: Support Operations
-          </div>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-             <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '24px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '64px', padding: '32px 32px 64px 32px' }}>
+          {/* Section 1: Support Operations */}
+          <div>
+            <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--text-white)', marginBottom: '32px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <Activity size={24} color="var(--accent-lime)" /> Section 1: Support Operations
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '24px' }}>
                 {renderPipelineHealthChart()}
                 {renderBreachRiskPanel()}
-             </div>
-             
-             {renderCarrierHealthPanel()}
-             
-             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '24px' }}>
+              </div>
+
+              {renderCarrierHealthPanel()}
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '24px' }}>
                 {renderOrderSourceHealth()}
                 {renderQueueDepthChart()}
-             </div>
+              </div>
+            </div>
           </div>
-       </div>
 
-       {/* Visual Divider */}
-       <div style={{ height: '1px', background: 'var(--bg-border)', width: '100%' }}></div>
+          {/* Visual Divider */}
+          <div style={{ height: '1px', background: 'var(--bg-border)', width: '100%' }}></div>
 
-       {/* Section 2: Vantage AI */}
-       <div>
-          <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--text-white)', marginBottom: '32px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-             <Bot size={24} color="var(--accent-lime)"/> Section 2: Vantage AI
-          </div>
-          
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-             {renderAIImpactHeader()}
-             
-             <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '24px' }}>
+          {/* Section 2: Vantage AI */}
+          <div>
+            <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--text-white)', marginBottom: '32px', display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <Bot size={24} color="var(--accent-lime)" /> Section 2: Vantage AI
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
+              {renderAIImpactHeader()}
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '24px' }}>
                 {renderAIAccuracyChart()}
                 {renderRiskDistribution()}
-             </div>
+              </div>
 
-             <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '24px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '24px' }}>
                 {renderAssociateAIUtil()}
                 <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '24px', flex: 1 }}>
-                   <div style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '16px' }}>Board Reporting Tools</div>
-                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                      <button style={{ padding: '12px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--bg-border)', color: 'white', borderRadius: '6px', fontSize: '12px', textAlign: 'left', cursor: 'pointer' }}>Export Period Logistics Report (.pdf)</button>
-                      <button style={{ padding: '12px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--bg-border)', color: 'white', borderRadius: '6px', fontSize: '12px', textAlign: 'left', cursor: 'pointer' }}>Generate Retention Slide Deck (.pptx)</button>
-                      <button style={{ padding: '12px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--bg-border)', color: 'white', borderRadius: '6px', fontSize: '12px', textAlign: 'left', cursor: 'pointer' }}>Raw Event Logs (CSV)</button>
-                   </div>
+                  <div style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '16px' }}>Board Reporting Tools</div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                    <button style={{ padding: '12px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--bg-border)', color: 'white', borderRadius: '6px', fontSize: '12px', textAlign: 'left', cursor: 'pointer' }}>Export Period Logistics Report (.pdf)</button>
+                    <button style={{ padding: '12px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--bg-border)', color: 'white', borderRadius: '6px', fontSize: '12px', textAlign: 'left', cursor: 'pointer' }}>Generate Retention Slide Deck (.pptx)</button>
+                    <button style={{ padding: '12px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--bg-border)', color: 'white', borderRadius: '6px', fontSize: '12px', textAlign: 'left', cursor: 'pointer' }}>Raw Event Logs (CSV)</button>
+                  </div>
                 </div>
-             </div>
+              </div>
+            </div>
           </div>
-       </div>
-    </div>
-    );
+        </div>
+        );
   }
 
-  function renderManagerOperationsTab() {
+        function renderManagerOperationsTab() {
     const stats = mgrOpsTimelineStats[opsTimeWindow];
 
-    return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
-        {renderShiftSnapshotBand()}
-        {renderVolumeResolutionBand()}
-        {renderRiskSLAIntelligenceBand()}
-        {renderTeamCarrierHealthBand()}
-        {renderOrderPipelineBand()}
-      </div>
-    );
+        return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '12px' }}>
+            <div className="data-card"><div className="data-card-title">Alerts</div><div className="data-card-value">{stats.alerts}</div></div>
+            <div className="data-card"><div className="data-card-title">New</div><div className="data-card-value">{stats.new}</div></div>
+            <div className="data-card"><div className="data-card-title">In-progress</div><div className="data-card-value">{stats.inProg}</div></div>
+            <div className="data-card"><div className="data-card-title">Escalated</div><div className="data-card-value">{stats.esc}</div></div>
+            <div className="data-card"><div className="data-card-title">Resolved</div><div className="data-card-value">{stats.resolved}</div></div>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '24px' }}>
+            {renderPipelineHealthChart()}
+            {renderBreachRiskPanel()}
+          </div>
+          {renderCarrierHealthPanel()}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '24px' }}>
+            {renderOrderSourceHealth()}
+            {renderQueueDepthChart()}
+          </div>
+        </div>
+        );
   }
 
-  function renderManagerDashboard() {
+        function renderManagerDashboard() {
     return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', padding: '0 32px 64px 32px' }}>
-       {renderManagerMetricCards()}
-       {renderSmartAlertStrip()}
-       
-       {dashboardTab === 'Operations' ? (
-         renderManagerOperationsTab()
-       ) : (
-         <>
-           <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '24px' }}>
-              {renderManagerTabbedWorkspace()}
-              {renderTeamWorkloadPanel()}
-           </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '32px', padding: '0 32px 64px 32px' }}>
+          {renderManagerMetricCards()}
+          {renderSmartAlertStrip()}
 
-           <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 400px', gap: '24px' }}>
-              {renderUSDeliveryMap()}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                 <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '20px' }}>
+          {dashboardTab === 'Operations' ? (
+            renderManagerOperationsTab()
+          ) : (
+            <>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '24px' }}>
+                {renderManagerTabbedWorkspace()}
+                {renderTeamWorkloadPanel()}
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr) 400px', gap: '24px' }}>
+                {renderUSDeliveryMap()}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                  <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '20px' }}>
                     <div style={{ fontSize: '14px', fontWeight: 'bold', borderBottom: '1px solid var(--bg-border)', paddingBottom: '12px', marginBottom: '16px' }}>Carrier Performance</div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                       {carrierHealth.map(c => (
-                         <div key={c.carrier} style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                            <div style={{ width: '40px', fontSize: '12px', fontWeight: 'bold', color: 'var(--text-white)' }}>{c.carrier}</div>
-                            <div style={{ flex: 1 }}>
-                               <div style={{ height: '4px', background: 'rgba(255,255,255,0.05)', borderRadius: '2px', overflow: 'hidden' }}>
-                                  <div style={{ height: '100%', width: `${(c.delayed / 20) * 100}%`, background: c.color }}></div>
-                               </div>
+                      {carrierHealth.map(c => (
+                        <div key={c.carrier} style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                          <div style={{ width: '40px', fontSize: '12px', fontWeight: 'bold', color: 'var(--text-white)' }}>{c.carrier}</div>
+                          <div style={{ flex: 1 }}>
+                            <div style={{ height: '4px', background: 'rgba(255,255,255,0.05)', borderRadius: '2px', overflow: 'hidden' }}>
+                              <div style={{ height: '100%', width: `${(c.delayed / 20) * 100}%`, background: c.color }}></div>
                             </div>
-                            <div style={{ fontSize: '11px', color: c.color, width: '90px' }}>{c.status}</div>
-                         </div>
-                       ))}
+                          </div>
+                          <div style={{ fontSize: '11px', color: c.color, width: '90px' }}>{c.status}</div>
+                        </div>
+                      ))}
                     </div>
-                 </div>
-                 
-                 <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                  </div>
+
+                  <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '12px', padding: '20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
                     <div style={{ fontSize: '14px', fontWeight: 'bold', borderBottom: '1px solid var(--bg-border)', paddingBottom: '12px', marginBottom: '16px' }}>SLA Compliance (Resolution Band)</div>
                     <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
-                       <div style={{ width: '160px', height: '160px', borderRadius: '50%', border: '16px solid var(--accent-lime)', borderTopColor: 'var(--accent-coral)', borderRightColor: '#f59e0b', transform: 'rotate(-45deg)' }}></div>
-                       <div style={{ position: 'absolute', textAlign: 'center' }}>
-                          <div style={{ fontSize: '24px', fontWeight: 'bold' }}>94%</div>
-                          <div style={{ fontSize: '10px', color: 'var(--text-gray)' }}>On-time Rate</div>
-                       </div>
+                      <div style={{ width: '160px', height: '160px', borderRadius: '50%', border: '16px solid var(--accent-lime)', borderTopColor: 'var(--accent-coral)', borderRightColor: '#f59e0b', transform: 'rotate(-45deg)' }}></div>
+                      <div style={{ position: 'absolute', textAlign: 'center' }}>
+                        <div style={{ fontSize: '24px', fontWeight: 'bold' }}>94%</div>
+                        <div style={{ fontSize: '10px', color: 'var(--text-gray)' }}>On-time Rate</div>
+                      </div>
                     </div>
                     <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'space-between' }}>
-                       <div style={{ textAlign: 'center' }}><div style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--accent-lime)' }}>84</div><div style={{ fontSize: '9px', color: 'var(--text-gray)' }}>ON TIME</div></div>
-                       <div style={{ textAlign: 'center' }}><div style={{ fontSize: '12px', fontWeight: 'bold', color: '#f59e0b' }}>7</div><div style={{ fontSize: '9px', color: 'var(--text-gray)' }}>AT RISK</div></div>
-                       <div style={{ textAlign: 'center' }}><div style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--accent-coral)' }}>3</div><div style={{ fontSize: '9px', color: 'var(--text-gray)' }}>BREACHED</div></div>
+                      <div style={{ textAlign: 'center' }}><div style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--accent-lime)' }}>84</div><div style={{ fontSize: '9px', color: 'var(--text-gray)' }}>ON TIME</div></div>
+                      <div style={{ textAlign: 'center' }}><div style={{ fontSize: '12px', fontWeight: 'bold', color: '#f59e0b' }}>7</div><div style={{ fontSize: '9px', color: 'var(--text-gray)' }}>AT RISK</div></div>
+                      <div style={{ textAlign: 'center' }}><div style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--accent-coral)' }}>3</div><div style={{ fontSize: '9px', color: 'var(--text-gray)' }}>BREACHED</div></div>
                     </div>
-                 </div>
+                  </div>
+                </div>
               </div>
-           </div>
-         </>
-       )}
-    </div>
-    );
+            </>
+          )}
+        </div>
+        );
   }
 
-  function renderTechnicalIncidentDetail() {
+        function renderTechnicalIncidentDetail() {
     return (
-      <div className="case-detail-container" style={{ color: 'var(--text-white)' }}>
-         {/* Page Header */}
-         <div className="case-header" style={{ borderBottom: '1px solid var(--accent-coral)' }}>
+        <div className="case-detail-container" style={{ color: 'var(--text-white)' }}>
+          {/* Page Header */}
+          <div className="case-header" style={{ borderBottom: '1px solid var(--accent-coral)' }}>
             <div className="header-left">
-               <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                  <h1 style={{ fontSize: '24px', fontWeight: '800', margin: 0 }}>{activeCase.id} | {activeCase.infraData?.title || 'API — Elevated Error Rate'}</h1>
-                  <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                     <span style={{ fontSize: '11px', padding: '4px 10px', borderRadius: '4px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', fontWeight: 'bold' }}>{activeCase.infraData?.incidentType || 'API Failure'}</span>
-                     <span style={{ fontSize: '11px', padding: '4px 10px', borderRadius: '4px', background: 'rgba(239, 68, 68, 0.1)', color: 'var(--accent-coral)', fontWeight: 'bold', border: '1px solid var(--accent-coral)' }}>{activeCase.infraData?.severity || 'HIGH'} SEVERITY</span>
-                  </div>
-               </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                <h1 style={{ fontSize: '24px', fontWeight: '800', margin: 0 }}>{activeCase.id} | {activeCase.infraData?.title || 'API — Elevated Error Rate'}</h1>
+                <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                  <span style={{ fontSize: '11px', padding: '4px 10px', borderRadius: '4px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', fontWeight: 'bold' }}>{activeCase.infraData?.incidentType || 'API Failure'}</span>
+                  <span style={{ fontSize: '11px', padding: '4px 10px', borderRadius: '4px', background: 'rgba(239, 68, 68, 0.1)', color: 'var(--accent-coral)', fontWeight: 'bold', border: '1px solid var(--accent-coral)' }}>{activeCase.infraData?.severity || 'HIGH'} SEVERITY</span>
+                </div>
+              </div>
             </div>
-            
-            <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
-               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: 'var(--text-gray)' }}>
-                  <Clock size={14} /> Detected At: {activeCase.infraData?.detectedAt || '--:--'} | 
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--accent-coral)', fontWeight: 'bold' }}>
-                    <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--accent-coral)', animation: 'pulse 1.5s infinite' }}></span>
-                    Active for {activeCase.infraData?.activeDuration || '--sm'}
-                  </span>
-               </div>
-               
-               <select 
-                  value={incidentStatus} 
-                  onChange={(e) => {
-                    const newStatus = e.target.value;
-                    setIncidentStatus(newStatus);
-                    setIncidentTimeline([{ id: Date.now(), type: 'Status', text: `Status set to ${newStatus}.`, time: get24hTimestamp() }, ...incidentTimeline]);
-                  }}
-                  style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', color: 'var(--text-white)', padding: '8px 16px', borderRadius: '6px', fontSize: '13px', outline: 'none' }}
-               >
-                  <option value="Investigating">Investigating (Active)</option>
-                  <option value="Identified">Identified</option>
-                  <option value="Monitoring">Monitoring</option>
-                  <option value="Resolved">Resolved</option>
-               </select>
-            </div>
-         </div>
 
-         <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            
-             {/* Section 1 — Incident Summary Strip */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: 'var(--text-gray)' }}>
+                <Clock size={14} /> Detected At: {activeCase.infraData?.detectedAt || '--:--'} |
+                <span style={{ display: 'flex', alignItems: 'center', gap: '6px', color: 'var(--accent-coral)', fontWeight: 'bold' }}>
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--accent-coral)', animation: 'pulse 1.5s infinite' }}></span>
+                  Active for {activeCase.infraData?.activeDuration || '--sm'}
+                </span>
+              </div>
+
+              <select
+                value={incidentStatus}
+                onChange={(e) => {
+                  const newStatus = e.target.value;
+                  setIncidentStatus(newStatus);
+                  setIncidentTimeline([{ id: Date.now(), type: 'Status', text: `Status set to ${newStatus}.`, time: get24hTimestamp() }, ...incidentTimeline]);
+                }}
+                style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', color: 'var(--text-white)', padding: '8px 16px', borderRadius: '6px', fontSize: '13px', outline: 'none' }}
+              >
+                <option value="Investigating">Investigating (Active)</option>
+                <option value="Identified">Identified</option>
+                <option value="Monitoring">Monitoring</option>
+                <option value="Resolved">Resolved</option>
+              </select>
+            </div>
+          </div>
+
+          <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+
+            {/* Section 1 — Incident Summary Strip */}
             <div style={{ display: 'flex', background: 'rgba(239, 68, 68, 0.03)', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '8px', padding: '20px', gap: '40px', boxShadow: '0 0 20px rgba(239, 68, 68, 0.05)' }}>
-               <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: '11px', color: 'var(--accent-coral)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <Sparkles size={12}/> What Happened (AI Synthesis)
-                  </div>
-                  <div style={{ fontSize: '13px', lineHeight: '1.6', color: 'var(--text-white)' }}>
-                    {activeCase.infraData?.whatHappened || '...'}
-                  </div>
-               </div>
-               <div style={{ width: '1px', background: 'rgba(239, 68, 68, 0.1)' }}></div>
-               <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: '11px', color: 'var(--accent-coral)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <Bot size={12}/> Blast Radius Estimate (AI Synthesis)
-                  </div>
-                  <div style={{ fontSize: '13px', lineHeight: '1.6', color: 'var(--text-white)' }}>
-                    {activeCase.infraData?.blastRadiusNarrative || '...'}
-                  </div>
-               </div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: '11px', color: 'var(--accent-coral)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <Sparkles size={12} /> What Happened (AI Synthesis)
+                </div>
+                <div style={{ fontSize: '13px', lineHeight: '1.6', color: 'var(--text-white)' }}>
+                  {activeCase.infraData?.whatHappened || '...'}
+                </div>
+              </div>
+              <div style={{ width: '1px', background: 'rgba(239, 68, 68, 0.1)' }}></div>
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: '11px', color: 'var(--accent-coral)', fontWeight: '800', textTransform: 'uppercase', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <Bot size={12} /> Blast Radius Estimate (AI Synthesis)
+                </div>
+                <div style={{ fontSize: '13px', lineHeight: '1.6', color: 'var(--text-white)' }}>
+                  {activeCase.infraData?.blastRadiusNarrative || '...'}
+                </div>
+              </div>
             </div>
 
             {/* Section 2 — Incident Vitals */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '8px', overflow: 'hidden' }}>
-               {(activeCase.infraData?.vitals || []).map((v: any, i: number) => (
-                 <div key={i} style={{ padding: '16px', borderRight: i === 6 ? 'none' : '1px solid var(--bg-border)', textAlign: 'center' }}>
-                    <div style={{ fontSize: '10px', color: 'var(--text-gray)', textTransform: 'uppercase', fontWeight: 'bold', marginBottom: '4px' }}>{v.label}</div>
-                    <div style={{ fontSize: '13px', color: v.color || 'var(--text-white)', fontWeight: 'bold' }}>{v.value}</div>
-                 </div>
-               ))}
+              {(activeCase.infraData?.vitals || []).map((v: any, i: number) => (
+                <div key={i} style={{ padding: '16px', borderRight: i === 6 ? 'none' : '1px solid var(--bg-border)', textAlign: 'center' }}>
+                  <div style={{ fontSize: '10px', color: 'var(--text-gray)', textTransform: 'uppercase', fontWeight: 'bold', marginBottom: '4px' }}>{v.label}</div>
+                  <div style={{ fontSize: '13px', color: v.color || 'var(--text-white)', fontWeight: 'bold' }}>{v.value}</div>
+                </div>
+              ))}
             </div>
 
             {/* Section 3 — Diagnostic Signal Panel */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
-               {/* Left: Metric Snapshot */}
-               <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '8px', padding: '24px' }}>
-                  <div style={{ fontSize: '13px', fontWeight: 'bold', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}><Activity size={14} color="var(--accent-coral)"/> Live Metric Snapshot (Last 2h)</div>
-                  
-                  {/* Simulated Chart: Error Rate */}
-                  <div style={{ marginBottom: '32px' }}>
-                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                        <span style={{ fontSize: '11px', color: 'var(--text-gray)' }}>Error Rate %</span>
-                        <span style={{ fontSize: '11px', color: 'var(--accent-coral)', fontWeight: 'bold' }}>Peak: {activeCase.infraData?.errorRatePeak || '--'}</span>
-                     </div>
-                     <div style={{ height: '80px', width: '100%', position: 'relative', borderLeft: '1px solid rgba(255,255,255,0.1)', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                        <svg viewBox="0 0 100 80" style={{ width: '100%', height: '100%' }}>
-                           <path d="M0 75 Q 10 75, 20 74 T 40 73 T 60 70 L 70 20 L 80 15 L 90 25 L 100 10" fill="none" stroke="var(--accent-coral)" strokeWidth="1.5" />
-                           <line x1="0" y1="40" x2="100" y2="40" stroke="var(--accent-coral)" strokeWidth="1" strokeDasharray="2,2" opacity="0.5" />
-                        </svg>
-                        <div style={{ position: 'absolute', top: '35px', right: '0', fontSize: '8px', color: 'var(--accent-coral)' }}>THRESHOLD (5%)</div>
-                     </div>
-                  </div>
+              {/* Left: Metric Snapshot */}
+              <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '8px', padding: '24px' }}>
+                <div style={{ fontSize: '13px', fontWeight: 'bold', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}><Activity size={14} color="var(--accent-coral)" /> Live Metric Snapshot (Last 2h)</div>
 
-                  {/* Simulated Chart: Latency */}
-                  <div>
-                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                        <span style={{ fontSize: '11px', color: 'var(--text-gray)' }}>Response Time (ms)</span>
-                        <span style={{ fontSize: '11px', color: 'var(--accent-coral)', fontWeight: 'bold' }}>P95: {activeCase.infraData?.latencyP95 || '--'}</span>
-                     </div>
-                     <div style={{ height: '80px', width: '100%', position: 'relative', borderLeft: '1px solid rgba(255,255,255,0.1)', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                        <svg viewBox="0 0 100 80" style={{ width: '100%', height: '100%' }}>
-                           <path d="M0 70 Q 20 72, 40 70 T 60 68 L 70 10 L 80 5 T 100 8" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
-                        </svg>
-                     </div>
+                {/* Simulated Chart: Error Rate */}
+                <div style={{ marginBottom: '32px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                    <span style={{ fontSize: '11px', color: 'var(--text-gray)' }}>Error Rate %</span>
+                    <span style={{ fontSize: '11px', color: 'var(--accent-coral)', fontWeight: 'bold' }}>Peak: {activeCase.infraData?.errorRatePeak || '--'}</span>
                   </div>
-               </div>
+                  <div style={{ height: '80px', width: '100%', position: 'relative', borderLeft: '1px solid rgba(255,255,255,0.1)', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                    <svg viewBox="0 0 100 80" style={{ width: '100%', height: '100%' }}>
+                      <path d="M0 75 Q 10 75, 20 74 T 40 73 T 60 70 L 70 20 L 80 15 L 90 25 L 100 10" fill="none" stroke="var(--accent-coral)" strokeWidth="1.5" />
+                      <line x1="0" y1="40" x2="100" y2="40" stroke="var(--accent-coral)" strokeWidth="1" strokeDasharray="2,2" opacity="0.5" />
+                    </svg>
+                    <div style={{ position: 'absolute', top: '35px', right: '0', fontSize: '8px', color: 'var(--accent-coral)' }}>THRESHOLD (5%)</div>
+                  </div>
+                </div>
 
-               {/* Right: Anomaly Breakdown */}
-               <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '8px' }}>
-                  <div style={{ padding: '16px', fontSize: '13px', fontWeight: 'bold', borderBottom: '1px solid var(--bg-border)' }}>Anomaly Breakdown Table</div>
-                  <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
-                     <thead>
-                        <tr style={{ textAlign: 'left', background: 'rgba(255,255,255,0.02)' }}>
-                           <th style={{ padding: '12px 16px', color: 'var(--text-gray)' }}>Endpoint Name</th>
-                           <th style={{ padding: '12px 16px', color: 'var(--text-gray)' }}>Error Count</th>
-                           <th style={{ padding: '12px 16px', color: 'var(--text-gray)' }}>Last Error</th>
-                           <th style={{ padding: '12px 16px', color: 'var(--text-gray)' }}>Time</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        {(activeCase.infraData?.endpoints || []).map((row: any, i: number) => (
-                          <tr key={i} style={{ borderBottom: '1px solid var(--bg-border)' }}>
-                             <td style={{ padding: '12px 16px', color: 'var(--text-white)' }}>{row.name}</td>
-                             <td style={{ padding: '12px 16px', color: 'var(--accent-coral)', fontWeight: 'bold' }}>{row.count}</td>
-                             <td style={{ padding: '12px 16px', color: 'var(--text-white)' }}>{row.code}</td>
-                             <td style={{ padding: '12px 16px', color: 'var(--text-gray)' }}>{row.time}</td>
-                          </tr>
-                        ))}
-                     </tbody>
-                  </table>
-               </div>
+                {/* Simulated Chart: Latency */}
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                    <span style={{ fontSize: '11px', color: 'var(--text-gray)' }}>Response Time (ms)</span>
+                    <span style={{ fontSize: '11px', color: 'var(--accent-coral)', fontWeight: 'bold' }}>P95: {activeCase.infraData?.latencyP95 || '--'}</span>
+                  </div>
+                  <div style={{ height: '80px', width: '100%', position: 'relative', borderLeft: '1px solid rgba(255,255,255,0.1)', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+                    <svg viewBox="0 0 100 80" style={{ width: '100%', height: '100%' }}>
+                      <path d="M0 70 Q 20 72, 40 70 T 60 68 L 70 10 L 80 5 T 100 8" fill="none" stroke="#fbbf24" strokeWidth="1.5" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right: Anomaly Breakdown */}
+              <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '8px' }}>
+                <div style={{ padding: '16px', fontSize: '13px', fontWeight: 'bold', borderBottom: '1px solid var(--bg-border)' }}>Anomaly Breakdown Table</div>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
+                  <thead>
+                    <tr style={{ textAlign: 'left', background: 'rgba(255,255,255,0.02)' }}>
+                      <th style={{ padding: '12px 16px', color: 'var(--text-gray)' }}>Endpoint Name</th>
+                      <th style={{ padding: '12px 16px', color: 'var(--text-gray)' }}>Error Count</th>
+                      <th style={{ padding: '12px 16px', color: 'var(--text-gray)' }}>Last Error</th>
+                      <th style={{ padding: '12px 16px', color: 'var(--text-gray)' }}>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(activeCase.infraData?.endpoints || []).map((row: any, i: number) => (
+                      <tr key={i} style={{ borderBottom: '1px solid var(--bg-border)' }}>
+                        <td style={{ padding: '12px 16px', color: 'var(--text-white)' }}>{row.name}</td>
+                        <td style={{ padding: '12px 16px', color: 'var(--accent-coral)', fontWeight: 'bold' }}>{row.count}</td>
+                        <td style={{ padding: '12px 16px', color: 'var(--text-white)' }}>{row.code}</td>
+                        <td style={{ padding: '12px 16px', color: 'var(--text-gray)' }}>{row.time}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             {/* Section 4 — Tickets in Blast Radius */}
             <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '8px' }}>
-               <div style={{ padding: '16px', borderBottom: '1px solid var(--bg-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div style={{ fontSize: '14px', fontWeight: 'bold' }}>Tickets in Blast Radius ({activeCase.infraData?.totalTickets || 0} Total)</div>
-                  <div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>{activeCase.infraData?.slaCriticalTickets || 0} SLA-Critical | {activeCase.infraData?.normalTickets || 0} Normal</div>
-               </div>
-               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
-                  <thead>
-                     <tr style={{ textAlign: 'left', background: 'rgba(255,255,255,0.02)', color: 'var(--text-gray)' }}>
-                        <th style={{ padding: '12px 16px' }}>Ticket ID</th>
-                        <th style={{ padding: '12px 16px' }}>Source</th>
-                        <th style={{ padding: '12px 16px' }}>Assigned To</th>
-                        <th style={{ padding: '12px 16px' }}>Order Stage</th>
-                        <th style={{ padding: '12px 16px' }}>Carrier</th>
-                        <th style={{ padding: '12px 16px' }}>SLA Remaining</th>
-                        <th style={{ padding: '12px 16px' }}>Notified</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     {(activeCase.infraData?.affectedTickets || []).map((row: any, i: number) => (
-                       <tr key={i} style={{ borderBottom: '1px solid var(--bg-border)', borderLeft: row.critical ? '4px solid var(--accent-coral)' : 'none' }}>
-                          <td style={{ padding: '12px 16px', color: 'var(--text-white)', fontWeight: 'bold' }}>{row.id}</td>
-                          <td style={{ padding: '12px 16px' }}>{row.source}</td>
-                          <td style={{ padding: '12px 16px' }}>{row.assigned}</td>
-                          <td style={{ padding: '12px 16px' }}>{row.stage}</td>
-                          <td style={{ padding: '12px 16px' }}>{row.carrier}</td>
-                          <td style={{ padding: '12px 16px', color: row.slaColor, fontWeight: 'bold' }}>{row.sla}</td>
-                          <td style={{ padding: '12px 16px', color: 'var(--text-gray)' }}>No</td>
-                       </tr>
-                     ))}
-                  </tbody>
-               </table>
+              <div style={{ padding: '16px', borderBottom: '1px solid var(--bg-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div style={{ fontSize: '14px', fontWeight: 'bold' }}>Tickets in Blast Radius ({activeCase.infraData?.totalTickets || 0} Total)</div>
+                <div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>{activeCase.infraData?.slaCriticalTickets || 0} SLA-Critical | {activeCase.infraData?.normalTickets || 0} Normal</div>
+              </div>
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
+                <thead>
+                  <tr style={{ textAlign: 'left', background: 'rgba(255,255,255,0.02)', color: 'var(--text-gray)' }}>
+                    <th style={{ padding: '12px 16px' }}>Ticket ID</th>
+                    <th style={{ padding: '12px 16px' }}>Source</th>
+                    <th style={{ padding: '12px 16px' }}>Assigned To</th>
+                    <th style={{ padding: '12px 16px' }}>Order Stage</th>
+                    <th style={{ padding: '12px 16px' }}>Carrier</th>
+                    <th style={{ padding: '12px 16px' }}>SLA Remaining</th>
+                    <th style={{ padding: '12px 16px' }}>Notified</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(activeCase.infraData?.affectedTickets || []).map((row: any, i: number) => (
+                    <tr key={i} style={{ borderBottom: '1px solid var(--bg-border)', borderLeft: row.critical ? '4px solid var(--accent-coral)' : 'none' }}>
+                      <td style={{ padding: '12px 16px', color: 'var(--text-white)', fontWeight: 'bold' }}>{row.id}</td>
+                      <td style={{ padding: '12px 16px' }}>{row.source}</td>
+                      <td style={{ padding: '12px 16px' }}>{row.assigned}</td>
+                      <td style={{ padding: '12px 16px' }}>{row.stage}</td>
+                      <td style={{ padding: '12px 16px' }}>{row.carrier}</td>
+                      <td style={{ padding: '12px 16px', color: row.slaColor, fontWeight: 'bold' }}>{row.sla}</td>
+                      <td style={{ padding: '12px 16px', color: 'var(--text-gray)' }}>No</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: '24px' }}>
-               {/* Section 5 — Broadcast Action Panel */}
-               <div style={{ background: 'rgba(239, 68, 68, 0.05)', border: '2px solid var(--accent-coral)', borderRadius: '12px', padding: '24px' }}>
-                  <div style={{ fontSize: '18px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-                    <ChevronsRight size={24} color="var(--accent-coral)" /> Broadcast Incident to Support Team
+              {/* Section 5 — Broadcast Action Panel */}
+              <div style={{ background: 'rgba(239, 68, 68, 0.05)', border: '2px solid var(--accent-coral)', borderRadius: '12px', padding: '24px' }}>
+                <div style={{ fontSize: '18px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
+                  <ChevronsRight size={24} color="var(--accent-coral)" /> Broadcast Incident to Support Team
+                </div>
+
+                <div style={{ background: 'var(--bg-deep)', borderRadius: '8px', padding: '16px', border: '1px solid var(--bg-border)', marginBottom: '24px' }}>
+                  <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', marginBottom: '12px', textTransform: 'uppercase' }}>Notification Preview</div>
+                  <div style={{ borderLeft: '3px solid var(--accent-coral)', paddingLeft: '16px' }}>
+                    <div style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '8px' }}>⚠️ Tech Incident Notice — {activeCase.id}</div>
+                    <div style={{ fontSize: '13px', lineHeight: '1.5', color: 'var(--text-gray)', marginBottom: '12px' }}>
+                      {activeCase.infraData?.broadcastPreviewText || 'An API degradation has been detected that may impact tracking. SLA timers remain active.'}
+                    </div>
+                    <div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>Detected: {activeCase.infraData?.detectedAt || '--:--'} | Severity: {activeCase.infraData?.severity || 'HIGH'} | Status: {incidentStatus}</div>
                   </div>
-                  
-                  <div style={{ background: 'var(--bg-deep)', borderRadius: '8px', padding: '16px', border: '1px solid var(--bg-border)', marginBottom: '24px' }}>
-                     <div style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', marginBottom: '12px', textTransform: 'uppercase' }}>Notification Preview</div>
-                     <div style={{ borderLeft: '3px solid var(--accent-coral)', paddingLeft: '16px' }}>
-                        <div style={{ fontSize: '14px', fontWeight: 'bold', marginBottom: '8px' }}>⚠️ Tech Incident Notice — {activeCase.id}</div>
-                        <div style={{ fontSize: '13px', lineHeight: '1.5', color: 'var(--text-gray)', marginBottom: '12px' }}>
-                           {activeCase.infraData?.broadcastPreviewText || 'An API degradation has been detected that may impact tracking. SLA timers remain active.'}
+                </div>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <label style={{ fontSize: '12px', color: 'var(--text-gray)', fontWeight: 'bold' }}>CUSTOM NOTE</label>
+                    <textarea placeholder="Add any context for the support team..." style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '6px', color: 'var(--text-white)', padding: '12px', fontSize: '13px', minHeight: '80px', outline: 'none' }}></textarea>
+                  </div>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <label style={{ fontSize: '12px', color: 'var(--text-gray)', fontWeight: 'bold' }}>SCOPE SELECTOR</label>
+                    <div style={{ display: 'flex', gap: '24px' }}>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '13px' }}>
+                        <input type="radio" name="scope" /> Notify all active tickets ({activeCase.infraData?.totalTickets || 0})
+                      </label>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '13px' }}>
+                        <input type="radio" name="scope" defaultChecked /> Notify only SLA-critical tickets ({activeCase.infraData?.slaCriticalTickets || 0})
+                      </label>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      if (broadcastDoneAt || isBroadcasting) return;
+                      setIsBroadcasting(true);
+                      setTimeout(() => {
+                        const time = get24hTimestamp();
+                        setIsBroadcasting(false);
+                        setBroadcastDoneAt(time);
+                        setIncidentTimeline([{ id: Date.now(), type: 'Broadcast', text: `Broadcast sent directly internally via active workflow.`, time: time }, ...incidentTimeline]);
+                      }, 1500);
+                    }}
+                    disabled={!!broadcastDoneAt || isBroadcasting}
+                    style={{
+                      width: '100%',
+                      background: broadcastDoneAt ? 'var(--bg-border)' : 'var(--accent-coral)',
+                      color: 'white',
+                      border: 'none',
+                      padding: '16px',
+                      borderRadius: '8px',
+                      fontSize: '14px',
+                      fontWeight: 'bold',
+                      cursor: broadcastDoneAt ? 'default' : 'pointer',
+                      marginTop: '8px',
+                      boxShadow: broadcastDoneAt ? 'none' : '0 4px 12px rgba(239, 68, 68, 0.3)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '10px'
+                    }}
+                  >
+                    {isBroadcasting ? 'Broadcasting...' : (broadcastDoneAt ? `Broadcasted at ${broadcastDoneAt}` : 'BROADCAST TO SUPPORT TEAM')}
+                  </button>
+                </div>
+              </div>
+
+              {/* Section 6 — Incident Timeline */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '8px', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                  <div style={{ padding: '16px', borderBottom: '1px solid var(--bg-border)', fontSize: '14px', fontWeight: 'bold' }}>Incident Timeline</div>
+                  <div style={{ flex: 1, padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px', overflowY: 'auto' }}>
+                    {incidentTimeline.map((item, i) => (
+                      <div key={item.id} style={{ display: 'flex', gap: '16px' }}>
+                        <div style={{ fontSize: '11px', color: 'var(--text-gray)', width: '40px', flexShrink: 0, paddingTop: '2px' }}>{item.time}</div>
+                        <div style={{ width: '12px', position: 'relative' }}>
+                          <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: item.type === 'Note' ? '#3b82f6' : 'var(--text-gray)', position: 'absolute', top: '5px', left: '2px', zIndex: 2 }}></div>
+                          {i !== incidentTimeline.length - 1 && <div style={{ width: '1px', background: 'rgba(255,255,255,0.1)', position: 'absolute', top: '15px', bottom: '-20px', left: '5px' }}></div>}
                         </div>
-                        <div style={{ fontSize: '11px', color: 'var(--text-gray)' }}>Detected: {activeCase.infraData?.detectedAt || '--:--'} | Severity: {activeCase.infraData?.severity || 'HIGH'} | Status: {incidentStatus}</div>
-                     </div>
-                  </div>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                        <label style={{ fontSize: '12px', color: 'var(--text-gray)', fontWeight: 'bold' }}>CUSTOM NOTE</label>
-                        <textarea placeholder="Add any context for the support team..." style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '6px', color: 'var(--text-white)', padding: '12px', fontSize: '13px', minHeight: '80px', outline: 'none' }}></textarea>
-                     </div>
-                     
-                     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                        <label style={{ fontSize: '12px', color: 'var(--text-gray)', fontWeight: 'bold' }}>SCOPE SELECTOR</label>
-                        <div style={{ display: 'flex', gap: '24px' }}>
-                           <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '13px' }}>
-                              <input type="radio" name="scope" /> Notify all active tickets ({activeCase.infraData?.totalTickets || 0})
-                           </label>
-                           <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '13px' }}>
-                              <input type="radio" name="scope" defaultChecked /> Notify only SLA-critical tickets ({activeCase.infraData?.slaCriticalTickets || 0})
-                           </label>
-                        </div>
-                     </div>
-
-                     <button 
-                        onClick={() => {
-                          if (broadcastDoneAt || isBroadcasting) return;
-                          setIsBroadcasting(true);
-                          setTimeout(() => {
-                            const time = get24hTimestamp();
-                            setIsBroadcasting(false);
-                            setBroadcastDoneAt(time);
-                            setIncidentTimeline([{ id: Date.now(), type: 'Broadcast', text: `Broadcast sent directly internally via active workflow.`, time: time }, ...incidentTimeline]);
-                          }, 1500);
-                        }}
-                        disabled={!!broadcastDoneAt || isBroadcasting}
-                        style={{ 
-                          width: '100%', 
-                          background: broadcastDoneAt ? 'var(--bg-border)' : 'var(--accent-coral)', 
-                          color: 'white', 
-                          border: 'none', 
-                          padding: '16px', 
-                          borderRadius: '8px', 
-                          fontSize: '14px', 
-                          fontWeight: 'bold', 
-                          cursor: broadcastDoneAt ? 'default' : 'pointer', 
-                          marginTop: '8px', 
-                          boxShadow: broadcastDoneAt ? 'none' : '0 4px 12px rgba(239, 68, 68, 0.3)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          gap: '10px'
-                        }}
-                     >
-                        {isBroadcasting ? 'Broadcasting...' : (broadcastDoneAt ? `Broadcasted at ${broadcastDoneAt}` : 'BROADCAST TO SUPPORT TEAM')}
-                     </button>
-                  </div>
-               </div>
-
-               {/* Section 6 — Incident Timeline */}
-               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                  <div style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '8px', flex: 1, display: 'flex', flexDirection: 'column' }}>
-                     <div style={{ padding: '16px', borderBottom: '1px solid var(--bg-border)', fontSize: '14px', fontWeight: 'bold' }}>Incident Timeline</div>
-                     <div style={{ flex: 1, padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px', overflowY: 'auto' }}>
-                        {incidentTimeline.map((item, i) => (
-                          <div key={item.id} style={{ display: 'flex', gap: '16px' }}>
-                             <div style={{ fontSize: '11px', color: 'var(--text-gray)', width: '40px', flexShrink: 0, paddingTop: '2px' }}>{item.time}</div>
-                             <div style={{ width: '12px', position: 'relative' }}>
-                                <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: item.type === 'Note' ? '#3b82f6' : 'var(--text-gray)', position: 'absolute', top: '5px', left: '2px', zIndex: 2 }}></div>
-                                {i !== incidentTimeline.length - 1 && <div style={{ width: '1px', background: 'rgba(255,255,255,0.1)', position: 'absolute', top: '15px', bottom: '-20px', left: '5px' }}></div>}
-                             </div>
-                             <div>
-                                <div style={{ fontSize: '13px', color: 'var(--text-white)' }}>
-                                   {item.type === 'Note' && <strong style={{color: '#3b82f6'}}>Note Added</strong>}
-                                   {item.type === 'Broadcast' && <strong>Broadcast Sent</strong>}
-                                   {item.type === 'Status' && <strong>Status Change</strong>}
-                                   {item.type === 'System' && <strong>System Update</strong>}
-                                   {item.type === 'Detection' && <strong>Detection</strong>}
-                                   {item.user && <span style={{fontSize: '11px', color: 'var(--text-gray)', marginLeft: '8px'}}>by {item.user}</span>}
-                                   <div style={{ marginTop: '4px', color: 'var(--text-gray)', fontSize: '12px', lineHeight: '1.4' }}>{item.text}</div>
-                                </div>
-                             </div>
+                        <div>
+                          <div style={{ fontSize: '13px', color: 'var(--text-white)' }}>
+                            {item.type === 'Note' && <strong style={{ color: '#3b82f6' }}>Note Added</strong>}
+                            {item.type === 'Broadcast' && <strong>Broadcast Sent</strong>}
+                            {item.type === 'Status' && <strong>Status Change</strong>}
+                            {item.type === 'System' && <strong>System Update</strong>}
+                            {item.type === 'Detection' && <strong>Detection</strong>}
+                            {item.user && <span style={{ fontSize: '11px', color: 'var(--text-gray)', marginLeft: '8px' }}>by {item.user}</span>}
+                            <div style={{ marginTop: '4px', color: 'var(--text-gray)', fontSize: '12px', lineHeight: '1.4' }}>{item.text}</div>
                           </div>
-                        ))}
-                     </div>
-                     <div style={{ padding: '16px', borderTop: '1px solid var(--bg-border)' }}>
-                        <div style={{ display: 'flex', gap: '8px' }}>
-                           <input 
-                              type="text" 
-                              value={incidentNote}
-                              onChange={(e) => setIncidentNote(e.target.value)}
-                              placeholder="Add diagnostic note..." 
-                              style={{ flex: 1, background: 'var(--bg-primary)', border: '1px solid var(--bg-border)', borderRadius: '6px', padding: '10px 16px', color: 'var(--text-white)', fontSize: '13px', outline: 'none' }} 
-                           />
-                           <button onClick={() => {
-                              if (!incidentNote.trim()) return;
-                              setIncidentTimeline([{ id: Date.now(), type: 'Note', text: incidentNote, time: get24hTimestamp(), user: 'Shankar' }, ...incidentTimeline]);
-                              setIncidentNote("");
-                           }} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--bg-border)', color: 'white', padding: '0 16px', borderRadius: '6px', cursor: 'pointer' }}>
-                              Add Note
-                           </button>
                         </div>
-                     </div>
+                      </div>
+                    ))}
                   </div>
-               </div>
+                  <div style={{ padding: '16px', borderTop: '1px solid var(--bg-border)' }}>
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                      <input
+                        type="text"
+                        value={incidentNote}
+                        onChange={(e) => setIncidentNote(e.target.value)}
+                        placeholder="Add diagnostic note..."
+                        style={{ flex: 1, background: 'var(--bg-primary)', border: '1px solid var(--bg-border)', borderRadius: '6px', padding: '10px 16px', color: 'var(--text-white)', fontSize: '13px', outline: 'none' }}
+                      />
+                      <button onClick={() => {
+                        if (!incidentNote.trim()) return;
+                        setIncidentTimeline([{ id: Date.now(), type: 'Note', text: incidentNote, time: get24hTimestamp(), user: 'Shankar' }, ...incidentTimeline]);
+                        setIncidentNote("");
+                      }} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--bg-border)', color: 'white', padding: '0 16px', borderRadius: '6px', cursor: 'pointer' }}>
+                        Add Note
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-         </div>
-      </div>
-    );
+          </div>
+        </div>
+        );
   }
 
-  function renderCaseDetail() {
+        function renderCaseDetail() {
     const slaText = activeCase.sla === '00d 00h' ? 'BREACHED' : activeCase.sla;
-    const slaColor = activeCase.slaColor || 'sla-red';
+        const slaColor = activeCase.slaColor || 'sla-red';
     
     const renderMilestoneIcon = (iconName: string) => {
       switch(iconName) {
@@ -2344,35 +2379,35 @@ export default function Home() {
     };
 
     const fullTimelineData = activeCase.milestones ? activeCase.milestones.map((m: any) => ({
-      ...m,
-      icon: renderMilestoneIcon(m.icon)
+          ...m,
+          icon: renderMilestoneIcon(m.icon)
     })) : [];
 
-    const displayTimeline = expandTimeline ? fullTimelineData : fullTimelineData.slice(0, 5);
+        const displayTimeline = expandTimeline ? fullTimelineData : fullTimelineData.slice(0, 5);
     const availableAssignees = PERSONAS.filter(p => selectedPersona && p.name !== selectedPersona.name);
 
-    return (
-      <div className="detail-view-container" style={{ padding: '24px 48px', position: 'relative' }}>
-        
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
-                   <div style={{ fontSize: '11px', color: 'var(--text-gray)', textTransform: 'uppercase', fontWeight: 'bold', marginBottom: '4px' }}>Support Case & Logistics Identity</div>
-                   <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--text-white)', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                     <span style={{ color: 'var(--accent-sentry)' }}>{activeCase.id}</span>
-                     <span style={{ fontSize: '18px', color: 'var(--text-gray)', fontWeight: 'normal' }}>/</span>
-                     <span style={{ fontSize: '18px', color: 'var(--text-white)', fontWeight: 'normal' }}>{activeCase.orderId || 'N/A'}</span>
-                   </div>
-                </div>
-               <div style={{ padding: '4px 8px', background: 'var(--bg-primary)', border: '1px solid var(--bg-border)', borderRadius: '4px', fontSize: '13px', color: 'var(--text-gray)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <MapPin size={14}/> Destination ZIP: {activeCase.zip}
-               </div>
+        return (
+        <div className="detail-view-container" style={{ padding: '24px 48px', position: 'relative' }}>
 
-               {/* Assignee Interactive Reassignment Chip */}
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ fontSize: '11px', color: 'var(--text-gray)', textTransform: 'uppercase', fontWeight: 'bold', marginBottom: '4px' }}>Support Case & Logistics Identity</div>
+                <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--text-white)', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <span style={{ color: 'var(--accent-sentry)' }}>{activeCase.id}</span>
+                  <span style={{ fontSize: '18px', color: 'var(--text-gray)', fontWeight: 'normal' }}>/</span>
+                  <span style={{ fontSize: '18px', color: 'var(--text-white)', fontWeight: 'normal' }}>{activeCase.orderId || 'N/A'}</span>
+                </div>
+              </div>
+              <div style={{ padding: '4px 8px', background: 'var(--bg-primary)', border: '1px solid var(--bg-border)', borderRadius: '4px', fontSize: '13px', color: 'var(--text-gray)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <MapPin size={14} /> Destination ZIP: {activeCase.zip}
+              </div>
+
+              {/* Assignee Interactive Reassignment Chip */}
 
               {/* Assignee Interactive Reassignment Chip */}
               <div style={{ position: 'relative' }}>
-                <div 
+                <div
                   onClick={() => setShowAssigneePopover(!showAssigneePopover)}
                   style={{ fontSize: '12px', display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(106, 95, 193, 0.1)', cursor: 'pointer', border: '1px solid rgba(106, 95, 193, 0.4)', padding: '6px 12px', borderRadius: '16px', color: 'var(--text-white)' }}
                 >
@@ -2382,8 +2417,8 @@ export default function Home() {
                 {showAssigneePopover && (
                   <div style={{ position: 'absolute', top: '100%', left: 0, marginTop: '8px', background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '8px', zIndex: 100, width: '220px', boxShadow: '0 10px 20px rgba(0,0,0,0.5)' }}>
                     {availableAssignees.map(p => (
-                      <div 
-                        key={p.name} 
+                      <div
+                        key={p.name}
                         onClick={() => {
                           setTargetAssignee(p);
                           setShowAssigneePopover(false);
@@ -2397,762 +2432,762 @@ export default function Home() {
                   </div>
                 )}
               </div>
-           </div>
+            </div>
 
-           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', position: 'relative' }}>
-               
-               {/* NEW: Ask Vantage Header Component Context */}
-               <button 
-                 onClick={() => {setShowVantageModal(true); setShowTimezoneMenu(false); setShowActionDropdown(false);}} 
-                 style={{ background: 'var(--bg-deep)', border: '1px solid var(--accent-lime)', color: 'var(--accent-lime)', padding: '8px 16px', fontSize: '12px', fontWeight: 'bold', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 0 10px rgba(194, 239, 78, 0.1)' }}
-               >
-                 <Sparkles size={14} />
-                 Ask Vantage
-               </button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', position: 'relative' }}>
 
-               {/* Time Zone Selector */}
-               <div style={{ position: 'relative' }}>
-                 <button onClick={() => {setShowTimezoneMenu(!showTimezoneMenu); setShowActionDropdown(false);}} style={{ background: 'var(--bg-deep)', border: '1px solid var(--accent-sentry)', color: 'var(--text-white)', padding: '8px 16px', fontSize: '12px', fontWeight: 'bold', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                   <Globe size={14} color="var(--accent-sentry)" />
-                   Time Zone: {globalTimezone}
-                 </button>
-                 {showTimezoneMenu && (
-                   <div style={{ position: 'absolute', top: '100%', right: '0', marginTop: '8px', background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '8px', boxShadow: '0 10px 25px rgba(0,0,0,0.5)', width: '240px', padding: '8px 0', zIndex: 100 }}>
-                     <div style={{ padding: '8px 16px', fontSize: '11px', textTransform: 'uppercase', color: 'var(--text-gray)', fontWeight: 'bold', borderBottom: '1px solid var(--bg-border)', marginBottom: '4px' }}>Select View Timezone</div>
-                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                       <div onClick={() => {setGlobalTimezone('System Time (PST)'); setShowTimezoneMenu(false);}} style={{ padding: '8px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', background: globalTimezone === 'System Time (PST)' ? 'rgba(255,255,255,0.05)' : 'transparent' }}>
-                         <span style={{ fontSize: '13px', color: 'var(--text-white)' }}>System Timezone (PST)</span>
-                       </div>
-                       <div onClick={() => {setGlobalTimezone('US Central (CST)'); setShowTimezoneMenu(false);}} style={{ padding: '8px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', background: globalTimezone === 'US Central (CST)' ? 'rgba(255,255,255,0.05)' : 'transparent' }}>
-                         <span style={{ fontSize: '13px', fontWeight: globalTimezone==='US Central (CST)'?'bold':'normal', color: 'var(--accent-coral)' }}>Customer Local (CST)</span>
-                       </div>
-                       <div onClick={() => {setGlobalTimezone('US Eastern (EST)'); setShowTimezoneMenu(false);}} style={{ padding: '8px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', background: globalTimezone === 'US Eastern (EST)' ? 'rgba(255,255,255,0.05)' : 'transparent' }}>
-                         <span style={{ fontSize: '13px', color: 'var(--text-white)' }}>Hubs / Warehouse (EST)</span>
-                       </div>
-                     </div>
-                   </div>
-                 )}
-               </div>
+              {/* NEW: Ask Vantage Header Component Context */}
+              <button
+                onClick={() => { setShowVantageModal(true); setShowTimezoneMenu(false); setShowActionDropdown(false); }}
+                style={{ background: 'var(--bg-deep)', border: '1px solid var(--accent-lime)', color: 'var(--accent-lime)', padding: '8px 16px', fontSize: '12px', fontWeight: 'bold', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px', boxShadow: '0 0 10px rgba(194, 239, 78, 0.1)' }}
+              >
+                <Sparkles size={14} />
+                Ask Vantage
+              </button>
 
-               {/* Action Dropdown Menu */}
-               <div style={{ position: 'relative' }}>
-                 <button onClick={() => {setShowActionDropdown(!showActionDropdown); setShowTimezoneMenu(false);}} style={{ background: 'var(--accent-sentry)', border: '1px solid var(--accent-sentry)', color: 'white', padding: '8px 16px', fontSize: '12px', fontWeight: 'bold', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                   Command Actions
-                 </button>
-                 {showActionDropdown && (
-                   <div style={{ position: 'absolute', top: '100%', right: '0', marginTop: '8px', background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '8px', boxShadow: '0 10px 25px rgba(0,0,0,0.5)', width: '300px', padding: '16px', zIndex: 100 }}>
-                     
-                     {actionMenuState === 'Main' && (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                           <button onClick={() => setActionMenuState('Escalate')} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px', background: 'var(--bg-primary)', border: '1px solid var(--bg-border)', borderRadius: '6px', cursor: 'pointer', color: 'var(--text-white)', fontSize: '13px', fontWeight: 'bold' }}>
-                              <span><Briefcase size={14} style={{ marginRight: '8px', verticalAlign: 'middle' }}/> Escalate Internally</span>
-                              <ArrowRight size={14} color="var(--text-gray)" />
-                           </button>
-                           <button onClick={() => setActionMenuState('Approval')} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px', background: 'var(--bg-primary)', border: '1px solid var(--bg-border)', borderRadius: '6px', cursor: 'pointer', color: 'var(--text-white)', fontSize: '13px', fontWeight: 'bold' }}>
-                              <span><FileSignature size={14} style={{ marginRight: '8px', verticalAlign: 'middle' }}/> Approvals</span>
-                              <ArrowRight size={14} color="var(--text-gray)" />
-                           </button>
+              {/* Time Zone Selector */}
+              <div style={{ position: 'relative' }}>
+                <button onClick={() => { setShowTimezoneMenu(!showTimezoneMenu); setShowActionDropdown(false); }} style={{ background: 'var(--bg-deep)', border: '1px solid var(--accent-sentry)', color: 'var(--text-white)', padding: '8px 16px', fontSize: '12px', fontWeight: 'bold', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <Globe size={14} color="var(--accent-sentry)" />
+                  Time Zone: {globalTimezone}
+                </button>
+                {showTimezoneMenu && (
+                  <div style={{ position: 'absolute', top: '100%', right: '0', marginTop: '8px', background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '8px', boxShadow: '0 10px 25px rgba(0,0,0,0.5)', width: '240px', padding: '8px 0', zIndex: 100 }}>
+                    <div style={{ padding: '8px 16px', fontSize: '11px', textTransform: 'uppercase', color: 'var(--text-gray)', fontWeight: 'bold', borderBottom: '1px solid var(--bg-border)', marginBottom: '4px' }}>Select View Timezone</div>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                      <div onClick={() => { setGlobalTimezone('System Time (PST)'); setShowTimezoneMenu(false); }} style={{ padding: '8px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', background: globalTimezone === 'System Time (PST)' ? 'rgba(255,255,255,0.05)' : 'transparent' }}>
+                        <span style={{ fontSize: '13px', color: 'var(--text-white)' }}>System Timezone (PST)</span>
+                      </div>
+                      <div onClick={() => { setGlobalTimezone('US Central (CST)'); setShowTimezoneMenu(false); }} style={{ padding: '8px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', background: globalTimezone === 'US Central (CST)' ? 'rgba(255,255,255,0.05)' : 'transparent' }}>
+                        <span style={{ fontSize: '13px', fontWeight: globalTimezone === 'US Central (CST)' ? 'bold' : 'normal', color: 'var(--accent-coral)' }}>Customer Local (CST)</span>
+                      </div>
+                      <div onClick={() => { setGlobalTimezone('US Eastern (EST)'); setShowTimezoneMenu(false); }} style={{ padding: '8px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', cursor: 'pointer', background: globalTimezone === 'US Eastern (EST)' ? 'rgba(255,255,255,0.05)' : 'transparent' }}>
+                        <span style={{ fontSize: '13px', color: 'var(--text-white)' }}>Hubs / Warehouse (EST)</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Action Dropdown Menu */}
+              <div style={{ position: 'relative' }}>
+                <button onClick={() => { setShowActionDropdown(!showActionDropdown); setShowTimezoneMenu(false); }} style={{ background: 'var(--accent-sentry)', border: '1px solid var(--accent-sentry)', color: 'white', padding: '8px 16px', fontSize: '12px', fontWeight: 'bold', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  Command Actions
+                </button>
+                {showActionDropdown && (
+                  <div style={{ position: 'absolute', top: '100%', right: '0', marginTop: '8px', background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '8px', boxShadow: '0 10px 25px rgba(0,0,0,0.5)', width: '300px', padding: '16px', zIndex: 100 }}>
+
+                    {actionMenuState === 'Main' && (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <button onClick={() => setActionMenuState('Escalate')} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px', background: 'var(--bg-primary)', border: '1px solid var(--bg-border)', borderRadius: '6px', cursor: 'pointer', color: 'var(--text-white)', fontSize: '13px', fontWeight: 'bold' }}>
+                          <span><Briefcase size={14} style={{ marginRight: '8px', verticalAlign: 'middle' }} /> Escalate Internally</span>
+                          <ArrowRight size={14} color="var(--text-gray)" />
+                        </button>
+                        <button onClick={() => setActionMenuState('Approval')} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px', background: 'var(--bg-primary)', border: '1px solid var(--bg-border)', borderRadius: '6px', cursor: 'pointer', color: 'var(--text-white)', fontSize: '13px', fontWeight: 'bold' }}>
+                          <span><FileSignature size={14} style={{ marginRight: '8px', verticalAlign: 'middle' }} /> Approvals</span>
+                          <ArrowRight size={14} color="var(--text-gray)" />
+                        </button>
+                      </div>
+                    )}
+
+                    {actionMenuState === 'Escalate' && (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-white)', fontSize: '14px', fontWeight: 'bold', marginBottom: '8px' }}>
+                          <button onClick={() => setActionMenuState('Main')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-gray)' }}><ArrowLeft size={14} /></button>
+                          Escalate to Manager
                         </div>
-                     )}
-
-                     {actionMenuState === 'Escalate' && (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-white)', fontSize: '14px', fontWeight: 'bold', marginBottom: '8px' }}>
-                             <button onClick={() => setActionMenuState('Main')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-gray)' }}><ArrowLeft size={14}/></button>
-                             Escalate to Manager
-                           </div>
-                           <div style={{ fontSize: '12px', color: 'var(--text-gray)' }}>Assigned Manager: <span style={{ color: 'var(--text-white)', fontWeight: 'bold' }}>Sarah Jenkins</span></div>
-                           <textarea 
-                             value={escalateNote}
-                             onChange={(e) => setEscalateNote(e.target.value)}
-                             placeholder="Add internal comment..."
-                             style={{ background: 'var(--bg-primary)', border: '1px solid var(--bg-border)', borderRadius: '6px', padding: '8px', fontSize: '12px', color: 'var(--text-white)', minHeight: '60px', resize: 'none', outline: 'none' }}
-                           />
-                           <button onClick={() => handleActionExecute('Escalate', escalateNote)} style={{ background: 'var(--accent-sentry)', color: 'white', border: 'none', padding: '8px', borderRadius: '4px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>
-                             Submit Escalation
-                           </button>
+                        <div style={{ fontSize: '12px', color: 'var(--text-gray)' }}>Assigned Manager: <span style={{ color: 'var(--text-white)', fontWeight: 'bold' }}>Sarah Jenkins</span></div>
+                        <textarea
+                          value={escalateNote}
+                          onChange={(e) => setEscalateNote(e.target.value)}
+                          placeholder="Add internal comment..."
+                          style={{ background: 'var(--bg-primary)', border: '1px solid var(--bg-border)', borderRadius: '6px', padding: '8px', fontSize: '12px', color: 'var(--text-white)', minHeight: '60px', resize: 'none', outline: 'none' }}
+                        />
+                        <button onClick={() => handleActionExecute('Escalate', escalateNote)} style={{ background: 'var(--accent-sentry)', color: 'white', border: 'none', padding: '8px', borderRadius: '4px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>
+                          Submit Escalation
+                        </button>
+                      </div>
+                    )}
+                    {actionMenuState === 'Approval' && (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-white)', fontSize: '14px', fontWeight: 'bold', marginBottom: '8px' }}>
+                          <button onClick={() => setActionMenuState('Main')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-gray)' }}><ArrowLeft size={14} /></button>
+                          Request Approvals
                         </div>
-                     )}
-                     {actionMenuState === 'Approval' && (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-white)', fontSize: '14px', fontWeight: 'bold', marginBottom: '8px' }}>
-                             <button onClick={() => setActionMenuState('Main')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-gray)' }}><ArrowLeft size={14}/></button>
-                             Request Approvals
-                           </div>
-                           <button onClick={() => handleActionExecute('Refund')} style={{ padding: '12px', background: 'var(--bg-primary)', border: '1px solid var(--bg-border)', borderRadius: '6px', cursor: 'pointer', color: 'var(--text-white)', fontSize: '13px', fontWeight: 'bold', textAlign: 'center' }}>
-                              Raise Refund
-                           </button>
-                           <button onClick={() => handleActionExecute('Cancel')} style={{ padding: '12px', background: 'var(--bg-primary)', border: '1px solid var(--accent-coral)', borderRadius: '6px', cursor: 'pointer', color: 'var(--accent-coral)', fontSize: '13px', fontWeight: 'bold', textAlign: 'center' }}>
-                              Cancel Order
-                           </button>
+                        <button onClick={() => handleActionExecute('Refund')} style={{ padding: '12px', background: 'var(--bg-primary)', border: '1px solid var(--bg-border)', borderRadius: '6px', cursor: 'pointer', color: 'var(--text-white)', fontSize: '13px', fontWeight: 'bold', textAlign: 'center' }}>
+                          Raise Refund
+                        </button>
+                        <button onClick={() => handleActionExecute('Cancel')} style={{ padding: '12px', background: 'var(--bg-primary)', border: '1px solid var(--accent-coral)', borderRadius: '6px', cursor: 'pointer', color: 'var(--accent-coral)', fontSize: '13px', fontWeight: 'bold', textAlign: 'center' }}>
+                          Cancel Order
+                        </button>
+                      </div>
+                    )}
+
+                    {selectedPersona?.name === 'Simran' && actionMenuState === 'Main' && (
+                      <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid var(--bg-border)' }}>
+                        <div style={{ fontSize: '10px', color: 'var(--accent-coral)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '8px' }}>Manager Authority</div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                          <button onClick={() => handleActionExecute('Approve Resolution', 'Manager Audit Override: Approved.')} style={{ background: 'rgba(194, 239, 78, 0.1)', border: '1px solid var(--accent-lime)', color: 'var(--accent-lime)', padding: '8px', borderRadius: '4px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>
+                            Approve Resolution
+                          </button>
+                          <button onClick={() => handleActionExecute('Override SLA', 'Manager Audit Override: SLA Reset.')} style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid var(--accent-coral)', color: 'var(--accent-coral)', padding: '8px', borderRadius: '4px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>
+                            Force SLA Reset
+                          </button>
                         </div>
-                     )}
+                      </div>
+                    )}
 
-                     {selectedPersona?.name === 'Simran' && actionMenuState === 'Main' && (
-                        <div style={{ marginTop: '12px', paddingTop: '12px', borderTop: '1px solid var(--bg-border)' }}>
-                           <div style={{ fontSize: '10px', color: 'var(--accent-coral)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '8px' }}>Manager Authority</div>
-                           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                              <button onClick={() => handleActionExecute('Approve Resolution', 'Manager Audit Override: Approved.')} style={{ background: 'rgba(194, 239, 78, 0.1)', border: '1px solid var(--accent-lime)', color: 'var(--accent-lime)', padding: '8px', borderRadius: '4px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>
-                                Approve Resolution
-                              </button>
-                              <button onClick={() => handleActionExecute('Override SLA', 'Manager Audit Override: SLA Reset.')} style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid var(--accent-coral)', color: 'var(--accent-coral)', padding: '8px', borderRadius: '4px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>
-                                Force SLA Reset
-                              </button>
-                           </div>
-                        </div>
-                     )}
-
-                   </div>
-                 )}
-               </div>
-           </div>
-        </div>
-
-        {/* Transfer Handoff Rendering */}
-        {showHandoffInput && targetAssignee && (
-          <div style={{ background: 'var(--bg-primary)', padding: '12px', borderRadius: '8px', border: '1px solid var(--accent-sentry)', display: 'flex', gap: '8px', marginBottom: '16px' }}>
-            <input 
-              type="text" 
-              placeholder={`Transfer Note for ${targetAssignee.name}...`}
-              value={handoffNote}
-              onChange={(e) => setHandoffNote(e.target.value)}
-              style={{ flex: 1, background: 'transparent', border: 'none', color: 'var(--text-white)', fontSize: '12px', outline: 'none' }}
-              autoFocus
-            />
-            <button onClick={submitHandoffAssignment} style={{ background: 'var(--accent-sentry)', color: 'white', border: 'none', borderRadius: '4px', padding: '4px 12px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>
-              Send
-            </button>
-            <button onClick={() => {setShowHandoffInput(false); setTargetAssignee(null);}} style={{ background: 'transparent', color: 'var(--text-gray)', border: 'none', padding: '4px', cursor: 'pointer' }}>
-              <X size={14}/>
-            </button>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
-        )}
 
-        {/* Intelligence Action Bar */}
-        {activeCase.intelligence && (
-          <div style={{ display: 'flex', background: 'var(--bg-deep)', borderRadius: '12px', border: '1px solid var(--accent-sentry)', overflow: 'hidden', marginBottom: '16px' }}>
-             
-             <div style={{ flex: '0 0 280px', display: 'flex', flexDirection: 'column', padding: '20px 24px', borderRight: '1px solid rgba(255,255,255,0.1)', background: !activeCase.caseId ? 'rgba(194, 239, 78, 0.05)' : 'rgba(239, 68, 68, 0.05)' }}>
+          {/* Transfer Handoff Rendering */}
+          {showHandoffInput && targetAssignee && (
+            <div style={{ background: 'var(--bg-primary)', padding: '12px', borderRadius: '8px', border: '1px solid var(--accent-sentry)', display: 'flex', gap: '8px', marginBottom: '16px' }}>
+              <input
+                type="text"
+                placeholder={`Transfer Note for ${targetAssignee.name}...`}
+                value={handoffNote}
+                onChange={(e) => setHandoffNote(e.target.value)}
+                style={{ flex: 1, background: 'transparent', border: 'none', color: 'var(--text-white)', fontSize: '12px', outline: 'none' }}
+                autoFocus
+              />
+              <button onClick={submitHandoffAssignment} style={{ background: 'var(--accent-sentry)', color: 'white', border: 'none', borderRadius: '4px', padding: '4px 12px', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>
+                Send
+              </button>
+              <button onClick={() => { setShowHandoffInput(false); setTargetAssignee(null); }} style={{ background: 'transparent', color: 'var(--text-gray)', border: 'none', padding: '4px', cursor: 'pointer' }}>
+                <X size={14} />
+              </button>
+            </div>
+          )}
+
+          {/* Intelligence Action Bar */}
+          {activeCase.intelligence && (
+            <div style={{ display: 'flex', background: 'var(--bg-deep)', borderRadius: '12px', border: '1px solid var(--accent-sentry)', overflow: 'hidden', marginBottom: '16px' }}>
+
+              <div style={{ flex: '0 0 280px', display: 'flex', flexDirection: 'column', padding: '20px 24px', borderRight: '1px solid rgba(255,255,255,0.1)', background: !activeCase.caseId ? 'rgba(194, 239, 78, 0.05)' : 'rgba(239, 68, 68, 0.05)' }}>
                 <div style={{ fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase', color: !activeCase.caseId ? 'var(--accent-lime)' : 'var(--accent-coral)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <AlertOctagon size={12} /> Risk Assessment
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                   <div>
-                      <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginBottom: '4px' }}>Probability of Breach</div>
-                      <div style={{ color: !activeCase.caseId ? 'var(--accent-lime)' : 'var(--accent-coral)', fontSize: '20px', fontWeight: 'bold' }}>{!activeCase.caseId ? '0' : activeCase.intelligence.breachProbability}% Risk</div>
-                      <div style={{ height: '4px', width: '100%', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginTop: '6px' }}>
-                         <div style={{ height: '100%', width: `${!activeCase.caseId ? '0' : activeCase.intelligence.breachProbability}%`, background: !activeCase.caseId ? 'var(--accent-lime)' : 'var(--accent-coral)', borderRadius: '2px' }}></div>
-                      </div>
-                   </div>
-                   <div>
-                      <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginBottom: '4px' }}>Resolution Runway (Countdown)</div>
-                      <div style={{ fontSize: '18px', fontWeight: 'bold', color: 'var(--text-white)' }}>{activeCase.intelligence.resolutionRunway || 'On Track'} <span style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'normal' }}>until projected delay</span></div>
-                   </div>
-                   <div style={{ fontSize: '11px', color: 'var(--text-white)', lineHeight: '1.4' }}>
-                     {activeCase.intelligence.riskAssessment || 'NOMINAL — No operational risks detected. The shipment is progressing according to the carrier\'s scheduled timeline.'}
-                   </div>
+                  <div>
+                    <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginBottom: '4px' }}>Probability of Breach</div>
+                    <div style={{ color: !activeCase.caseId ? 'var(--accent-lime)' : 'var(--accent-coral)', fontSize: '20px', fontWeight: 'bold' }}>{!activeCase.caseId ? '0' : activeCase.intelligence.breachProbability}% Risk</div>
+                    <div style={{ height: '4px', width: '100%', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginTop: '6px' }}>
+                      <div style={{ height: '100%', width: `${!activeCase.caseId ? '0' : activeCase.intelligence.breachProbability}%`, background: !activeCase.caseId ? 'var(--accent-lime)' : 'var(--accent-coral)', borderRadius: '2px' }}></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginBottom: '4px' }}>Resolution Runway (Countdown)</div>
+                    <div style={{ fontSize: '18px', fontWeight: 'bold', color: 'var(--text-white)' }}>{activeCase.intelligence.resolutionRunway || 'On Track'} <span style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'normal' }}>until projected delay</span></div>
+                  </div>
+                  <div style={{ fontSize: '11px', color: 'var(--text-white)', lineHeight: '1.4' }}>
+                    {activeCase.intelligence.riskAssessment || 'NOMINAL — No operational risks detected. The shipment is progressing according to the carrier\'s scheduled timeline.'}
+                  </div>
                 </div>
-             </div>
+              </div>
 
-             <div style={{ flex: '2', display: 'flex', flexDirection: 'column', padding: '20px 24px', borderRight: '1px solid rgba(255,255,255,0.1)', justifyContent: 'center' }} className="vantage-ai-glow">
+              <div style={{ flex: '2', display: 'flex', flexDirection: 'column', padding: '20px 24px', borderRight: '1px solid rgba(255,255,255,0.1)', justifyContent: 'center' }} className="vantage-ai-glow">
                 <div style={{ fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--accent-lime)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <Bot size={12} /> Vantage Case Synthesis
                 </div>
                 <div style={{ fontSize: '13px', lineHeight: '1.6', color: 'var(--text-white)' }}>
                   {activeCase.intelligence.caseSynthesis || 'Order is moving normally through the fulfillment network. Labels have been generated and carrier handoff is confirmed. No anomalies or delays detected in recent telemetry.'}
                 </div>
-             </div>
+              </div>
 
-             <div style={{ flex: '1', display: 'flex', flexDirection: 'column', padding: '20px 24px', justifyContent: 'center', backgroundColor: !activeCase.caseId ? 'rgba(194, 239, 78, 0.05)' : 'rgba(239, 68, 68, 0.05)' }} className="vantage-ai-glow">
+              <div style={{ flex: '1', display: 'flex', flexDirection: 'column', padding: '20px 24px', justifyContent: 'center', backgroundColor: !activeCase.caseId ? 'rgba(194, 239, 78, 0.05)' : 'rgba(239, 68, 68, 0.05)' }} className="vantage-ai-glow">
                 <div style={{ fontSize: '11px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px', color: !activeCase.caseId ? 'var(--accent-lime)' : 'var(--accent-coral)', marginBottom: '8px' }}>
                   Suggested Action
                 </div>
                 <div style={{ fontSize: '12px', lineHeight: '1.5', color: 'var(--accent-lime)', fontWeight: '600' }}>
                   {activeCase.intelligence.suggestedAction || 'All good here for now'}
                 </div>
-             </div>
-          </div>
-        )}
+              </div>
+            </div>
+          )}
 
-        {/* Metric & Summary Integration Strip */}
-        <div style={{ display: 'flex', alignItems: 'center', padding: '16px 20px', background: 'var(--bg-deep)', borderRadius: '8px', border: '1px solid var(--bg-border)', gap: '20px', marginBottom: '32px', flexWrap: 'wrap' }}>
+          {/* Metric & Summary Integration Strip */}
+          <div style={{ display: 'flex', alignItems: 'center', padding: '16px 20px', background: 'var(--bg-deep)', borderRadius: '8px', border: '1px solid var(--bg-border)', gap: '20px', marginBottom: '32px', flexWrap: 'wrap' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', borderRight: '1px solid var(--bg-border)', paddingRight: '20px' }}>
               <span style={{ fontSize: '11px', color: 'var(--text-gray)', textTransform: 'uppercase', fontWeight: 'bold' }}>Delivery Status</span>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                 <span style={{ fontSize: '13px', fontWeight: 'bold', color: 'var(--accent-coral)' }}>{activeCase.deliveryStatus || 'Exception - Delay'}</span>
+                <span style={{ fontSize: '13px', fontWeight: 'bold', color: 'var(--accent-coral)' }}>{activeCase.deliveryStatus || 'Exception - Delay'}</span>
               </div>
             </div>
-            
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', borderRight: '1px solid var(--bg-border)', paddingRight: '20px' }}>
               <span style={{ fontSize: '11px', color: 'var(--text-gray)', textTransform: 'uppercase', fontWeight: 'bold' }}>SLA Health</span>
               <span className={slaColor} style={{ fontSize: '13px', fontWeight: 'bold' }}>{slaText}</span>
             </div>
-            
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', borderRight: '1px solid var(--bg-border)', paddingRight: '20px' }}>
               <span style={{ fontSize: '11px', color: 'var(--text-gray)', textTransform: 'uppercase', fontWeight: 'bold' }}>Carrier Partner</span>
-              <button 
-                onClick={() => setActiveWorkspaceTab('Carrier')} 
+              <button
+                onClick={() => setActiveWorkspaceTab('Carrier')}
                 style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255, 255, 255, 0.05)', color: 'var(--text-white)', border: '1px solid var(--bg-border)', padding: '4px 8px', borderRadius: '4px', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>
-                {activeCase.carrier || 'FedEx'} Express <ChevronsRight size={14} color="var(--text-gray)"/>
+                {activeCase.carrier || 'FedEx'} Express <ChevronsRight size={14} color="var(--text-gray)" />
               </button>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', borderRight: '1px solid var(--bg-border)', paddingRight: '20px' }}>
               <span style={{ fontSize: '11px', color: 'var(--text-gray)', textTransform: 'uppercase', fontWeight: 'bold' }}>Order Source</span>
-              <button 
-                onClick={() => setActiveWorkspaceTab('Order Source')} 
+              <button
+                onClick={() => setActiveWorkspaceTab('Order Source')}
                 style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255, 255, 255, 0.05)', color: '#95bf47', border: '1px solid var(--bg-border)', padding: '4px 8px', borderRadius: '4px', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>
-                Shopify <ChevronsRight size={14} color="var(--text-gray)"/>
+                Shopify <ChevronsRight size={14} color="var(--text-gray)" />
               </button>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', borderRight: '1px solid var(--bg-border)', paddingRight: '20px' }}>
               <span style={{ fontSize: '11px', color: 'var(--text-gray)', textTransform: 'uppercase', fontWeight: 'bold' }}>Fulfillment Center</span>
-              <button 
-                onClick={() => setActiveWorkspaceTab('Fulfillment')} 
+              <button
+                onClick={() => setActiveWorkspaceTab('Fulfillment')}
                 style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255, 255, 255, 0.05)', color: 'var(--text-white)', border: '1px solid var(--bg-border)', padding: '4px 8px', borderRadius: '4px', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold' }}>
-                {activeCase.fulfillmentCenter || 'N/A'} <ChevronsRight size={14} color="var(--text-gray)"/>
+                {activeCase.fulfillmentCenter || 'N/A'} <ChevronsRight size={14} color="var(--text-gray)" />
               </button>
             </div>
 
             <div style={{ flex: 1 }}></div>
-            
+
             {/* Customer Details Block Component */}
-            <div 
+            <div
               onClick={() => setShowCustomerModal(true)}
               style={{ display: 'flex', alignItems: 'center', gap: '16px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--bg-border)', padding: '12px 20px', borderRadius: '8px', cursor: 'pointer' }}
             >
               <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'rgba(106, 95, 193, 0.2)', color: 'var(--accent-sentry)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <User size={18}/>
+                <User size={18} />
               </div>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ fontSize: '14px', fontWeight: 'bold', color: 'var(--text-white)' }}>{activeCase.customer?.name || 'N/A'}</span>
-                    <span style={{ fontSize: '10px', background: activeCase.customer?.type === 'REPEAT' ? 'rgba(194, 239, 78, 0.1)' : 'rgba(59, 130, 246, 0.1)', color: activeCase.customer?.type === 'REPEAT' ? 'var(--accent-lime)' : '#3b82f6', padding: '2px 6px', borderRadius: '4px', fontWeight: 'bold', border: activeCase.customer?.type === 'REPEAT' ? '1px solid rgba(194, 239, 78, 0.3)' : '1px solid rgba(59, 130, 246, 0.3)' }}>{activeCase.customer?.type || 'NEW'}</span>
-                 </div>
-                 <div style={{ fontSize: '12px', color: 'var(--text-gray)' }}>{activeCase.customer?.city || 'N/A'}, {activeCase.customer?.state || 'N/A'} &bull; {activeCase.customer?.totalOrders || 0} Order{(activeCase.customer?.totalOrders || 0) !== 1 ? 's' : ''} ({activeCase.customer?.orderWindow || 'N/A'})</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ fontSize: '14px', fontWeight: 'bold', color: 'var(--text-white)' }}>{activeCase.customer?.name || 'N/A'}</span>
+                  <span style={{ fontSize: '10px', background: activeCase.customer?.type === 'REPEAT' ? 'rgba(194, 239, 78, 0.1)' : 'rgba(59, 130, 246, 0.1)', color: activeCase.customer?.type === 'REPEAT' ? 'var(--accent-lime)' : '#3b82f6', padding: '2px 6px', borderRadius: '4px', fontWeight: 'bold', border: activeCase.customer?.type === 'REPEAT' ? '1px solid rgba(194, 239, 78, 0.3)' : '1px solid rgba(59, 130, 246, 0.3)' }}>{activeCase.customer?.type || 'NEW'}</span>
+                </div>
+                <div style={{ fontSize: '12px', color: 'var(--text-gray)' }}>{activeCase.customer?.city || 'N/A'}, {activeCase.customer?.state || 'N/A'} &bull; {activeCase.customer?.totalOrders || 0} Order{(activeCase.customer?.totalOrders || 0) !== 1 ? 's' : ''} ({activeCase.customer?.orderWindow || 'N/A'})</div>
               </div>
             </div>
-        </div>
-
-        {/* Dynamic Milestone Graph */}
-        <div className="content-box" style={{ padding: '32px', position: 'relative' }}>
-          
-          {!expandTimeline && (
-             <div onClick={() => setExpandTimeline(true)} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer', color: 'var(--text-gray)' }}>
-               <ChevronsLeft size={20} />
-             </div>
-          )}
-
-          <div style={{ display: 'flex', width: '100%', position: 'relative' }}>
-            {displayTimeline.map((node: any, index: number) => (
-              <div key={node.id} style={{ flex: 1, position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: '100px' }}>
-                
-                {index < displayTimeline.length - 1 && (
-                  <div style={{ position: 'absolute', top: '35px', left: '50%', width: '100%', height: '2px', background: node.connectorColor, zIndex: 1 }}>
-                    <span style={{ 
-                      position: 'absolute', 
-                      top: '-20px', 
-                      left: '50%', 
-                      transform: 'translateX(-50%)', 
-                      fontSize: '11px', 
-                      fontWeight: 'bold',
-                      color: node.connectorColor === '#ef4444' ? '#ef4444' : 'var(--text-gray)', 
-                      background: 'var(--bg-deep)', 
-                      padding: '0 8px' 
-                    }}>
-                      {node.connectorTime}
-                    </span>
-                  </div>
-                )}
-                
-                <div className="node-label" style={{ marginBottom: '12px', fontSize: '13px', fontWeight: 'bold', color: node.colorClass === 'red' ? '#ef4444' : 'var(--text-white)' }}>{node.action}</div>
-                <div className={`node-circle ${node.colorClass}`} style={{ position: 'relative', zIndex: 2 }}>{node.icon}</div>
-                <div className="node-subtext" style={{ marginTop: '16px', fontSize: '11px', color: 'var(--text-gray)' }}>{node.location}</div>
-                <div className="node-subtext" style={{ fontSize: '11px', color: node.colorClass === 'red' ? '#ef4444' : 'var(--text-gray)', background: 'rgba(255,255,255,0.05)', padding: '2px 4px', borderRadius: '4px', marginTop: '4px' }}>{node.time}</div>
-              </div>
-            ))}
           </div>
 
-          {!expandTimeline && (
-             <div onClick={() => setExpandTimeline(true)} style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer', color: 'var(--text-gray)' }}>
-               <ChevronsRight size={20} />
-             </div>
-          )}
-        </div>
+          {/* Dynamic Milestone Graph */}
+          <div className="content-box" style={{ padding: '32px', position: 'relative' }}>
 
-        {/* Centralized 7-Tab Workspace */}
-        <div style={{ marginTop: '24px', background: 'var(--bg-deep)', borderRadius: '12px', border: '1px solid var(--bg-border)', display: 'flex', flexDirection: 'column', height: '600px' }}>
-            
+            {!expandTimeline && (
+              <div onClick={() => setExpandTimeline(true)} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer', color: 'var(--text-gray)' }}>
+                <ChevronsLeft size={20} />
+              </div>
+            )}
+
+            <div style={{ display: 'flex', width: '100%', position: 'relative' }}>
+              {displayTimeline.map((node: any, index: number) => (
+                <div key={node.id} style={{ flex: 1, position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: '100px' }}>
+
+                  {index < displayTimeline.length - 1 && (
+                    <div style={{ position: 'absolute', top: '35px', left: '50%', width: '100%', height: '2px', background: node.connectorColor, zIndex: 1 }}>
+                      <span style={{
+                        position: 'absolute',
+                        top: '-20px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        fontSize: '11px',
+                        fontWeight: 'bold',
+                        color: node.connectorColor === '#ef4444' ? '#ef4444' : 'var(--text-gray)',
+                        background: 'var(--bg-deep)',
+                        padding: '0 8px'
+                      }}>
+                        {node.connectorTime}
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="node-label" style={{ marginBottom: '12px', fontSize: '13px', fontWeight: 'bold', color: node.colorClass === 'red' ? '#ef4444' : 'var(--text-white)' }}>{node.action}</div>
+                  <div className={`node-circle ${node.colorClass}`} style={{ position: 'relative', zIndex: 2 }}>{node.icon}</div>
+                  <div className="node-subtext" style={{ marginTop: '16px', fontSize: '11px', color: 'var(--text-gray)' }}>{node.location}</div>
+                  <div className="node-subtext" style={{ fontSize: '11px', color: node.colorClass === 'red' ? '#ef4444' : 'var(--text-gray)', background: 'rgba(255,255,255,0.05)', padding: '2px 4px', borderRadius: '4px', marginTop: '4px' }}>{node.time}</div>
+                </div>
+              ))}
+            </div>
+
+            {!expandTimeline && (
+              <div onClick={() => setExpandTimeline(true)} style={{ position: 'absolute', right: '16px', top: '50%', transform: 'translateY(-50%)', cursor: 'pointer', color: 'var(--text-gray)' }}>
+                <ChevronsRight size={20} />
+              </div>
+            )}
+          </div>
+
+          {/* Centralized 7-Tab Workspace */}
+          <div style={{ marginTop: '24px', background: 'var(--bg-deep)', borderRadius: '12px', border: '1px solid var(--bg-border)', display: 'flex', flexDirection: 'column', height: '600px' }}>
+
             {/* Header Navigation */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--bg-border)', background: 'rgba(255,255,255,0.02)', paddingRight: '16px', overflowX: 'auto' }}>
-               <div style={{ display: 'flex', minWidth: 'max-content' }}>
-                 {(activeCase.source === 'Vantage' 
-                   ? ['Vantage Actions', 'Internal Comments', 'Customer', 'Order Source', 'Warehouse', 'Fulfillment', 'Carrier', 'Activity Log'] 
-                   : ['Internal Comments', 'Customer', 'Order Source', 'Warehouse', 'Fulfillment', 'Carrier', 'Activity Log']
-                 ).map(tab => (
-                   <button 
-                     key={tab}
-                     onClick={() => setActiveWorkspaceTab(tab)}
-                     style={{ 
-                       padding: '16px 20px', 
-                       background: 'transparent', 
-                       border: 'none', 
-                       borderBottom: activeWorkspaceTab === tab ? '2px solid var(--accent-sentry)' : '2px solid transparent',
-                       color: activeWorkspaceTab === tab ? 'var(--text-white)' : 'var(--text-gray)',
-                       fontSize: '13px',
-                       fontWeight: activeWorkspaceTab === tab ? 'bold' : 'normal',
-                       cursor: 'pointer',
-                       display: 'flex',
-                       alignItems: 'center',
-                       gap: '8px',
-                       transition: 'all 0.2s ease',
-                       whiteSpace: 'nowrap'
-                     }}
-                   >
-                     {tab === 'Vantage Actions' && <Bot size={14} color="var(--accent-lime)"/>}
-                     {tab === 'Internal Comments' && <Users size={14}/>}
-                     {tab === 'Customer' && <MessageSquare size={14}/>}
-                     {tab === 'Order Source' && <ShoppingBag size={14}/>}
-                     {tab === 'Warehouse' && <Factory size={14}/>}
-                     {tab === 'Fulfillment' && <Package size={14}/>}
-                     {tab === 'Carrier' && <Truck size={14}/>}
-                     {tab === 'Activity Log' && <Settings size={14}/>}
-                     {tab}
-                   </button>
-                 ))}
-               </div>
-
-               {/* Right Side Call Header Action dynamically rendered directly for everything EXCEPT Activity Log */}
-               {activeWorkspaceTab !== 'Activity Log' && (
-                  <button 
-                    onClick={() => simulateCallEntity(activeWorkspaceTab)}
-                    style={{ background: 'var(--bg-deep)', border: '1px solid var(--accent-sentry)', color: 'var(--accent-sentry)', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', transition: 'all 0.2s', flexShrink: 0 }}
-                    title={`Initiate call natively mapping constraints optimally.`}
+              <div style={{ display: 'flex', minWidth: 'max-content' }}>
+                {(activeCase.source === 'Vantage'
+                  ? ['Vantage Actions', 'Internal Comments', 'Customer', 'Order Source', 'Warehouse', 'Fulfillment', 'Carrier', 'Activity Log']
+                  : ['Internal Comments', 'Customer', 'Order Source', 'Warehouse', 'Fulfillment', 'Carrier', 'Activity Log']
+                ).map(tab => (
+                  <button
+                    key={tab}
+                    onClick={() => setActiveWorkspaceTab(tab)}
+                    style={{
+                      padding: '16px 20px',
+                      background: 'transparent',
+                      border: 'none',
+                      borderBottom: activeWorkspaceTab === tab ? '2px solid var(--accent-sentry)' : '2px solid transparent',
+                      color: activeWorkspaceTab === tab ? 'var(--text-white)' : 'var(--text-gray)',
+                      fontSize: '13px',
+                      fontWeight: activeWorkspaceTab === tab ? 'bold' : 'normal',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      transition: 'all 0.2s ease',
+                      whiteSpace: 'nowrap'
+                    }}
                   >
-                    <PhoneCall size={16}/>
+                    {tab === 'Vantage Actions' && <Bot size={14} color="var(--accent-lime)" />}
+                    {tab === 'Internal Comments' && <Users size={14} />}
+                    {tab === 'Customer' && <MessageSquare size={14} />}
+                    {tab === 'Order Source' && <ShoppingBag size={14} />}
+                    {tab === 'Warehouse' && <Factory size={14} />}
+                    {tab === 'Fulfillment' && <Package size={14} />}
+                    {tab === 'Carrier' && <Truck size={14} />}
+                    {tab === 'Activity Log' && <Settings size={14} />}
+                    {tab}
                   </button>
-               )}
+                ))}
+              </div>
+
+              {/* Right Side Call Header Action dynamically rendered directly for everything EXCEPT Activity Log */}
+              {activeWorkspaceTab !== 'Activity Log' && (
+                <button
+                  onClick={() => simulateCallEntity(activeWorkspaceTab)}
+                  style={{ background: 'var(--bg-deep)', border: '1px solid var(--accent-sentry)', color: 'var(--accent-sentry)', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', transition: 'all 0.2s', flexShrink: 0 }}
+                  title={`Initiate call natively mapping constraints optimally.`}
+                >
+                  <PhoneCall size={16} />
+                </button>
+              )}
             </div>
 
             {/* Scrollable Feed Core Arrays */}
             <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column' }}>
-               
-               {activeWorkspaceTab === 'Vantage Actions' && (
-                  <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                      <div style={{ flex: '1', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px', overflowY: 'auto' }}>
-                          <div style={{ alignSelf: 'center', padding: '4px 12px', background: 'rgba(194, 239, 78, 0.1)', color: 'var(--accent-lime)', borderRadius: '16px', fontSize: '11px', fontWeight: 'bold', border: '1px solid rgba(194, 239, 78, 0.3)' }}>Autonomous AI Actions Feed</div>
-                          {vantageActionsLogs.map(log => (
-                             <div key={log.id} style={{ display: 'flex', gap: '16px' }}>
-                                <div style={{ zIndex: 2, padding: '8px', borderRadius: '50%', background: 'rgba(194, 239, 78, 0.05)', border: '1px solid var(--accent-lime)', color: 'var(--accent-lime)', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                                  {log.icon}
-                                </div>
-                                <div className="vantage-ai-glow" style={{ flex: 1, border: '1px solid rgba(194, 239, 78, 0.2)', borderRadius: '8px', padding: '16px', background: 'rgba(194, 239, 78, 0.02)' }}>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-                                       <span style={{ fontSize: '14px', color: 'var(--accent-lime)', fontWeight: 'bold' }}>{log.title}</span>
-                                       <div style={{ fontSize: '11px', color: 'var(--text-gray)', background: 'rgba(255,255,255,0.05)', padding: '2px 8px', borderRadius: '4px' }}>{adjustTimestamp(log.time)}</div>
-                                    </div>
-                                    <div style={{ fontSize: '13px', color: 'var(--text-white)', lineHeight: '1.5' }}>{log.details}</div>
-                                </div>
-                             </div>
-                          ))}
-                      </div>
 
-                      {/* Vantage Advice Footer */}
-                      {activeCase.intelligence?.humanTouchAdvice && (
-                      <div style={{ flex: '0 0 auto', padding: '20px 24px', borderTop: '1px solid var(--bg-border)', background: 'rgba(194, 239, 78, 0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                             <AlertCircle size={20} color="var(--accent-lime)"/>
-                             <div style={{ fontSize: '13px', color: 'var(--text-white)' }}>
-                               <strong style={{ color: 'var(--accent-lime)' }}>Human Touch Required:</strong> {activeCase.intelligence.humanTouchAdvice}
-                             </div>
-                          </div>
-                          {activeCase.intelligence.humanTouchAdvice.includes('Call') && (
-                          <button 
-                            onClick={() => simulateCallEntity(activeCase.intelligence.humanTouchAdvice.includes('FedEx') ? 'Carrier' : 'Warehouse')}
-                            style={{ background: 'var(--accent-lime)', border: 'none', color: 'black', padding: '10px 20px', borderRadius: '6px', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0, marginLeft: '16px' }}
-                          >
-                            <Phone size={14}/> Place Needed Call
-                          </button>
-                          )}
-                      </div>
-                      )}
-                  </div>
-               )}
-
-               {activeWorkspaceTab === 'Internal Comments' && (
-                  <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                      <div style={{ flex: '1', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px', overflowY: 'auto' }}>
-                          {auditLogs.filter(log => log.type === 'Internal').map(log => (
-                             <div key={log.id} style={{ display: 'flex', gap: '16px', cursor: 'pointer' }} onClick={() => { setActiveAuditLog(log); setShowUnifiedDetailsModal(true); }}>
-                                <div style={{ zIndex: 2, padding: '8px', borderRadius: '50%', background: 'var(--bg-primary)', border: '1px solid var(--bg-border)', color: 'var(--text-white)', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                                  {log.icon}
-                                </div>
-                                <div style={{ flex: 1, border: '1px solid var(--bg-border)', borderRadius: '8px', padding: '16px', background: 'var(--bg-primary)' }}>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-                                       <span style={{ fontSize: '14px', color: 'var(--text-white)', fontWeight: 'bold' }}>{log.title}</span>
-                                       <div style={{ fontSize: '11px', color: 'var(--text-gray)', background: 'rgba(255,255,255,0.05)', padding: '2px 8px', borderRadius: '4px' }}>{adjustTimestamp(log.time)}</div>
-                                    </div>
-                                    <div style={{ fontSize: '13px', color: 'var(--text-gray)', lineHeight: '1.5' }}>{log.details}</div>
-                                </div>
-                             </div>
-                          ))}
-                      </div>
-
-                      {/* Internal Input Zone */}
-                      <div style={{ flex: '0 0 auto', padding: '16px 24px', borderTop: '1px solid var(--bg-border)', background: 'var(--bg-primary)', display: 'flex', gap: '16px', alignItems: 'center' }}>
-                          <input 
-                             type="text"
-                             value={internalCommentInput}
-                             onChange={(e) => setInternalCommentInput(e.target.value)}
-                             placeholder="Type @ to tag team members..."
-                             onKeyDown={(e) => e.key === 'Enter' && submitInternalComment()}
-                             style={{ flex: 1, padding: '12px 16px', background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '6px', color: 'var(--text-white)', fontSize: '13px', outline: 'none' }}
-                          />
-                          <button 
-                             onClick={submitInternalComment}
-                             style={{ background: 'var(--accent-sentry)', border: 'none', color: 'white', padding: '12px 24px', borderRadius: '6px', cursor: 'pointer', fontSize: '13px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px' }}
-                          >
-                             <Send size={16}/> Post
-                          </button>
-                      </div>
-                  </div>
-               )}
-
-               {activeWorkspaceTab === 'Customer' && (
-                  <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                      {!contactCustomerUnlocked ? (
-                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '48px', textAlign: 'center' }}>
-                            <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'rgba(239, 68, 68, 0.1)', color: 'var(--accent-coral)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
-                              <AlertCircle size={32} />
-                            </div>
-                            <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: 'var(--text-white)', marginBottom: '12px' }}>Communication Restricted</h3>
-                            <p style={{ fontSize: '14px', color: 'var(--text-gray)', maxWidth: '400px', lineHeight: '1.6', marginBottom: '24px' }}>
-                              Please include the customer in the conversation only if there is a certain delay. Early notifications for AI-detected anomalies may cause unnecessary support inquiries.
-                            </p>
-                            <button 
-                              onClick={() => setContactCustomerUnlocked(true)}
-                              style={{ background: 'var(--accent-sentry)', border: 'none', color: 'white', padding: '14px 28px', borderRadius: '8px', cursor: 'pointer', fontSize: '14px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '10px' }}
-                            >
-                              <MessageSquare size={18}/> Contact Customer
-                            </button>
-                        </div>
-                      ) : (
-                        <>
-                          <div style={{ flex: '1', display: 'flex', flexDirection: 'column', padding: '24px', overflowY: 'auto' }}>
-                            {activeCase.omniMessages?.map((msg: any) => (
-                                <div key={msg.id} style={{ display: 'flex', flexDirection: 'column', alignItems: msg.direction === 'outbound' ? 'flex-end' : 'flex-start', marginBottom: '24px', maxWidth: '85%', alignSelf: msg.direction === 'outbound' ? 'flex-end' : 'flex-start' }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                                       <span style={{ fontSize: '11px', color: 'var(--text-gray)' }}>{adjustTimestamp(msg.time)}</span>
-                                       <span style={{ fontSize: '11px', background: 'var(--bg-primary)', padding: '2px 6px', borderRadius: '4px', border: '1px solid var(--bg-border)' }}>{msg.sender} ({msg.channel})</span>
-                                       {msg.isAiSuggested && <span style={{ fontSize: '10px', background: 'rgba(194, 239, 78, 0.1)', color: 'var(--accent-lime)', padding: '2px 4px', borderRadius: '4px', border: '1px solid rgba(194, 239, 78, 0.3)' }}><Bot size={10} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '2px' }}/>AI Drafted</span>}
-                                    </div>
-                                    <div style={{ background: msg.direction === 'outbound' ? 'rgba(106, 95, 193, 0.1)' : 'rgba(255,255,255,0.05)', border: msg.direction === 'outbound' ? '1px solid rgba(106, 95, 193, 0.4)' : '1px solid var(--bg-border)', padding: '16px', borderRadius: '12px', borderTopRightRadius: msg.direction === 'outbound' ? '0' : '12px', borderTopLeftRadius: msg.direction === 'outbound' ? '12px' : '0', fontSize: '13px', color: 'var(--text-white)', lineHeight: '1.5' }}>
-                                       {msg.text}
-                                    </div>
-                                </div>
-                            ))}
-                          </div>
-
-                          {/* Communications Full Width Input Zone */}
-                          <div style={{ flex: '0 0 auto', background: 'var(--bg-primary)', padding: '24px', borderTop: '1px solid var(--bg-border)' }}>
-                              {activeCase.copilotSuggestion && (
-                              <div className="vantage-ai-glow" style={{ padding: '16px', background: 'rgba(194, 239, 78, 0.05)', border: '1px solid var(--accent-lime)', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px' }}>
-                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-lime)', fontSize: '12px', fontWeight: 'bold' }}>
-                                     <Sparkles size={14} /> Vantage Copilot
-                                   </div>
-                                   <button onClick={() => setOmniInput(activeCase.copilotSuggestion)} style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', color: 'var(--text-white)', fontSize: '11px', padding: '4px 8px', borderRadius: '4px', cursor: 'pointer' }}>
-                                     Import
-                                   </button>
-                                 </div>
-                                 <div style={{ fontSize: '12px', color: 'var(--text-white)', lineHeight: '1.5' }}>
-                                   "{activeCase.copilotSuggestion}"
-                                 </div>
-                              </div>
-                              )}
-
-                              <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-end' }}>
-                                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                                     <span style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase' }}>Channel</span>
-                                     <select value={omniChannel} onChange={(e) => setOmniChannel(e.target.value)} style={{ padding: '12px', background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '6px', color: 'var(--text-white)', fontSize: '13px', outline: 'none' }}>
-                                       <option value="SMS">SMS</option>
-                                       <option value="Email">Email</option>
-                                       <option value="WhatsApp">WhatsApp</option>
-                                     </select>
-                                  </div>
-                                  <textarea 
-                                     value={omniInput}
-                                     onChange={(e) => setOmniInput(e.target.value)}
-                                     placeholder="Type response to Customer..."
-                                     style={{ flex: 1, padding: '12px', background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '6px', color: 'var(--text-white)', fontSize: '13px', height: '46px', outline: 'none', resize: 'none' }}
-                                  />
-                                  <button onClick={sendOmniChannelMessage} style={{ background: 'var(--accent-sentry)', color: 'white', border: 'none', padding: '0 24px', height: '46px', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
-                                     <Send size={16}/> Send
-                                  </button>
-                              </div>
-                          </div>
-                        </>
-                      )}
-                  </div>
-               )}
-
-               {['Order Source', 'Warehouse', 'Fulfillment', 'Carrier'].includes(activeWorkspaceTab) && (
-                  <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                     <div style={{ flex: '1', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px', overflowY: 'auto' }}>
-                        <div style={{ alignSelf: 'center', padding: '4px 12px', background: 'var(--bg-primary)', borderRadius: '16px', fontSize: '11px', color: 'var(--text-gray)' }}>Context Filter Active: {activeWorkspaceTab}</div>
-                        
-                        {auditLogs.filter(log => log.type === activeWorkspaceTab || (activeWorkspaceTab === 'Order Source' && log.type === 'Source')).map(log => (
-                           <div key={log.id} style={{ alignSelf: 'flex-start', background: 'var(--bg-primary)', border: '1px solid var(--bg-border)', padding: '12px 16px', borderRadius: '8px', fontSize: '13px', color: 'var(--text-white)', maxWidth: '70%', lineHeight: '1.5' }}>
-                              <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginBottom: '4px' }}>{log.title} - {adjustTimestamp(log.time)}</div>
-                              {log.details}
-                           </div>
-                        ))}
-                     </div>
-                     
-                     <div style={{ flex: '0 0 auto', padding: '16px 24px', borderTop: '1px solid var(--bg-border)', background: 'var(--bg-primary)', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-                         <button 
-                            onClick={() => { setTicketEntity(activeWorkspaceTab); setShowTicketModal(true); }}
-                            style={{ background: 'var(--accent-coral)', border: 'none', color: 'white', padding: '12px 24px', borderRadius: '6px', cursor: 'pointer', fontSize: '13px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px' }}
-                         >
-                            <AlertOctagon size={16}/> Raise Ticket
-                         </button>
-                     </div>
-                  </div>
-               )}
-
-               {activeWorkspaceTab === 'Activity Log' && (
-                  <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                    {([...vantageActionsLogs, ...auditLogs]).map(log => (
-                      <div key={log.id} style={{ display: 'flex', gap: '16px', cursor: 'pointer' }} onClick={() => { setActiveAuditLog(log); setShowUnifiedDetailsModal(true); }}>
-                        <div style={{ zIndex: 2, padding: '8px', borderRadius: '50%', background: 'var(--bg-primary)', border: '1px solid', borderColor: log.isVantage ? 'var(--accent-lime)' : 'var(--bg-border)', color: log.isVantage ? 'var(--accent-lime)' : 'var(--text-gray)', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+              {activeWorkspaceTab === 'Vantage Actions' && (
+                <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                  <div style={{ flex: '1', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px', overflowY: 'auto' }}>
+                    <div style={{ alignSelf: 'center', padding: '4px 12px', background: 'rgba(194, 239, 78, 0.1)', color: 'var(--accent-lime)', borderRadius: '16px', fontSize: '11px', fontWeight: 'bold', border: '1px solid rgba(194, 239, 78, 0.3)' }}>Autonomous AI Actions Feed</div>
+                    {vantageActionsLogs.map(log => (
+                      <div key={log.id} style={{ display: 'flex', gap: '16px' }}>
+                        <div style={{ zIndex: 2, padding: '8px', borderRadius: '50%', background: 'rgba(194, 239, 78, 0.05)', border: '1px solid var(--accent-lime)', color: 'var(--accent-lime)', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                           {log.icon}
                         </div>
-                        <div style={{ flex: 1, border: '1px solid', borderColor: log.isVantage ? 'rgba(194, 239, 78, 0.2)' : 'var(--bg-border)', borderRadius: '8px', padding: '16px', background: log.isVantage ? 'rgba(194, 239, 78, 0.05)' : 'var(--bg-primary)' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-                               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                                 <span style={{ fontSize: '14px', color: log.isVantage ? 'var(--accent-lime)' : 'var(--text-white)', fontWeight: 'bold' }}>{log.title}</span>
-                                 {log.type === 'Call' && log.duration && (
-                                   <span style={{ fontSize: '11px', background: 'rgba(255,255,255,0.05)', color: 'var(--text-gray)', padding: '2px 6px', borderRadius: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                     <Mic size={10}/> {log.duration}
-                                   </span>
-                                 )}
-                               </div>
-                               <div style={{ fontSize: '11px', color: 'var(--text-gray)', background: 'rgba(255,255,255,0.05)', padding: '2px 8px', borderRadius: '4px' }}>{adjustTimestamp(log.time)}</div>
-                            </div>
-                            
-                            {log.type === 'Call' && (
-                              <div style={{ marginBottom: '12px', fontSize: '12px', color: 'var(--accent-lime)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                 <Bot size={12}/> AI Summary: <span style={{ color: 'var(--text-white)' }}>{log.details}</span>
-                              </div>
-                            )}
-
-                            {log.type !== 'Call' && (
-                               <div style={{ fontSize: '13px', color: 'var(--text-gray)', lineHeight: '1.5' }}>{log.details}</div>
-                            )}
-
-                            {log.transcript && (
-                               <div style={{ marginTop: '12px' }}>
-                                 <button onClick={(e) => { e.stopPropagation(); setExpandedTranscripts(prev => ({...prev, [log.id]: !prev[log.id]})); }} style={{ background: 'transparent', border: '1px solid var(--bg-border)', color: 'var(--text-gray)', fontSize: '11px', padding: '4px 8px', borderRadius: '4px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                   {expandedTranscripts[log.id] ? <ChevronDown size={14}/> : <ChevronRight size={14}/>} Read Transcript
-                                 </button>
-                                 <AnimatePresence>
-                                   {expandedTranscripts[log.id] && (
-                                     <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} style={{ overflow: 'hidden' }}>
-                                       <div style={{ background: '#09090b', padding: '16px', borderRadius: '8px', border: '1px solid #27272a', fontSize: '12px', fontFamily: 'monospace', whiteSpace: 'pre-wrap', color: '#a1a1aa', lineHeight: '1.8', marginTop: '8px' }}>
-                                         {log.transcript}
-                                       </div>
-                                     </motion.div>
-                                   )}
-                                 </AnimatePresence>
-                               </div>
-                            )}
+                        <div className="vantage-ai-glow" style={{ flex: 1, border: '1px solid rgba(194, 239, 78, 0.2)', borderRadius: '8px', padding: '16px', background: 'rgba(194, 239, 78, 0.02)' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+                            <span style={{ fontSize: '14px', color: 'var(--accent-lime)', fontWeight: 'bold' }}>{log.title}</span>
+                            <div style={{ fontSize: '11px', color: 'var(--text-gray)', background: 'rgba(255,255,255,0.05)', padding: '2px 8px', borderRadius: '4px' }}>{adjustTimestamp(log.time)}</div>
+                          </div>
+                          <div style={{ fontSize: '13px', color: 'var(--text-white)', lineHeight: '1.5' }}>{log.details}</div>
                         </div>
                       </div>
                     ))}
                   </div>
-               )}
+
+                  {/* Vantage Advice Footer */}
+                  {activeCase.intelligence?.humanTouchAdvice && (
+                    <div style={{ flex: '0 0 auto', padding: '20px 24px', borderTop: '1px solid var(--bg-border)', background: 'rgba(194, 239, 78, 0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <AlertCircle size={20} color="var(--accent-lime)" />
+                        <div style={{ fontSize: '13px', color: 'var(--text-white)' }}>
+                          <strong style={{ color: 'var(--accent-lime)' }}>Human Touch Required:</strong> {activeCase.intelligence.humanTouchAdvice}
+                        </div>
+                      </div>
+                      {activeCase.intelligence.humanTouchAdvice.includes('Call') && (
+                        <button
+                          onClick={() => simulateCallEntity(activeCase.intelligence.humanTouchAdvice.includes('FedEx') ? 'Carrier' : 'Warehouse')}
+                          style={{ background: 'var(--accent-lime)', border: 'none', color: 'black', padding: '10px 20px', borderRadius: '6px', cursor: 'pointer', fontSize: '12px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0, marginLeft: '16px' }}
+                        >
+                          <Phone size={14} /> Place Needed Call
+                        </button>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {activeWorkspaceTab === 'Internal Comments' && (
+                <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                  <div style={{ flex: '1', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px', overflowY: 'auto' }}>
+                    {auditLogs.filter(log => log.type === 'Internal').map(log => (
+                      <div key={log.id} style={{ display: 'flex', gap: '16px', cursor: 'pointer' }} onClick={() => { setActiveAuditLog(log); setShowUnifiedDetailsModal(true); }}>
+                        <div style={{ zIndex: 2, padding: '8px', borderRadius: '50%', background: 'var(--bg-primary)', border: '1px solid var(--bg-border)', color: 'var(--text-white)', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                          {log.icon}
+                        </div>
+                        <div style={{ flex: 1, border: '1px solid var(--bg-border)', borderRadius: '8px', padding: '16px', background: 'var(--bg-primary)' }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+                            <span style={{ fontSize: '14px', color: 'var(--text-white)', fontWeight: 'bold' }}>{log.title}</span>
+                            <div style={{ fontSize: '11px', color: 'var(--text-gray)', background: 'rgba(255,255,255,0.05)', padding: '2px 8px', borderRadius: '4px' }}>{adjustTimestamp(log.time)}</div>
+                          </div>
+                          <div style={{ fontSize: '13px', color: 'var(--text-gray)', lineHeight: '1.5' }}>{log.details}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Internal Input Zone */}
+                  <div style={{ flex: '0 0 auto', padding: '16px 24px', borderTop: '1px solid var(--bg-border)', background: 'var(--bg-primary)', display: 'flex', gap: '16px', alignItems: 'center' }}>
+                    <input
+                      type="text"
+                      value={internalCommentInput}
+                      onChange={(e) => setInternalCommentInput(e.target.value)}
+                      placeholder="Type @ to tag team members..."
+                      onKeyDown={(e) => e.key === 'Enter' && submitInternalComment()}
+                      style={{ flex: 1, padding: '12px 16px', background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '6px', color: 'var(--text-white)', fontSize: '13px', outline: 'none' }}
+                    />
+                    <button
+                      onClick={submitInternalComment}
+                      style={{ background: 'var(--accent-sentry)', border: 'none', color: 'white', padding: '12px 24px', borderRadius: '6px', cursor: 'pointer', fontSize: '13px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px' }}
+                    >
+                      <Send size={16} /> Post
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {activeWorkspaceTab === 'Customer' && (
+                <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                  {!contactCustomerUnlocked ? (
+                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '48px', textAlign: 'center' }}>
+                      <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'rgba(239, 68, 68, 0.1)', color: 'var(--accent-coral)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '24px' }}>
+                        <AlertCircle size={32} />
+                      </div>
+                      <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: 'var(--text-white)', marginBottom: '12px' }}>Communication Restricted</h3>
+                      <p style={{ fontSize: '14px', color: 'var(--text-gray)', maxWidth: '400px', lineHeight: '1.6', marginBottom: '24px' }}>
+                        Please include the customer in the conversation only if there is a certain delay. Early notifications for AI-detected anomalies may cause unnecessary support inquiries.
+                      </p>
+                      <button
+                        onClick={() => setContactCustomerUnlocked(true)}
+                        style={{ background: 'var(--accent-sentry)', border: 'none', color: 'white', padding: '14px 28px', borderRadius: '8px', cursor: 'pointer', fontSize: '14px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '10px' }}
+                      >
+                        <MessageSquare size={18} /> Contact Customer
+                      </button>
+                    </div>
+                  ) : (
+                    <>
+                      <div style={{ flex: '1', display: 'flex', flexDirection: 'column', padding: '24px', overflowY: 'auto' }}>
+                        {activeCase.omniMessages?.map((msg: any) => (
+                          <div key={msg.id} style={{ display: 'flex', flexDirection: 'column', alignItems: msg.direction === 'outbound' ? 'flex-end' : 'flex-start', marginBottom: '24px', maxWidth: '85%', alignSelf: msg.direction === 'outbound' ? 'flex-end' : 'flex-start' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                              <span style={{ fontSize: '11px', color: 'var(--text-gray)' }}>{adjustTimestamp(msg.time)}</span>
+                              <span style={{ fontSize: '11px', background: 'var(--bg-primary)', padding: '2px 6px', borderRadius: '4px', border: '1px solid var(--bg-border)' }}>{msg.sender} ({msg.channel})</span>
+                              {msg.isAiSuggested && <span style={{ fontSize: '10px', background: 'rgba(194, 239, 78, 0.1)', color: 'var(--accent-lime)', padding: '2px 4px', borderRadius: '4px', border: '1px solid rgba(194, 239, 78, 0.3)' }}><Bot size={10} style={{ display: 'inline', verticalAlign: 'middle', marginRight: '2px' }} />AI Drafted</span>}
+                            </div>
+                            <div style={{ background: msg.direction === 'outbound' ? 'rgba(106, 95, 193, 0.1)' : 'rgba(255,255,255,0.05)', border: msg.direction === 'outbound' ? '1px solid rgba(106, 95, 193, 0.4)' : '1px solid var(--bg-border)', padding: '16px', borderRadius: '12px', borderTopRightRadius: msg.direction === 'outbound' ? '0' : '12px', borderTopLeftRadius: msg.direction === 'outbound' ? '12px' : '0', fontSize: '13px', color: 'var(--text-white)', lineHeight: '1.5' }}>
+                              {msg.text}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Communications Full Width Input Zone */}
+                      <div style={{ flex: '0 0 auto', background: 'var(--bg-primary)', padding: '24px', borderTop: '1px solid var(--bg-border)' }}>
+                        {activeCase.copilotSuggestion && (
+                          <div className="vantage-ai-glow" style={{ padding: '16px', background: 'rgba(194, 239, 78, 0.05)', border: '1px solid var(--accent-lime)', borderRadius: '8px', display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-lime)', fontSize: '12px', fontWeight: 'bold' }}>
+                                <Sparkles size={14} /> Vantage Copilot
+                              </div>
+                              <button onClick={() => setOmniInput(activeCase.copilotSuggestion)} style={{ background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', color: 'var(--text-white)', fontSize: '11px', padding: '4px 8px', borderRadius: '4px', cursor: 'pointer' }}>
+                                Import
+                              </button>
+                            </div>
+                            <div style={{ fontSize: '12px', color: 'var(--text-white)', lineHeight: '1.5' }}>
+                              "{activeCase.copilotSuggestion}"
+                            </div>
+                          </div>
+                        )}
+
+                        <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-end' }}>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                            <span style={{ fontSize: '11px', color: 'var(--text-gray)', fontWeight: 'bold', textTransform: 'uppercase' }}>Channel</span>
+                            <select value={omniChannel} onChange={(e) => setOmniChannel(e.target.value)} style={{ padding: '12px', background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '6px', color: 'var(--text-white)', fontSize: '13px', outline: 'none' }}>
+                              <option value="SMS">SMS</option>
+                              <option value="Email">Email</option>
+                              <option value="WhatsApp">WhatsApp</option>
+                            </select>
+                          </div>
+                          <textarea
+                            value={omniInput}
+                            onChange={(e) => setOmniInput(e.target.value)}
+                            placeholder="Type response to Customer..."
+                            style={{ flex: 1, padding: '12px', background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '6px', color: 'var(--text-white)', fontSize: '13px', height: '46px', outline: 'none', resize: 'none' }}
+                          />
+                          <button onClick={sendOmniChannelMessage} style={{ background: 'var(--accent-sentry)', color: 'white', border: 'none', padding: '0 24px', height: '46px', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
+                            <Send size={16} /> Send
+                          </button>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              )}
+
+              {['Order Source', 'Warehouse', 'Fulfillment', 'Carrier'].includes(activeWorkspaceTab) && (
+                <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                  <div style={{ flex: '1', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px', overflowY: 'auto' }}>
+                    <div style={{ alignSelf: 'center', padding: '4px 12px', background: 'var(--bg-primary)', borderRadius: '16px', fontSize: '11px', color: 'var(--text-gray)' }}>Context Filter Active: {activeWorkspaceTab}</div>
+
+                    {auditLogs.filter(log => log.type === activeWorkspaceTab || (activeWorkspaceTab === 'Order Source' && log.type === 'Source')).map(log => (
+                      <div key={log.id} style={{ alignSelf: 'flex-start', background: 'var(--bg-primary)', border: '1px solid var(--bg-border)', padding: '12px 16px', borderRadius: '8px', fontSize: '13px', color: 'var(--text-white)', maxWidth: '70%', lineHeight: '1.5' }}>
+                        <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginBottom: '4px' }}>{log.title} - {adjustTimestamp(log.time)}</div>
+                        {log.details}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div style={{ flex: '0 0 auto', padding: '16px 24px', borderTop: '1px solid var(--bg-border)', background: 'var(--bg-primary)', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                    <button
+                      onClick={() => { setTicketEntity(activeWorkspaceTab); setShowTicketModal(true); }}
+                      style={{ background: 'var(--accent-coral)', border: 'none', color: 'white', padding: '12px 24px', borderRadius: '6px', cursor: 'pointer', fontSize: '13px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px' }}
+                    >
+                      <AlertOctagon size={16} /> Raise Ticket
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {activeWorkspaceTab === 'Activity Log' && (
+                <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                  {([...vantageActionsLogs, ...auditLogs]).map(log => (
+                    <div key={log.id} style={{ display: 'flex', gap: '16px', cursor: 'pointer' }} onClick={() => { setActiveAuditLog(log); setShowUnifiedDetailsModal(true); }}>
+                      <div style={{ zIndex: 2, padding: '8px', borderRadius: '50%', background: 'var(--bg-primary)', border: '1px solid', borderColor: log.isVantage ? 'var(--accent-lime)' : 'var(--bg-border)', color: log.isVantage ? 'var(--accent-lime)' : 'var(--text-gray)', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                        {log.icon}
+                      </div>
+                      <div style={{ flex: 1, border: '1px solid', borderColor: log.isVantage ? 'rgba(194, 239, 78, 0.2)' : 'var(--bg-border)', borderRadius: '8px', padding: '16px', background: log.isVantage ? 'rgba(194, 239, 78, 0.05)' : 'var(--bg-primary)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                            <span style={{ fontSize: '14px', color: log.isVantage ? 'var(--accent-lime)' : 'var(--text-white)', fontWeight: 'bold' }}>{log.title}</span>
+                            {log.type === 'Call' && log.duration && (
+                              <span style={{ fontSize: '11px', background: 'rgba(255,255,255,0.05)', color: 'var(--text-gray)', padding: '2px 6px', borderRadius: '4px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                <Mic size={10} /> {log.duration}
+                              </span>
+                            )}
+                          </div>
+                          <div style={{ fontSize: '11px', color: 'var(--text-gray)', background: 'rgba(255,255,255,0.05)', padding: '2px 8px', borderRadius: '4px' }}>{adjustTimestamp(log.time)}</div>
+                        </div>
+
+                        {log.type === 'Call' && (
+                          <div style={{ marginBottom: '12px', fontSize: '12px', color: 'var(--accent-lime)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                            <Bot size={12} /> AI Summary: <span style={{ color: 'var(--text-white)' }}>{log.details}</span>
+                          </div>
+                        )}
+
+                        {log.type !== 'Call' && (
+                          <div style={{ fontSize: '13px', color: 'var(--text-gray)', lineHeight: '1.5' }}>{log.details}</div>
+                        )}
+
+                        {log.transcript && (
+                          <div style={{ marginTop: '12px' }}>
+                            <button onClick={(e) => { e.stopPropagation(); setExpandedTranscripts(prev => ({ ...prev, [log.id]: !prev[log.id] })); }} style={{ background: 'transparent', border: '1px solid var(--bg-border)', color: 'var(--text-gray)', fontSize: '11px', padding: '4px 8px', borderRadius: '4px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                              {expandedTranscripts[log.id] ? <ChevronDown size={14} /> : <ChevronRight size={14} />} Read Transcript
+                            </button>
+                            <AnimatePresence>
+                              {expandedTranscripts[log.id] && (
+                                <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} style={{ overflow: 'hidden' }}>
+                                  <div style={{ background: '#09090b', padding: '16px', borderRadius: '8px', border: '1px solid #27272a', fontSize: '12px', fontFamily: 'monospace', whiteSpace: 'pre-wrap', color: '#a1a1aa', lineHeight: '1.8', marginTop: '8px' }}>
+                                    {log.transcript}
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
 
             </div>
-        </div>
+          </div>
 
-      </div>
-    );
+        </div>
+        );
   }
 
-  function renderMainContent() {
+        function renderMainContent() {
     if (activeCaseId) {
       if (activeCaseId.startsWith('INFRA-')) return renderTechnicalIncidentDetail();
-      return renderCaseDetail();
+        return renderCaseDetail();
     }
-    
-    // Support Command Center Routing
-    if (selectedPersona?.name === 'Shankar') return renderShankarDashboard();
-    if (selectedPersona?.name === 'Simran') {
+
+        // Support Command Center Routing
+        if (selectedPersona?.name === 'Shankar') return renderShankarDashboard();
+        if (selectedPersona?.name === 'Simran') {
       return (
         <>
           {renderDashboardTabs()}
           {dashboardTab === 'Orders' ? renderAllOpenOrders() : renderManagerDashboard()}
         </>
-      );
+        );
     }
 
-    if (selectedPersona?.name === 'Piyush') {
+        if (selectedPersona?.name === 'Piyush') {
       return renderVPDashboard();
     }
-    
-    return renderDashboard();
+
+        return renderDashboard();
   }
 
-  return (
-    <main className={!selectedPersona ? "main-viewport" : ""}>
-      {!selectedPersona && (
-        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '1200px', height: '800px', backgroundColor: 'rgba(106, 95, 193, 0.05)', filter: 'blur(120px)', borderRadius: '50%', zIndex: -10 }} />
-      )}
-      <AnimatePresence mode="wait">
-        {!selectedPersona ? (
-          <motion.div
-            key="login"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className="content-container"
-          >
-            <div className="header-section">
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 }}
-                style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '48px', height: '48px', borderRadius: '12px', backgroundColor: 'rgba(106, 95, 193, 0.2)', border: '1px solid rgba(106, 95, 193, 0.3)', marginBottom: '24px', color: '#6a5fc1' }}
+        return (
+        <main className={!selectedPersona ? "main-viewport" : ""}>
+          {!selectedPersona && (
+            <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '1200px', height: '800px', backgroundColor: 'rgba(106, 95, 193, 0.05)', filter: 'blur(120px)', borderRadius: '50%', zIndex: -10 }} />
+          )}
+          <AnimatePresence mode="wait">
+            {!selectedPersona ? (
+              <motion.div
+                key="login"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                className="content-container"
               >
-                <Command size={24} />
-              </motion.div>
-              <h1 className="hey-there">Hey there! Login to continue.</h1>
-              <p className="sub-text">Select your persona to access the Sentinel Command Center and manage system alerts.</p>
-            </div>
-            <div className="persona-grid">
-              <div className="persona-row">
-                {PERSONAS.map((persona, index) => (
-                  <motion.div key={persona.name} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * index }}>
-                    <PersonaCard persona={persona} onSelect={handleSelect} />
+                <div className="header-section">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.2 }}
+                    style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: '48px', height: '48px', borderRadius: '12px', backgroundColor: 'rgba(106, 95, 193, 0.2)', border: '1px solid rgba(106, 95, 193, 0.3)', marginBottom: '24px', color: '#6a5fc1' }}
+                  >
+                    <Command size={24} />
                   </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="success"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="associate-layout"
-          >
-            <div className="left-content" style={{ width: '100%', paddingRight: '0' }}>
-              <div className="top-nav">
-                
-                {!activeCaseId ? (
-                  <div className="plain-greeting">
-                    {selectedPersona?.name === 'Shankar' ? (
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                        <ShieldCheck size={20} color="var(--accent-lime)" />
-                        <span style={{ fontWeight: 'bold' }}>Technical Support Command Center</span>
-                        <span style={{ fontSize: '11px', background: 'rgba(255,255,255,0.05)', padding: '2px 8px', borderRadius: '4px', color: 'var(--text-gray)' }}>User: {selectedPersona.name}</span>
+                  <h1 className="hey-there">Hey there! Login to continue.</h1>
+                  <p className="sub-text">Select your persona to access the Sentinel Command Center and manage system alerts.</p>
+                </div>
+                <div className="persona-grid">
+                  <div className="persona-row">
+                    {PERSONAS.map((persona, index) => (
+                      <motion.div key={persona.name} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * index }}>
+                        <PersonaCard persona={persona} onSelect={handleSelect} />
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="success"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="associate-layout"
+              >
+                <div className="left-content" style={{ width: '100%', paddingRight: '0' }}>
+                  <div className="top-nav">
+
+                    {!activeCaseId ? (
+                      <div className="plain-greeting">
+                        {selectedPersona?.name === 'Shankar' ? (
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            <ShieldCheck size={20} color="var(--accent-lime)" />
+                            <span style={{ fontWeight: 'bold' }}>Technical Support Command Center</span>
+                            <span style={{ fontSize: '11px', background: 'rgba(255,255,255,0.05)', padding: '2px 8px', borderRadius: '4px', color: 'var(--text-gray)' }}>User: {selectedPersona.name}</span>
+                          </div>
+                        ) : (
+                          `Welcome, ${selectedPersona.name}.`
+                        )}
                       </div>
                     ) : (
-                      `Welcome, ${selectedPersona.name}.`
-                    )}
-                  </div>
-                ) : (
-                  <div onClick={() => handleCaseSelection(null)} style={{ color: 'var(--text-white)', cursor: 'pointer', fontSize: '14px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.05)', padding: '6px 16px', borderRadius: '6px', border: '1px solid var(--bg-border)' }}>
-                     <ArrowLeft size={16} /> Back to Dashboard
-                  </div>
-                )}
-                
-                <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                  <button className="switch-btn" onClick={() => setSelectedPersona(null)}>Switch Persona</button>
-                </div>
-              </div>
-              
-              {renderMainContent()}
-            </div>
-
-            {/* General Log / Legacy Transcript Pop-Up Detail Modals */}
-            <AnimatePresence>
-              {showUnifiedDetailsModal && activeAuditLog && (
-                <motion.div 
-                   initial={{ opacity: 0 }} 
-                   animate={{ opacity: 1 }} 
-                   exit={{ opacity: 0 }} 
-                   className="modal-overlay" 
-                   onClick={() => setShowUnifiedDetailsModal(false)}
-                >
-                  <motion.div 
-                     initial={{ scale: 0.95, y: -20 }} 
-                     animate={{ scale: 1, y: 0 }} 
-                     exit={{ scale: 0.95, y: -20 }} 
-                     className="modal-content" 
-                     onClick={e => e.stopPropagation()}
-                  >
-                     <div className="modal-header">
-                       <div style={{ fontSize: '18px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '12px' }}>
-                         {activeAuditLog.icon} {activeAuditLog.title}
-                       </div>
-                       <button onClick={() => setShowUnifiedDetailsModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-gray)' }}><X size={20}/></button>
-                     </div>
-                     <div className="modal-body">
-                       <div style={{ marginBottom: '16px', fontSize: '13px', color: 'var(--text-gray)' }}>Timestamp: {adjustTimestamp(activeAuditLog.time)}</div>
-                       <div style={{ fontSize: '14px', color: 'var(--text-white)', lineHeight: '1.6', marginBottom: '24px' }}>
-                         {activeAuditLog.details}
-                       </div>
-                       {activeAuditLog.transcript && (
-                         <div style={{ background: 'var(--bg-deep)', padding: '16px', borderRadius: '8px', border: '1px solid var(--bg-border)', fontSize: '13px', fontFamily: 'monospace', whiteSpace: 'pre-wrap', color: '#a1a1aa', lineHeight: '1.8' }}>
-                           {activeAuditLog.transcript}
-                         </div>
-                       )}
-                     </div>
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-            
-            {/* Ticket Creation Modal explicitly mapping constraints smoothly dynamically intuitively cleverly efficiently safely naturally successfully comprehensively structurally resolving successfully reliably intelligently flawlessly compactly wrapping brilliantly locally reliably efficiently perfectly beautifully smartly functionally naturally safely. */}
-            <AnimatePresence>
-              {showTicketModal && (
-                <motion.div 
-                  initial={{ opacity: 0 }} 
-                  animate={{ opacity: 1 }} 
-                  exit={{ opacity: 0 }} 
-                  className="modal-overlay" 
-                  onClick={() => setShowTicketModal(false)}
-                >
-                  <motion.div 
-                    initial={{ scale: 0.95, y: -10 }} 
-                    animate={{ scale: 1, y: 0 }} 
-                    exit={{ scale: 0.95, y: -10 }} 
-                    className="modal-content" 
-                    style={{ maxWidth: '450px' }}
-                    onClick={e => e.stopPropagation()}
-                  >
-                    <div className="modal-header">
-                      <div style={{ fontSize: '18px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--text-white)' }}>
-                        Raise {ticketEntity} Ticket
+                      <div onClick={() => handleCaseSelection(null)} style={{ color: 'var(--text-white)', cursor: 'pointer', fontSize: '14px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.05)', padding: '6px 16px', borderRadius: '6px', border: '1px solid var(--bg-border)' }}>
+                        <ArrowLeft size={16} /> Back to Dashboard
                       </div>
-                      <button onClick={() => setShowTicketModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-gray)' }}><X size={20}/></button>
+                    )}
+
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                      <button className="switch-btn" onClick={() => setSelectedPersona(null)}>Switch Persona</button>
                     </div>
-                    
-                    <div className="modal-body" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                         <label style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--text-gray)', textTransform: 'uppercase' }}>Severity Level</label>
-                         <div style={{ display: 'flex', gap: '8px' }}>
-                            {['Low', 'Medium', 'High', 'Critical'].map(level => (
-                               <button 
+                  </div>
+
+                  {renderMainContent()}
+                </div>
+
+                {/* General Log / Legacy Transcript Pop-Up Detail Modals */}
+                <AnimatePresence>
+                  {showUnifiedDetailsModal && activeAuditLog && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="modal-overlay"
+                      onClick={() => setShowUnifiedDetailsModal(false)}
+                    >
+                      <motion.div
+                        initial={{ scale: 0.95, y: -20 }}
+                        animate={{ scale: 1, y: 0 }}
+                        exit={{ scale: 0.95, y: -20 }}
+                        className="modal-content"
+                        onClick={e => e.stopPropagation()}
+                      >
+                        <div className="modal-header">
+                          <div style={{ fontSize: '18px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                            {activeAuditLog.icon} {activeAuditLog.title}
+                          </div>
+                          <button onClick={() => setShowUnifiedDetailsModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-gray)' }}><X size={20} /></button>
+                        </div>
+                        <div className="modal-body">
+                          <div style={{ marginBottom: '16px', fontSize: '13px', color: 'var(--text-gray)' }}>Timestamp: {adjustTimestamp(activeAuditLog.time)}</div>
+                          <div style={{ fontSize: '14px', color: 'var(--text-white)', lineHeight: '1.6', marginBottom: '24px' }}>
+                            {activeAuditLog.details}
+                          </div>
+                          {activeAuditLog.transcript && (
+                            <div style={{ background: 'var(--bg-deep)', padding: '16px', borderRadius: '8px', border: '1px solid var(--bg-border)', fontSize: '13px', fontFamily: 'monospace', whiteSpace: 'pre-wrap', color: '#a1a1aa', lineHeight: '1.8' }}>
+                              {activeAuditLog.transcript}
+                            </div>
+                          )}
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Ticket Creation Modal explicitly mapping constraints smoothly dynamically intuitively cleverly efficiently safely naturally successfully comprehensively structurally resolving successfully reliably intelligently flawlessly compactly wrapping brilliantly locally reliably efficiently perfectly beautifully smartly functionally naturally safely. */}
+                <AnimatePresence>
+                  {showTicketModal && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="modal-overlay"
+                      onClick={() => setShowTicketModal(false)}
+                    >
+                      <motion.div
+                        initial={{ scale: 0.95, y: -10 }}
+                        animate={{ scale: 1, y: 0 }}
+                        exit={{ scale: 0.95, y: -10 }}
+                        className="modal-content"
+                        style={{ maxWidth: '450px' }}
+                        onClick={e => e.stopPropagation()}
+                      >
+                        <div className="modal-header">
+                          <div style={{ fontSize: '18px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--text-white)' }}>
+                            Raise {ticketEntity} Ticket
+                          </div>
+                          <button onClick={() => setShowTicketModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-gray)' }}><X size={20} /></button>
+                        </div>
+
+                        <div className="modal-body" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                            <label style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--text-gray)', textTransform: 'uppercase' }}>Severity Level</label>
+                            <div style={{ display: 'flex', gap: '8px' }}>
+                              {['Low', 'Medium', 'High', 'Critical'].map(level => (
+                                <button
                                   key={level}
                                   onClick={() => setTicketSeverity(level)}
-                                  style={{ 
-                                    flex: 1, 
-                                    padding: '8px', 
-                                    borderRadius: '4px', 
-                                    border: '1px solid', 
+                                  style={{
+                                    flex: 1,
+                                    padding: '8px',
+                                    borderRadius: '4px',
+                                    border: '1px solid',
                                     borderColor: ticketSeverity === level ? (level === 'Critical' ? 'var(--accent-coral)' : 'var(--accent-sentry)') : 'var(--bg-border)',
                                     background: ticketSeverity === level ? (level === 'Critical' ? 'rgba(225,29,72,0.1)' : 'rgba(106,95,193,0.1)') : 'var(--bg-deep)',
                                     color: ticketSeverity === level ? (level === 'Critical' ? 'var(--accent-coral)' : 'var(--text-white)') : 'var(--text-gray)',
@@ -3160,174 +3195,174 @@ export default function Home() {
                                     fontWeight: ticketSeverity === level ? 'bold' : 'normal',
                                     cursor: 'pointer'
                                   }}
-                               >
+                                >
                                   {level}
-                               </button>
-                            ))}
-                         </div>
-                      </div>
-
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                         <label style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--text-gray)', textTransform: 'uppercase' }}>Issue Details</label>
-                         <textarea 
-                           value={ticketComment}
-                           onChange={(e) => setTicketComment(e.target.value)}
-                           placeholder="Describe the problem, attach tracking codes or internal notes..."
-                           style={{ width: '100%', height: '100px', padding: '12px', background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '6px', color: 'var(--text-white)', fontSize: '13px', resize: 'none', outline: 'none' }}
-                         />
-                      </div>
-
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                         <label style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--text-gray)', textTransform: 'uppercase' }}>Attachments</label>
-                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px dashed var(--bg-border)', borderRadius: '6px', padding: '24px', background: 'rgba(255,255,255,0.02)', cursor: 'pointer' }}>
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', color: 'var(--text-gray)' }}>
-                               <Camera size={24} />
-                               <span style={{ fontSize: '12px' }}>Click to upload photos (Optional)</span>
+                                </button>
+                              ))}
                             </div>
-                         </div>
-                      </div>
+                          </div>
 
-                      <button 
-                         onClick={handleCreateTicket}
-                         style={{ width: '100%', padding: '14px', background: 'var(--accent-sentry)', color: 'white', border: 'none', borderRadius: '6px', fontSize: '13px', fontWeight: 'bold', cursor: 'pointer', marginTop: '8px' }}
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                            <label style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--text-gray)', textTransform: 'uppercase' }}>Issue Details</label>
+                            <textarea
+                              value={ticketComment}
+                              onChange={(e) => setTicketComment(e.target.value)}
+                              placeholder="Describe the problem, attach tracking codes or internal notes..."
+                              style={{ width: '100%', height: '100px', padding: '12px', background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '6px', color: 'var(--text-white)', fontSize: '13px', resize: 'none', outline: 'none' }}
+                            />
+                          </div>
+
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                            <label style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--text-gray)', textTransform: 'uppercase' }}>Attachments</label>
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px dashed var(--bg-border)', borderRadius: '6px', padding: '24px', background: 'rgba(255,255,255,0.02)', cursor: 'pointer' }}>
+                              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', color: 'var(--text-gray)' }}>
+                                <Camera size={24} />
+                                <span style={{ fontSize: '12px' }}>Click to upload photos (Optional)</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <button
+                            onClick={handleCreateTicket}
+                            style={{ width: '100%', padding: '14px', background: 'var(--accent-sentry)', color: 'white', border: 'none', borderRadius: '6px', fontSize: '13px', fontWeight: 'bold', cursor: 'pointer', marginTop: '8px' }}
+                          >
+                            Submit Ticket
+                          </button>
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Smart Contact Customer 70% Width Overlay Modal mapped correctly implicitly seamlessly effortlessly structurally properly clearly mapping naturally safely intelligently cleanly logically correctly smartly uniquely cleanly efficiently. */}
+                <AnimatePresence>
+                  {showCustomerModal && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="modal-overlay"
+                      onClick={() => setShowCustomerModal(false)}
+                    >
+                      <motion.div
+                        initial={{ scale: 0.95, y: -20 }}
+                        animate={{ scale: 1, y: 0 }}
+                        exit={{ scale: 0.95, y: -20 }}
+                        className="modal-content"
+                        style={{ width: '70vw', maxWidth: '900px' }}
+                        onClick={e => e.stopPropagation()}
                       >
-                         Submit Ticket
-                      </button>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                        <div className="modal-header">
+                          <div style={{ fontSize: '18px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--text-white)' }}>
+                            <User size={20} /> Customer Profile Verification
+                          </div>
+                          <button onClick={() => setShowCustomerModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-gray)' }}><X size={20} /></button>
+                        </div>
 
-            {/* Smart Contact Customer 70% Width Overlay Modal mapped correctly implicitly seamlessly effortlessly structurally properly clearly mapping naturally safely intelligently cleanly logically correctly smartly uniquely cleanly efficiently. */}
-            <AnimatePresence>
-              {showCustomerModal && (
-                <motion.div 
-                  initial={{ opacity: 0 }} 
-                  animate={{ opacity: 1 }} 
-                  exit={{ opacity: 0 }} 
-                  className="modal-overlay" 
-                  onClick={() => setShowCustomerModal(false)}
-                >
-                  <motion.div 
-                    initial={{ scale: 0.95, y: -20 }} 
-                    animate={{ scale: 1, y: 0 }} 
-                    exit={{ scale: 0.95, y: -20 }} 
-                    className="modal-content" 
-                    style={{ width: '70vw', maxWidth: '900px' }}
-                    onClick={e => e.stopPropagation()}
-                  >
-                    <div className="modal-header">
-                      <div style={{ fontSize: '18px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--text-white)' }}>
-                        <User size={20}/> Customer Profile Verification
-                      </div>
-                      <button onClick={() => setShowCustomerModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-gray)' }}><X size={20}/></button>
-                    </div>
-                    
-                    <div className="modal-body" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                       
-                       <div style={{ display: 'flex', gap: '16px' }}>
-                          <div style={{ flex: 1, background: 'var(--bg-deep)', padding: '20px', borderRadius: '8px', border: '1px solid var(--bg-border)' }}>
-                             <div style={{ fontSize: '11px', color: 'var(--text-gray)', textTransform: 'uppercase', fontWeight: 'bold', marginBottom: '12px' }}>Identity</div>
-                             <div style={{ fontSize: '16px', fontWeight: 'bold', color: 'var(--text-white)', marginBottom: '4px' }}>{activeCase.customer?.name || 'N/A'}</div>
-                             <div style={{ fontSize: '13px', color: 'var(--text-gray)' }}>{activeCase.customer?.email || 'N/A'}</div>
-                             <div style={{ fontSize: '13px', color: 'var(--text-gray)' }}>{activeCase.customer?.phone || 'N/A'}</div>
+                        <div className="modal-body" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+
+                          <div style={{ display: 'flex', gap: '16px' }}>
+                            <div style={{ flex: 1, background: 'var(--bg-deep)', padding: '20px', borderRadius: '8px', border: '1px solid var(--bg-border)' }}>
+                              <div style={{ fontSize: '11px', color: 'var(--text-gray)', textTransform: 'uppercase', fontWeight: 'bold', marginBottom: '12px' }}>Identity</div>
+                              <div style={{ fontSize: '16px', fontWeight: 'bold', color: 'var(--text-white)', marginBottom: '4px' }}>{activeCase.customer?.name || 'N/A'}</div>
+                              <div style={{ fontSize: '13px', color: 'var(--text-gray)' }}>{activeCase.customer?.email || 'N/A'}</div>
+                              <div style={{ fontSize: '13px', color: 'var(--text-gray)' }}>{activeCase.customer?.phone || 'N/A'}</div>
+                            </div>
+
+                            <div style={{ flex: 1, background: 'var(--bg-deep)', padding: '20px', borderRadius: '8px', border: '1px solid var(--bg-border)' }}>
+                              <div style={{ fontSize: '11px', color: 'var(--text-gray)', textTransform: 'uppercase', fontWeight: 'bold', marginBottom: '12px' }}>Destination Address</div>
+                              <div style={{ fontSize: '14px', color: 'var(--text-white)', lineHeight: '1.5' }}>
+                                {(activeCase.customer?.fullAddress || 'N/A').split(',').map((line: string, i: number) => (
+                                  <div key={i}>{line.trim()}</div>
+                                ))}
+                                <div>United States</div>
+                              </div>
+                            </div>
+
+                            <div style={{ flex: 1, background: 'var(--bg-deep)', padding: '20px', borderRadius: '8px', border: '1px solid var(--bg-border)', display: 'flex', flexDirection: 'column' }}>
+                              <div style={{ fontSize: '11px', color: 'var(--text-gray)', textTransform: 'uppercase', fontWeight: 'bold', marginBottom: '12px' }}>Customer Vector</div>
+                              <span style={{ alignSelf: 'flex-start', fontSize: '11px', background: activeCase.customer?.type === 'REPEAT' ? 'rgba(194, 239, 78, 0.1)' : 'rgba(59, 130, 246, 0.1)', color: activeCase.customer?.type === 'REPEAT' ? 'var(--accent-lime)' : '#3b82f6', padding: '4px 8px', borderRadius: '4px', fontWeight: 'bold', border: activeCase.customer?.type === 'REPEAT' ? '1px solid rgba(194, 239, 78, 0.3)' : '1px solid rgba(59, 130, 246, 0.3)', marginBottom: '8px' }}>{activeCase.customer?.type === 'REPEAT' ? 'REPEAT CUSTOMER' : 'NEW CUSTOMER'}</span>
+                              <div style={{ fontSize: '13px', color: 'var(--text-gray)' }}>{activeCase.customer?.totalOrders || 0} Order{(activeCase.customer?.totalOrders || 0) !== 1 ? 's' : ''} in last {activeCase.customer?.orderWindow || 'N/A'}. Total LTV: {activeCase.customer?.ltv || '$0'}</div>
+                            </div>
                           </div>
 
-                          <div style={{ flex: 1, background: 'var(--bg-deep)', padding: '20px', borderRadius: '8px', border: '1px solid var(--bg-border)' }}>
-                             <div style={{ fontSize: '11px', color: 'var(--text-gray)', textTransform: 'uppercase', fontWeight: 'bold', marginBottom: '12px' }}>Destination Address</div>
-                             <div style={{ fontSize: '14px', color: 'var(--text-white)', lineHeight: '1.5' }}>
-                               {(activeCase.customer?.fullAddress || 'N/A').split(',').map((line: string, i: number) => (
-                                   <div key={i}>{line.trim()}</div>
-                               ))}
-                               <div>United States</div>
-                             </div>
+                          <div className="vantage-ai-glow" style={{ background: 'rgba(194, 239, 78, 0.05)', padding: '20px', borderRadius: '8px', border: '1px solid var(--accent-lime)', display: 'flex', alignItems: 'center', gap: '16px' }}>
+                            <Bot size={24} color="var(--accent-lime)" />
+                            <div style={{ flex: 1 }}>
+                              <div style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--accent-lime)', textTransform: 'uppercase', marginBottom: '4px' }}>Smart Contact Safeguard</div>
+                              <div style={{ fontSize: '13px', color: 'var(--text-white)' }}>
+                                Local Destination Time: <strong>{activeCase.customer?.localTimeNow || 'Unknown'} ({activeCase.customer?.localTimezone?.match(/\(([^)]+)\)/)?.[1] || 'Timezone'})</strong>. Ensure explicit compliance. {activeCase.customer?.isQuietHours ? <span style={{ color: 'var(--accent-coral)' }}>Automated policy WARNS against direct outbound voice contact between 8 PM and 8 AM local.</span> : <span>Outbound voice contact is currently permitted.</span>}
+                              </div>
+                            </div>
                           </div>
-                          
-                          <div style={{ flex: 1, background: 'var(--bg-deep)', padding: '20px', borderRadius: '8px', border: '1px solid var(--bg-border)', display: 'flex', flexDirection: 'column' }}>
-                             <div style={{ fontSize: '11px', color: 'var(--text-gray)', textTransform: 'uppercase', fontWeight: 'bold', marginBottom: '12px' }}>Customer Vector</div>
-                             <span style={{ alignSelf: 'flex-start', fontSize: '11px', background: activeCase.customer?.type === 'REPEAT' ? 'rgba(194, 239, 78, 0.1)' : 'rgba(59, 130, 246, 0.1)', color: activeCase.customer?.type === 'REPEAT' ? 'var(--accent-lime)' : '#3b82f6', padding: '4px 8px', borderRadius: '4px', fontWeight: 'bold', border: activeCase.customer?.type === 'REPEAT' ? '1px solid rgba(194, 239, 78, 0.3)' : '1px solid rgba(59, 130, 246, 0.3)', marginBottom: '8px' }}>{activeCase.customer?.type === 'REPEAT' ? 'REPEAT CUSTOMER' : 'NEW CUSTOMER'}</span>
-                             <div style={{ fontSize: '13px', color: 'var(--text-gray)' }}>{activeCase.customer?.totalOrders || 0} Order{(activeCase.customer?.totalOrders || 0) !== 1 ? 's' : ''} in last {activeCase.customer?.orderWindow || 'N/A'}. Total LTV: {activeCase.customer?.ltv || '$0'}</div>
-                          </div>
-                       </div>
+                        </div>
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-                       <div className="vantage-ai-glow" style={{ background: 'rgba(194, 239, 78, 0.05)', padding: '20px', borderRadius: '8px', border: '1px solid var(--accent-lime)', display: 'flex', alignItems: 'center', gap: '16px' }}>
-                          <Bot size={24} color="var(--accent-lime)"/>
-                          <div style={{ flex: 1 }}>
-                             <div style={{ fontSize: '12px', fontWeight: 'bold', color: 'var(--accent-lime)', textTransform: 'uppercase', marginBottom: '4px' }}>Smart Contact Safeguard</div>
-                             <div style={{ fontSize: '13px', color: 'var(--text-white)' }}>
-                               Local Destination Time: <strong>{activeCase.customer?.localTimeNow || 'Unknown'} ({activeCase.customer?.localTimezone?.match(/\(([^)]+)\)/)?.[1] || 'Timezone'})</strong>. Ensure explicit compliance. {activeCase.customer?.isQuietHours ? <span style={{color: 'var(--accent-coral)'}}>Automated policy WARNS against direct outbound voice contact between 8 PM and 8 AM local.</span> : <span>Outbound voice contact is currently permitted.</span>}
-                             </div>
+                {/* NEW: Ask Vantage ChatGPT-like Modal successfully uniquely gracefully safely cleverly efficiently structurally seamlessly intelligently beautifully flexibly accurately tracking intuitively effortlessly neatly compactly directly explicitly securely manually explicitly gracefully natively cleanly intuitively gracefully naturally mapping dynamically optimally cleanly seamlessly efficiently. */}
+                <AnimatePresence>
+                  {showVantageModal && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="modal-overlay"
+                      onClick={() => setShowVantageModal(false)}
+                    >
+                      <motion.div
+                        initial={{ scale: 0.95, y: -20 }}
+                        animate={{ scale: 1, y: 0 }}
+                        exit={{ scale: 0.95, y: -20 }}
+                        className="modal-content"
+                        style={{ width: '70vw', maxWidth: '900px', height: '80vh', display: 'flex', flexDirection: 'column', padding: 0, overflow: 'hidden' }}
+                        onClick={e => e.stopPropagation()}
+                      >
+                        <div className="modal-header" style={{ flex: '0 0 auto', padding: '20px 24px', borderBottom: '1px solid var(--bg-border)' }}>
+                          <div style={{ fontSize: '18px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--accent-lime)' }}>
+                            <Sparkles size={20} /> Ask Vantage
                           </div>
-                       </div>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                          <button onClick={() => setShowVantageModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-gray)' }}><X size={20} /></button>
+                        </div>
 
-            {/* NEW: Ask Vantage ChatGPT-like Modal successfully uniquely gracefully safely cleverly efficiently structurally seamlessly intelligently beautifully flexibly accurately tracking intuitively effortlessly neatly compactly directly explicitly securely manually explicitly gracefully natively cleanly intuitively gracefully naturally mapping dynamically optimally cleanly seamlessly efficiently. */}
-            <AnimatePresence>
-              {showVantageModal && (
-                <motion.div 
-                  initial={{ opacity: 0 }} 
-                  animate={{ opacity: 1 }} 
-                  exit={{ opacity: 0 }} 
-                  className="modal-overlay" 
-                  onClick={() => setShowVantageModal(false)}
-                >
-                  <motion.div 
-                    initial={{ scale: 0.95, y: -20 }} 
-                    animate={{ scale: 1, y: 0 }} 
-                    exit={{ scale: 0.95, y: -20 }} 
-                    className="modal-content" 
-                    style={{ width: '70vw', maxWidth: '900px', height: '80vh', display: 'flex', flexDirection: 'column', padding: 0, overflow: 'hidden' }}
-                    onClick={e => e.stopPropagation()}
-                  >
-                    <div className="modal-header" style={{ flex: '0 0 auto', padding: '20px 24px', borderBottom: '1px solid var(--bg-border)' }}>
-                      <div style={{ fontSize: '18px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '12px', color: 'var(--accent-lime)' }}>
-                        <Sparkles size={20}/> Ask Vantage
-                      </div>
-                      <button onClick={() => setShowVantageModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-gray)' }}><X size={20}/></button>
-                    </div>
-                    
-                    <div style={{ flex: 1, overflowY: 'auto', padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                       {vantageChat.map(msg => (
-                          <div key={msg.id} style={{ display: 'flex', flexDirection: 'column', alignItems: msg.sender === 'user' ? 'flex-end' : 'flex-start', maxWidth: '85%', alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start' }}>
-                             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                                 <span style={{ fontSize: '11px', color: 'var(--text-gray)' }}>{adjustTimestamp(msg.time)}</span>
-                                 <span style={{ fontSize: '11px', background: 'var(--bg-primary)', padding: '2px 6px', borderRadius: '4px', border: '1px solid var(--bg-border)', color: msg.sender === 'vantage' ? 'var(--accent-lime)' : 'var(--text-white)', fontWeight: 'bold' }}>
-                                   {msg.sender === 'vantage' ? 'Vantage AI' : selectedPersona?.name}
-                                 </span>
-                             </div>
-                             <div className={msg.sender === 'vantage' ? 'vantage-ai-glow' : ''} style={{ background: msg.sender === 'vantage' ? 'rgba(194, 239, 78, 0.05)' : 'rgba(106, 95, 193, 0.1)', border: msg.sender === 'vantage' ? '1px solid rgba(194, 239, 78, 0.3)' : '1px solid rgba(106, 95, 193, 0.4)', padding: '16px', borderRadius: '12px', borderTopLeftRadius: msg.sender === 'vantage' ? '0' : '12px', borderTopRightRadius: msg.sender === 'user' ? '0' : '12px', fontSize: '13px', color: 'var(--text-white)', lineHeight: '1.6' }}>
+                        <div style={{ flex: 1, overflowY: 'auto', padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                          {vantageChat.map(msg => (
+                            <div key={msg.id} style={{ display: 'flex', flexDirection: 'column', alignItems: msg.sender === 'user' ? 'flex-end' : 'flex-start', maxWidth: '85%', alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start' }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+                                <span style={{ fontSize: '11px', color: 'var(--text-gray)' }}>{adjustTimestamp(msg.time)}</span>
+                                <span style={{ fontSize: '11px', background: 'var(--bg-primary)', padding: '2px 6px', borderRadius: '4px', border: '1px solid var(--bg-border)', color: msg.sender === 'vantage' ? 'var(--accent-lime)' : 'var(--text-white)', fontWeight: 'bold' }}>
+                                  {msg.sender === 'vantage' ? 'Vantage AI' : selectedPersona?.name}
+                                </span>
+                              </div>
+                              <div className={msg.sender === 'vantage' ? 'vantage-ai-glow' : ''} style={{ background: msg.sender === 'vantage' ? 'rgba(194, 239, 78, 0.05)' : 'rgba(106, 95, 193, 0.1)', border: msg.sender === 'vantage' ? '1px solid rgba(194, 239, 78, 0.3)' : '1px solid rgba(106, 95, 193, 0.4)', padding: '16px', borderRadius: '12px', borderTopLeftRadius: msg.sender === 'vantage' ? '0' : '12px', borderTopRightRadius: msg.sender === 'user' ? '0' : '12px', fontSize: '13px', color: 'var(--text-white)', lineHeight: '1.6' }}>
                                 {msg.text}
-                             </div>
-                          </div>
-                       ))}
-                    </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
 
-                    <div style={{ flex: '0 0 auto', padding: '20px 24px', background: 'var(--bg-primary)', borderTop: '1px solid var(--bg-border)', display: 'flex', alignItems: 'flex-end', gap: '12px' }}>
-                       <textarea 
-                          value={vantageInput}
-                          onChange={(e) => setVantageInput(e.target.value)}
-                          onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitVantageQuery(); } }}
-                          placeholder="Ask Vantage about this case timeline, customer history, or routing logs..."
-                          style={{ flex: 1, background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '8px', padding: '16px', color: 'var(--text-white)', fontSize: '13px', resize: 'none', outline: 'none', height: '56px', fontFamily: 'inherit' }}
-                       />
-                       <button onClick={submitVantageQuery} style={{ background: 'var(--accent-lime)', color: 'black', border: 'none', padding: '0 24px', height: '56px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
-                          <Send size={16}/> Ask
-                       </button>
-                    </div>
+                        <div style={{ flex: '0 0 auto', padding: '20px 24px', background: 'var(--bg-primary)', borderTop: '1px solid var(--bg-border)', display: 'flex', alignItems: 'flex-end', gap: '12px' }}>
+                          <textarea
+                            value={vantageInput}
+                            onChange={(e) => setVantageInput(e.target.value)}
+                            onKeyDown={(e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitVantageQuery(); } }}
+                            placeholder="Ask Vantage about this case timeline, customer history, or routing logs..."
+                            style={{ flex: 1, background: 'var(--bg-deep)', border: '1px solid var(--bg-border)', borderRadius: '8px', padding: '16px', color: 'var(--text-white)', fontSize: '13px', resize: 'none', outline: 'none', height: '56px', fontFamily: 'inherit' }}
+                          />
+                          <button onClick={submitVantageQuery} style={{ background: 'var(--accent-lime)', color: 'black', border: 'none', padding: '0 24px', height: '56px', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
+                            <Send size={16} /> Ask
+                          </button>
+                        </div>
 
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                      </motion.div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </main>
-  );
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </main>
+        );
 }
