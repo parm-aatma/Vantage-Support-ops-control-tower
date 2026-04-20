@@ -62,6 +62,7 @@ export const mockCases: any[] = [
       { id: 5, action: 'Carrier Handoff', location: 'FedEx AUS Hub', time: 'Pending', status: 'Pending', colorClass: 'gray', icon: 'clock', connectorTime: null, connectorColor: 'gray' },
     ],
     caseAuditLogs: [
+      { id: 1013, type: 'Warehouse', title: 'Automated Warehouse Ticket #WH-882', time: '11/07, 04:35 PM', details: 'Priority: P0 | Status: UNRESPONSIVE | Topic: Late Pick Escalation | Action Required: Manual Warehouse Outreach.', isVantage: true, isTicket: true },
       { id: 1011, type: 'Internal', title: 'Escalated to Support Team', time: '11/08, 08:00 AM', details: 'Ticket #WH-882 exceeded its 12-hour internal SLA with zero response from AUS-01. Case auto-transferred from Vantage autonomous queue to Associate queue for direct human intervention.', isVantage: true },
       { id: 1010, type: 'System', title: '⚠️ Ticket SLA Breached — No Reply from Warehouse', time: '11/08, 04:35 AM', details: 'Critical: Warehouse Ticket #WH-882 has been open for 12 hours. AUS-01 has not acknowledged, updated, or resolved the ticket. Vantage has exhausted its automated follow-up capacity — human escalation required.', isVantage: false },
       { id: 1009, type: 'System', title: 'Follow-up Reminder Sent — No Response', time: '11/07, 10:35 PM', details: 'Vantage sent a second automated reminder to AUS-01 Shift Lead for Ticket #WH-882 at the 6-hour SLA checkpoint. No acknowledgment received. Ticket status remains unchanged.', isVantage: false },

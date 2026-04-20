@@ -2717,12 +2717,39 @@ export default function Home() {
                   <div style={{ flex: '1', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px', overflowY: 'auto' }}>
                     <div style={{ alignSelf: 'center', padding: '4px 12px', background: 'var(--bg-primary)', borderRadius: '16px', fontSize: '11px', color: 'var(--text-gray)' }}>Context Filter Active: {activeWorkspaceTab}</div>
 
-                    {auditLogs.filter(log => log.type === activeWorkspaceTab || (activeWorkspaceTab === 'Order Source' && log.type === 'Source')).map(log => (
-                      <div key={log.id} style={{ alignSelf: 'flex-start', background: 'var(--bg-primary)', border: '1px solid var(--bg-border)', padding: '12px 16px', borderRadius: '8px', fontSize: '13px', color: 'var(--text-white)', maxWidth: '70%', lineHeight: '1.5' }}>
-                        <div style={{ fontSize: '11px', color: 'var(--text-gray)', marginBottom: '4px' }}>{log.title} - {adjustTimestamp(log.time)}</div>
-                        {log.details}
-                      </div>
-                    ))}
+                    {auditLogs.filter(log => log.type === activeWorkspaceTab || (activeWorkspaceTab === 'Order Source' && log.type === 'Source')).map(log => {
+                      const isTicket = (log as any).isTicket;
+                      return (
+                        <div key={log.id} style={{ 
+                          alignSelf: 'flex-start', 
+                          background: isTicket ? 'rgba(239, 68, 68, 0.05)' : 'var(--bg-primary)', 
+                          border: '1px solid',
+                          borderColor: isTicket ? 'rgba(239, 68, 68, 0.4)' : 'var(--bg-border)', 
+                          padding: '16px', 
+                          borderRadius: '8px', 
+                          fontSize: '13px', 
+                          color: 'var(--text-white)', 
+                          maxWidth: '80%', 
+                          lineHeight: '1.5',
+                          boxShadow: isTicket ? '0 4px 12px rgba(239, 68, 68, 0.1)' : 'none'
+                        }}>
+                          <div style={{ fontSize: '11px', color: isTicket ? 'var(--accent-coral)' : 'var(--text-gray)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                            {isTicket && <Ticket size={12} />}
+                            {log.title}
+                            <span style={{ fontWeight: 'normal', color: 'var(--text-gray)', marginLeft: 'auto' }}>{adjustTimestamp(log.time)}</span>
+                          </div>
+                          <div style={{ color: isTicket ? 'var(--text-white)' : 'var(--text-white)' }}>
+                            {log.details}
+                          </div>
+                          {isTicket && (
+                            <div style={{ marginTop: '12px', display: 'flex', gap: '8px' }}>
+                              <span style={{ background: 'rgba(239, 68, 68, 0.2)', color: 'var(--accent-coral)', padding: '2px 6px', borderRadius: '4px', fontSize: '10px', fontWeight: 'bold' }}>UNRESPONSIVE</span>
+                              <span style={{ background: 'rgba(255, 255, 255, 0.05)', color: 'var(--text-gray)', padding: '2px 6px', borderRadius: '4px', fontSize: '10px' }}>ID: #WH-882</span>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
 
                   <div style={{ flex: '0 0 auto', padding: '16px 24px', borderTop: '1px solid var(--bg-border)', background: 'var(--bg-primary)', display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
@@ -2845,11 +2872,11 @@ export default function Home() {
                   <h1 className="hey-there">Vantage - Last Mile Delivery Control Tower</h1>
                   <p className="sub-text">Identify your role to access the control tower and manage last mile logistics operations.</p>
                 </div>
-                <div className="persona-grid">
+                <div className="persona-grid" style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
                   <div style={{ width: '100%', textAlign: 'center' }}>
-                    <h2 style={{ fontSize: '14px', textTransform: 'uppercase', color: 'var(--accent-lime)', marginBottom: '16px', letterSpacing: '2px', fontWeight: 'bold' }}>Associates</h2>
+                    <h2 style={{ fontSize: '12px', textTransform: 'uppercase', color: 'var(--text-gray)', marginBottom: '20px', letterSpacing: '3px', fontWeight: 'bold', opacity: 0.6 }}>Level 1: Support Associates</h2>
                     <div className="persona-row">
-                      {PERSONAS.filter(p => p.data.role === 'Support').map((persona, index) => (
+                      {PERSONAS.filter(p => ['Siddhant', 'Rupesh'].includes(p.name)).map((persona, index) => (
                         <motion.div key={persona.name} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * index }}>
                           <PersonaCard persona={persona} onSelect={handleSelect} />
                         </motion.div>
@@ -2857,10 +2884,21 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div style={{ width: '100%', textAlign: 'center', marginTop: '32px' }}>
-                    <h2 style={{ fontSize: '14px', textTransform: 'uppercase', color: 'var(--accent-coral)', marginBottom: '16px', letterSpacing: '2px', fontWeight: 'bold' }}>Management & Leadership</h2>
+                  <div style={{ width: '100%', textAlign: 'center' }}>
+                    <h2 style={{ fontSize: '12px', textTransform: 'uppercase', color: 'var(--accent-lime)', marginBottom: '20px', letterSpacing: '3px', fontWeight: 'bold' }}>Level 2: Technical Support</h2>
                     <div className="persona-row">
-                      {PERSONAS.filter(p => p.data.role === 'Manager' || p.data.role === 'VP of Support').map((persona, index) => (
+                      {PERSONAS.filter(p => p.name === 'Shankar').map((persona, index) => (
+                        <motion.div key={persona.name} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * index }}>
+                          <PersonaCard persona={persona} onSelect={handleSelect} />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div style={{ width: '100%', textAlign: 'center' }}>
+                    <h2 style={{ fontSize: '12px', textTransform: 'uppercase', color: 'var(--accent-coral)', marginBottom: '20px', letterSpacing: '3px', fontWeight: 'bold' }}>Level 3: Management & Leadership</h2>
+                    <div className="persona-row">
+                      {PERSONAS.filter(p => ['Simran', 'Piyush'].includes(p.name)).map((persona, index) => (
                         <motion.div key={persona.name} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 * index }}>
                           <PersonaCard persona={persona} onSelect={handleSelect} />
                         </motion.div>
