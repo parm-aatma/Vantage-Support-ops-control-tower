@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Rubik, Lexend } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const rubik = Rubik({
@@ -31,6 +32,7 @@ export default function RootLayout({
     >
       <body style={{ fontFamily: "var(--font-rubik), sans-serif" }} className="min-h-full flex flex-col bg-[#1f1633] text-white">
         {children}
+        <Analytics />
       </body>
     </html>
   );
